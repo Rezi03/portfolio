@@ -2,14 +2,167 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Projet Mémoire - Learning Analytics</title>
+  <title>Learning Analytics</title>
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+
+    .project-grid img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: zoom-in;
+    }
+
+
+    .project-grid img {
+  width: 100%;
+  max-width: 100%;
+  height: 250px; /* hauteur fixe */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: zoom-in;
+  border: 3px solid #e0e0e0; /* bordure uniforme */
+  box-sizing: border-box;
+}
+
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .centered {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <section>
-    <h1>Projet : Learning Analytics</h1>
-    <p>Détail du projet ici...</p>
-    <a href="../index.html">← Go back</a>
+  <header class="sticky-header">
+    <div class="header-left">Rezi's Portfolio</div>
+    <div class="header-right">
+      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+    </div>
+  </header>
+
+  <main class="container">
+  <section class="centered">
+    <h2>Learning Analytics - Master Thesis</h2>
+
+    <p>
+      This thesis was conducted as part of the Master's in Economic Analysis and Policy (specialization: Statistics for Evaluation and Forecasting) at the University of Reims Champagne-Ardenne. It explores <strong>Learning Analytics</strong> through a case study of the online learning platform <em>Éducapacités</em>.
+    </p>
+
+    <p>
+      In response to the digital transformation of education—intensified by the 2020 global health crisis—the thesis investigates how user interaction data can help improve learner engagement. The core objective is to develop a structured analytical framework for understanding user behaviors on digital platforms, thereby identifying improvement pathways tailored to diverse learner profiles.
+    </p>
+
+    <h3>Key Contributions:</h3>
+    <ul style="text-align: left; max-width: 800px; margin: 0 auto;">
+      <li><strong>Data Anonymization & Cleaning:</strong> Applied GDPR-compliant SHA-256 hashing to anonymize sensitive user data, followed by extensive cleaning and restructuring of a large dataset (initially over 4,000 columns).</li>
+      <li><strong>Engagement Indicators:</strong> Defined measurable engagement indicators based on literature, including session duration, visit frequency, and navigation diversity.</li>
+      <li><strong>Behavioral Analysis:</strong> Identified common navigation paths and engagement patterns, using both exploratory statistics and visual analytics.</li>
+      <li><strong>Limitations:</strong> Highlighted critical limitations such as lack of granularity in content-level interactions and potential teacher-driven bias in student navigation.</li>
+      <li><strong>Tools Used:</strong> Analysis was conducted using both R and Python, with a transition to Python to align with the research team's stack.</li>
+    </ul>
+
+    <p>
+      Despite the constraints, the project provides a first operational layer for future research in Learning Analytics, contributing directly to a doctoral project and collaborative research involving Éducapacités’ development team.
+    </p>
+
+    <p style="font-style: italic; color: #666;">
+      Here are a few images of the work. If you want to explore the full project, including all scripts, datasets, and reports, you can visit my Git repository (link at the bottom of the main page).
+    </p>
+
+    <h3>Image Gallery</h3>
+    <div class="project-grid">
+      <img src="../assets/images/thesis/la1.png" alt="img1" class="fade-in" />
+      <img src="../assets/images/thesis/la2.png" alt="img2" class="fade-in" />
+      <img src="../assets/images/thesis/la3.png" alt="img3" class="fade-in" />
+      <img src="../assets/images/thesis/la4.png" alt="img4" class="fade-in" />
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a href="../index.html" class="btn-outline">← Go Back to Homepage</a>
+    </div>
   </section>
+</main>
+
+
+  <!-- Modal structure -->
+  <div class="modal" id="imageModal">
+    <img src="" alt="Full-size image" id="modalImage" />
+  </div>
+
+  <script>
+    // Fade-in observer
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    faders.forEach(el => observer.observe(el));
+
+    // Modal image zoom
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+
+    document.querySelectorAll('.project-grid img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modal.classList.add('show');
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+  </script>
 </body>
 </html>

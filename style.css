@@ -1,46 +1,399 @@
+/* Style général */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+}
+
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: white;
-  color: #2c3e50;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 header {
-  text-align: center;
-  padding: 80px 20px;
-  background-color: #ecf0f1;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-color);
+  z-index: 1000;
 }
 
-.contact-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 15px;
-  background-color: #2980b9;
-  color: white;
+.header-left {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.header-right .btn {
+  border: 2px solid var(--border-color);
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
   text-decoration: none;
-  border-radius: 5px;
+  color: var(--text-color);
+  background-color: transparent;
 }
 
+.header-right .btn:hover {
+  text-decoration: underline;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-left img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.img-description {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.hero-right {
+  flex: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 2px solid var(--border-color);
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  color: var(--text-color);
+  text-decoration: none;
+  margin-top: 1rem;
+  font-weight: 500;
+  background-color: transparent;
+  text-align: center;
+}
+
+.btn-outline:hover {
+  text-decoration: underline;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+.btn-outline:active,
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Sections */
 section {
-  padding: 60px 20px;
-  max-width: 800px;
-  margin: auto;
+  padding: 2rem;
 }
 
-.project {
-  margin-bottom: 40px;
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Projects */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.project img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.project h3 {
+  margin-top: 1rem;
+}
+
+.align-btn {
+  display: block;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+/* CV & Recos */
+.document-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.doc-block {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Footer */
+footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+  background-color: var(--bg-color);
+}
+
+.social-icons img {
+  height: 24px;
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: translateX(5px);
+}
+
+/* Style général pour les boutons */
+.btn,
+.btn-outline {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700; /* Texte plus gras */
+  text-decoration: none;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background-color: transparent;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+/* Effet au survol */
+.btn:hover,
+.btn-outline:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.btn,
+.btn-outline {
+  display: inline-block;
+  padding: 0.4rem 1rem;        /* Moins de padding = plus fit */
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;        /* Très arrondi, style "pill" */
+  border: 2px solid #333;
+  background-color: transparent;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+/* Effet au survol */
+.btn:hover,
+.btn-outline:hover {
+  background-color: #333;
+  color: white;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #1a1a1a;
+  --accent-color: #003366; /* Bleu corporate */
+  --button-hover: #001d3d;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.reco-card, .project, .doc-block {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background-color: white;
+  padding: 1.5rem;
+}
+
+/* Animation douce au survol */
+a.btn,
+.btn-outline,
+.project,
+.reco-card,
+.doc-block { /* ← ajoute ceci */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+a.btn:hover,
+.btn-outline:hover,
+.project:hover,
+.reco-card:hover,
+.doc-block:hover { /* ← ajoute ceci */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
 }
 
 footer {
-  background-color: #ecf0f1;
-  padding: 20px;
   text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: #666;
+  background-color: #f1f3f5;
+}
+footer a img {
+  width: 24px;
+  margin: 0 0.5rem;
+  filter: grayscale(100%) opacity(80%);
+  transition: filter 0.3s;
+}
+footer a img:hover {
+  filter: grayscale(0%) opacity(100%);
 }
 
-footer img {
-  width: 32px;
-  margin: 0 10px;
+.btn:hover,
+.btn-outline:hover {
+  box-shadow: 0 0 8px rgba(0, 51, 102, 0.15); /* lumière douce bleue */
 }
+
+.header-right::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+  margin: 0 1rem;
+  vertical-align: middle;
+}
+
+.project,
+.reco-card,
+.doc-block {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* À placer globalement */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-outline:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.project-grid img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.project-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.doc-block {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.doc-block:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+  background-color: #f9f9f9; /* optionnel, un fond plus clair */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #222;
+  line-height: 1.6;
+}
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Appliquer la justification à tous les paragraphes */
+p {
+  text-align: justify;
+  /* Optionnel, un peu plus lisible */
+  line-height: 1.6;
+}
+
+/* Limiter la largeur du contenu principal et centrer */
+main.container, section {
+  max-width: 900px;  /* ou une largeur qui te convient */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* Pour éviter que les images ou autres éléments débordent */
+img, .project-grid, .document-grid {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Bonus : s’assurer que les titres ne débordent pas */
+h1, h2, h3 {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommendation Letters</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .reco-card {
+      background-color: #f9f9f9;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .reco-buttons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    .no-link-style a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .translation-note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky-header">
+    <div class="header-left">Rezi's Portfolio</div>
+    <div class="header-right">
+      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Recommendation Letters</h2>
+
+    <div class="reco-card no-link-style">
+      <p><strong>Bart Lamiroy</strong><br>
+        Full Professor<br>
+        Deputy Director of CReSTIC<br>
+        <a href="mailto:Bart.Lamiroy@univ-reims.fr">Bart.Lamiroy@univ-reims.fr</a><br>
+        +33 6 02 14 69 73
+      </p>
+
+      <p><strong>Eric Bittar</strong><br>
+        Associate Professor in Computer Science<br>
+        Accredited to Supervise Research (HDR)<br>
+        <a href="mailto:Eric.Bittar@univ-reims.fr">Eric.Bittar@univ-reims.fr</a><br>
+        +33 6 21 86 60 06
+      </p>
+
+      <button onclick="toggleLetters()" class="btn-outline">Read Letter</button>
+      <div id="letter-buttons" class="reco-buttons hidden">
+        <a href="../assets/recommendations/rl_bl_eb_fr.pdf" target="_blank" class="btn-outline">Read in French</a>
+        <a href="../assets/recommendations/rl_bl_eb_en.pdf" target="_blank" class="btn-outline">Read in English</a>
+      </div>
+
+      <div class="translation-note">
+        Note: The English version is a self-made translation and has no official value. The original signed document is in French.
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="../index.html" class="btn-outline">← Go Back</a>
+    </div>
+  </main>
+
+  <script>
+    function toggleLetters() {
+      const section = document.getElementById('letter-buttons');
+      section.classList.toggle('hidden');
+    }
+  </script>
+
+  <script>
+  const faders = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  faders.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

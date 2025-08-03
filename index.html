@@ -2,50 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nom Prénom - Data Analyst</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rezi's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Hi, I'm Nom Prénom</h1>
-    <p>Data Analyst passionate about finance and analytics</p>
-    <button onclick="scrollToProjects()">Check my projects</button>
-    <a href="mailto:tonemail@mail.com" class="contact-button">Contact me</a>
+  <header class="sticky-header fade-in">
+    <div class="header-left">Rezi's Portfolio</div>
+    <div class="header-right">
+      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Étudiant en Master Data Analytics, passionné par la finance et les données.</p>
-  </section>
+  <main class="container">
+    <section class="hero fade-in">
+      <div class="hero-left">
+        <img src="assets/images/me.png" alt="Profile Picture" class="profile-img hover-zoom" />
+        <p class="img-description">Master's Student in Data Analytics</p>
+      </div>
+      <div class="hero-right">
+        <p class="intro">Passionate about data, finance, and technology.</p>
+        <h1>Hey, I'm Rezi</h1>
+        <p>I interpret data to uncover insights and anticipate trends before they emerge. My goal is to transform complex information into actionable strategies that drive informed decisions.</p>
+        <a href="#projects" class="btn-outline scroll-link">See My Projects</a>
+      </div>
+    </section>
 
-  <section id="projects">
-    <h2>My Projects</h2>
-    <div class="project">
-      <h3>Projet de Mémoire : Learning Analytics</h3>
-      <p>Résumé rapide...</p>
-      <a href="projects/projet1.html">Read more</a>
+    <section id="about" class="fade-in">
+      <h2>About Me</h2>
+      <p>I’m Rezi Sabashvili, currently in my second year of a Master’s degree in Economic Analysis and Policy, with a specialization in Statistics for Evaluation and Forecasting at the University of Reims Champagne-Ardenne. I’m actively looking for a 6-month internship, from March to August 2026. I have strong skills in data analysis, programming, and digital tools, as well as a solid background in economics and finance, enabling me to understand and interpret financial challenges. I adapt quickly to new environments.</p>
+      <p>This portfolio showcases my academic and personal projects, especially my Master 1 thesis on Learning Analytics. You’ll also find my resume and recommendation letters written by professors and researchers who supervised my work.</p>
+      <p>Feel free to reach out! You can find my contact information below, and I’m always open to discussing new opportunities or collaborations.</p>
+    </section>
+
+
+    <section id="projects" class="fade-in">
+      <h2>My Projects</h2>
+      <div class="project-grid">
+        <div class="project">
+          <img src="assets/images/thesis/thesis.png" alt="Learning Analytics" />
+          <h3>Learning Analytics - Thesis</h3>
+          <p style="font-style: italic; color: #555;">Exploration of a large-scale dataset using Learning Analytics and Big Data techniques to understand student interaction dynamics within a digital learning environment.</p>
+          <a href="projects/projet1.html" class="btn-outline align-btn">Read more →</a>
+        </div>
+        <div class="project">
+          <img src="assets/images/internship/internship.png" alt="Internship" />
+          <h3>Internship</h3>
+          <p>Coming soon</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv-reco" class="fade-in">
+      <h2>Documents & Recommendations</h2>
+      <div class="document-grid">
+        <div class="doc-block fade-in">
+          <h3>My Resume</h3>
+          <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View CV</a>
+        </div>
+        <div class="doc-block fade-in">
+          <h3>Recommendation Letters</h3>
+          <a href="projects/recommendations.html" class="btn-outline align-btn">See All Letters</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in">
+    <div class="social-icons">
+      <a href="mailto:rezisabashvili1@gmail.com" class="underline-hover"><img src="assets/logos/mail.png" alt="Email" /></a>
+      <a href="https://github.com/Rezi03" target="_blank" class="underline-hover"><img src="assets/logos/github.png" alt="GitHub" /></a>
+      <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank" class="underline-hover"><img src="assets/logos/linkedin.png" alt="LinkedIn" /></a>
     </div>
-
-    <div class="project">
-      <h3>Stage - Poste à venir</h3>
-      <p>Description plus tard.</p>
-      <a href="#">Read more</a>
-    </div>
-  </section>
-
-  <section id="recommandations">
-    <h2>Recommandations</h2>
-    <p>Lettres de recommandation disponibles.</p>
-  </section>
-
-  <footer>
-    <a href="mailto:tonmail@mail.com"><img src="assets/logos/mail.png" alt="Email" /></a>
-    <a href="https://linkedin.com/in/tonlinkedin"><img src="assets/logos/linkedin.png" alt="LinkedIn" /></a>
-    <a href="https://github.com/tonpseudo"><img src="assets/logos/github.png" alt="GitHub" /></a>
-    <a href="assets/cv.pdf" target="_blank">Voir mon CV</a>
   </footer>
 
-  <script src="scripts.js"></script>
+  <!-- Script fade-in -->
+  <script>
+  const faders = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  faders.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>

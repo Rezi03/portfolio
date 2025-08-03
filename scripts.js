@@ -1,3 +1,10 @@
-function scrollToProjects() {
-  document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-}
+// Script simple pour scroll smooth
+document.querySelectorAll('.scroll-link').forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
