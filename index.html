@@ -53,13 +53,29 @@
       </div>
     </section>
 
-    <section id="cv-reco" class="fade-in">
-      <h2>Documents & Recommendations</h2>
-      <div class="document-grid">
-        <div class="doc-block fade-in">
-          <h3>My Resume</h3>
-          <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View CV</a>
-        </div>
+<section id="cv-reco" class="fade-in">
+  <h2>Documents & Recommendations</h2>
+  <div class="document-grid">
+    <div class="doc-block fade-in">
+      <h3>My Resume</h3>
+      
+      <a href="#" class="btn-outline align-btn" id="viewCvBtn">View CV</a>
+
+      <div id="cvLanguages" style="display: none; margin-top: 10px;">
+        <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View in English</a>
+        <a href="assets/cv/cv_fr.pdf" target="_blank" class="btn-outline align-btn">View in French</a>
+      </div>
+    </div>
+
+<script>
+  document.getElementById("viewCvBtn").addEventListener("click", function(event) {
+    event.preventDefault();
+    const langButtons = document.getElementById("cvLanguages");
+    langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
+  });
+</script>
+
+
         <div class="doc-block fade-in">
           <h3>Recommendation Letters</h3>
           <a href="projects/recommendations.html" class="btn-outline align-btn">See All Letters</a>
