@@ -35,7 +35,6 @@
       <p>Feel free to reach out! You can find my contact information below, and I’m always open to discussing new opportunities or collaborations.</p>
     </section>
 
-
     <section id="projects" class="fade-in">
       <h2>My Projects</h2>
       <div class="project-grid">
@@ -45,6 +44,17 @@
           <p style="font-style: italic; color: #555;">Exploration of a large-scale dataset using Learning Analytics and Big Data techniques to understand student interaction dynamics within a digital learning environment.</p>
           <a href="projects/projet1.html" class="btn-outline align-btn">Read more →</a>
         </div>
+
+        <!-- Projet Banking Market Intelligence Dashboard ajouté -->
+        <div class="project">
+          <img src="assets/images/b2.png" alt="Banking Market Intelligence Dashboard" />
+          <h3>Banking Market Intelligence Dashboard</h3>
+          <p style="font-style: italic; color: #555;">
+            Interactive dashboard for analyzing and visualizing financial market data to support informed banking decisions.
+          </p>
+          <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" rel="noopener" class="btn-outline align-btn">Visit Dashboard →</a>
+        </div>
+
         <div class="project">
           <img src="assets/images/internship/internship.png" alt="Internship" />
           <h3>Internship</h3>
@@ -53,28 +63,25 @@
       </div>
     </section>
 
-<section id="cv-reco" class="fade-in">
-  <h2>Documents & Recommendations</h2>
-  <div class="document-grid">
-    <div class="doc-block fade-in">
-      <h3>My Resume</h3>
-      
-      <a href="#" class="btn-outline align-btn" id="viewCvBtn">View CV</a>
+    <section id="cv-reco" class="fade-in">
+      <h2>Documents & Recommendations</h2>
+      <div class="document-grid">
+        <div class="doc-block fade-in">
+          <h3>My Resume</h3>
+          <a href="#" class="btn-outline align-btn" id="viewCvBtn">View CV</a>
+          <div id="cvLanguages" style="display: none; margin-top: 10px;">
+            <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View in English</a>
+            <a href="assets/cv/cv_fr.pdf" target="_blank" class="btn-outline align-btn">View in French</a>
+          </div>
+        </div>
 
-      <div id="cvLanguages" style="display: none; margin-top: 10px;">
-        <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View in English</a>
-        <a href="assets/cv/cv_fr.pdf" target="_blank" class="btn-outline align-btn">View in French</a>
-      </div>
-    </div>
-
-<script>
-  document.getElementById("viewCvBtn").addEventListener("click", function(event) {
-    event.preventDefault();
-    const langButtons = document.getElementById("cvLanguages");
-    langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
-  });
-</script>
-
+        <script>
+          document.getElementById("viewCvBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            const langButtons = document.getElementById("cvLanguages");
+            langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
+          });
+        </script>
 
         <div class="doc-block fade-in">
           <h3>Recommendation Letters</h3>
@@ -94,22 +101,22 @@
 
   <!-- Script fade-in -->
   <script>
-  const faders = document.querySelectorAll('.fade-in');
+    const faders = document.querySelectorAll('.fade-in');
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.1
-  });
 
-  faders.forEach(el => observer.observe(el));
-</script>
+    faders.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
