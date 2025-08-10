@@ -10,11 +10,14 @@
   <header class="sticky-header fade-in">
     <div class="header-left">Rezi's Portfolio</div>
     <div class="header-right">
+      <a href="#finance" class="btn">Finance Projects</a>
+      <a href="#projects" class="btn">Other Projects</a>
       <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
     </div>
   </header>
 
   <main class="container">
+    <!-- Hero -->
     <section class="hero fade-in">
       <div class="hero-left">
         <img src="assets/images/me.png" alt="Profile Picture" class="profile-img hover-zoom" />
@@ -24,10 +27,10 @@
         <p class="intro">Passionate about data, finance, and technology.</p>
         <h1>Hey, I'm Rezi</h1>
         <p>I interpret data to uncover insights and anticipate trends before they emerge. My goal is to transform complex information into actionable strategies that drive informed decisions.</p>
-        <a href="#projects" class="btn-outline scroll-link">See My Projects</a>
       </div>
     </section>
 
+    <!-- About -->
     <section id="about" class="fade-in">
       <h2>About Me</h2>
       <p>I’m Rezi Sabashvili, currently in my second year of a Master’s degree in Economic Analysis and Policy, with a specialization in Statistics for Evaluation and Forecasting at the University of Reims Champagne-Ardenne. I’m actively looking for a 6-month internship, from March to August 2026. I have strong skills in data analysis, programming, and digital tools, as well as a solid background in economics and finance, enabling me to understand and interpret financial challenges. I adapt quickly to new environments.</p>
@@ -35,6 +38,26 @@
       <p>Feel free to reach out! You can find my contact information below, and I’m always open to discussing new opportunities or collaborations.</p>
     </section>
 
+    <!-- Finance Projects -->
+    <section id="finance" class="fade-in">
+      <h2>Finance Projects</h2>
+      <div class="project-grid">
+        <div class="project">
+          <video autoplay loop muted playsinline class="project-video">
+            <source src="assets/videos/dashboard-preview.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <h3>Banking Market Intelligence Dashboard</h3>
+          <p style="font-style: italic; color: #555;">
+            Interactive financial dashboard comparing multiple banks with technical indicators, risk metrics, and downloadable reports.
+          </p>
+          <p style="font-size: 0.9rem; color: #777;">Python, Streamlit, Yahoo Finance API – 2025</p>
+          <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-outline align-btn">Visit Dashboard →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other Projects -->
     <section id="projects" class="fade-in">
       <h2>My Projects</h2>
       <div class="project-grid">
@@ -45,16 +68,6 @@
           <a href="projects/projet1.html" class="btn-outline align-btn">Read more →</a>
         </div>
 
-        <!-- Projet Banking Market Intelligence Dashboard ajouté -->
-        <div class="project">
-          <img src="assets/images/b2.png" alt="Banking Market Intelligence Dashboard" />
-          <h3>Banking Market Intelligence Dashboard</h3>
-          <p style="font-style: italic; color: #555;">
-            Interactive dashboard for analyzing and visualizing financial market data to support informed banking decisions.
-          </p>
-          <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" rel="noopener" class="btn-outline align-btn">Visit Dashboard →</a>
-        </div>
-
         <div class="project">
           <img src="assets/images/internship/internship.png" alt="Internship" />
           <h3>Internship</h3>
@@ -63,6 +76,7 @@
       </div>
     </section>
 
+    <!-- Documents -->
     <section id="cv-reco" class="fade-in">
       <h2>Documents & Recommendations</h2>
       <div class="document-grid">
@@ -75,14 +89,6 @@
           </div>
         </div>
 
-        <script>
-          document.getElementById("viewCvBtn").addEventListener("click", function(event) {
-            event.preventDefault();
-            const langButtons = document.getElementById("cvLanguages");
-            langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
-          });
-        </script>
-
         <div class="doc-block fade-in">
           <h3>Recommendation Letters</h3>
           <a href="projects/recommendations.html" class="btn-outline align-btn">See All Letters</a>
@@ -91,6 +97,7 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="fade-in">
     <div class="social-icons">
       <a href="mailto:rezisabashvili1@gmail.com" class="underline-hover"><img src="assets/logos/mail.png" alt="Email" /></a>
@@ -99,24 +106,27 @@
     </div>
   </footer>
 
-  <!-- Script fade-in -->
+  <!-- Script fade-in & CV toggle -->
   <script>
-    const faders = document.querySelectorAll('.fade-in');
-
+      const faders = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+      entry.target.classList.add('visible');
         } else {
-          entry.target.classList.remove('visible');
+      entry.target.classList.remove('visible'); // remet à l'état initial
         }
       });
-    }, {
-      threshold: 0.1
+        }, { threshold: 0.1 });
+
+faders.forEach(el => observer.observe(el));
+
+
+    document.getElementById("viewCvBtn").addEventListener("click", function(event) {
+      event.preventDefault();
+      const langButtons = document.getElementById("cvLanguages");
+      langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
     });
-
-    faders.forEach(el => observer.observe(el));
   </script>
-
 </body>
 </html>
