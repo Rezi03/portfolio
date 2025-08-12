@@ -49,6 +49,7 @@
   <main class="container">
     <h2>Recommendation Letters</h2>
 
+    <!-- First Recommendation Card -->
     <div class="reco-card no-link-style">
       <p><strong>Bart Lamiroy</strong><br>
         Full Professor<br>
@@ -64,10 +65,32 @@
         +33 6 21 86 60 06
       </p>
 
-      <button onclick="toggleLetters()" class="btn-outline">Read Letter</button>
-      <div id="letter-buttons" class="reco-buttons hidden">
+      <button onclick="toggleLetters('bl_eb')" class="btn-outline">Read Letter</button>
+      <div id="letter-buttons-bl_eb" class="reco-buttons hidden">
         <a href="../assets/recommendations/rl_bl_eb_fr.pdf" target="_blank" class="btn-outline">Read in French</a>
         <a href="../assets/recommendations/rl_bl_eb_en.pdf" target="_blank" class="btn-outline">Read in English</a>
+      </div>
+
+      <div class="translation-note">
+        Note: The English version is a self-made translation and has no official value. The original signed document is in French.
+      </div>
+    </div>
+
+    <!-- Second Recommendation Card: Emmanuelle Gautherat -->
+    <div class="reco-card no-link-style">
+      <p><strong>Emmanuelle Gautherat</strong><br>
+        Head of the Master’s Program <em>Statistics for Evaluation and Forecasting</em><br>
+        Faculty of Economic, Social and Management Sciences, University of Reims<br>
+        Member of the REGARDS Research Laboratory, University of Reims<br>
+        Associate Member of the Modal’X Laboratory, University of Nanterre<br>
+        <a href="mailto:emmanuelle.gautherat@univ-reims.fr">emmanuelle.gautherat@univ-reims.fr</a><br>
+        +33 6 81 22 01 06
+      </p>
+
+      <button onclick="toggleLetters('eg')" class="btn-outline">Read Letter</button>
+      <div id="letter-buttons-eg" class="reco-buttons hidden">
+        <a href="../assets/recommendations/rl_eg_fr.pdf" target="_blank" class="btn-outline">Read in French</a>
+        <a href="../assets/recommendations/rl_eg_en.pdf" target="_blank" class="btn-outline">Read in English</a>
       </div>
 
       <div class="translation-note">
@@ -81,29 +104,29 @@
   </main>
 
   <script>
-    function toggleLetters() {
-      const section = document.getElementById('letter-buttons');
+    function toggleLetters(id) {
+      const section = document.getElementById(`letter-buttons-${id}`);
       section.classList.toggle('hidden');
     }
   </script>
 
   <script>
-  const faders = document.querySelectorAll('.fade-in');
+    const faders = document.querySelectorAll('.fade-in');
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.1
-  });
 
-  faders.forEach(el => observer.observe(el));
-</script>
+    faders.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
