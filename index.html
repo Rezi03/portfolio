@@ -14,37 +14,39 @@
 
   <link rel="stylesheet" href="style.css" />
 
-<style>
-@media (max-width: 768px) {
-  .header-right {
-    flex-direction: row; 
-    flex-wrap: wrap;     
-    gap: 5px;             
-    justify-content: flex-end; 
-  }
-  .header-right .btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
-  }
-}
-</style>
-
-  <!-- Styles responsive pour mobile -->
+  <!-- Styles responsive -->
   <style>
+    /* ==== Header optimisé pour mobile ==== */
     @media (max-width: 768px) {
-      /* Ajustement du header */
-      .sticky-header {
-        flex-direction: column;
-        text-align: center;
-        padding: 10px;
+      header {
+        flex-direction: row;           /* Garde la disposition horizontale */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0.8rem;         /* Réduit la hauteur */
+        gap: 0;
       }
+
+      .header-left {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
       .header-right {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.4rem;
       }
 
+      .header-right .btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        border-radius: 6px;
+      }
+    }
+
+    /* ==== Autres adaptations mobile ==== */
+    @media (max-width: 768px) {
       /* Hero section */
       .hero {
         flex-direction: column;
@@ -182,16 +184,16 @@
 
   <!-- Script fade-in & CV toggle -->
   <script>
-      const faders = document.querySelectorAll('.fade-in');
+    const faders = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+          entry.target.classList.add('visible');
         } else {
-      entry.target.classList.remove('visible');
+          entry.target.classList.remove('visible');
         }
       });
-        }, { threshold: 0.1 });
+    }, { threshold: 0.1 });
 
     faders.forEach(el => observer.observe(el));
 

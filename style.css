@@ -473,37 +473,28 @@ h1, h2, h3 {
 /* Adaptation mobile pour le header et les boutons */
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
+    flex-direction: row;           /* Garde la disposition horizontale */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0.8rem;         /* Réduit la hauteur */
+    gap: 0;
+  }
+
+  .header-left {
+    font-size: 1.1rem;
+    font-weight: bold;
   }
 
   .header-right {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .header-right .btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    border-radius: 8px;
-  }
-}
-/* Header plus compact sur mobile */
-@media (max-width: 768px) {
-  header {
-    padding: 0.3rem 0.8rem;
+    justify-content: flex-end;
+    gap: 0.4rem;
   }
 
   .header-right .btn {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
     border-radius: 6px;
-  }
-
-  .header-left {
-    font-size: 1.1rem;
   }
 }
