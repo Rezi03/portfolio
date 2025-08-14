@@ -14,6 +14,30 @@
 
   <link rel="stylesheet" href="style.css" />
 
+  <style>
+@media (max-width: 768px) {
+  /* Header plus compact */
+  .sticky-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+  }
+
+  .header-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .header-right .btn {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+}
+</style>
+
+
   <!-- Styles responsive pour mobile -->
   <style>
     @media (max-width: 768px) {
