@@ -13,6 +13,57 @@
   </script>
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Styles responsive pour mobile -->
+  <style>
+    @media (max-width: 768px) {
+      /* Ajustement du header */
+      .sticky-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+      }
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      /* Hero section */
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-left, .hero-right {
+        width: 100%;
+      }
+      .profile-img {
+        max-width: 150px;
+        height: auto;
+      }
+
+      /* Projets et documents */
+      .project-grid, .document-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+      }
+      .project, .doc-block {
+        text-align: center;
+      }
+
+      /* Images et vidéos */
+      img, video {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Conteneur global */
+      .container {
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="sticky-header fade-in">
@@ -122,13 +173,12 @@
         if (entry.isIntersecting) {
       entry.target.classList.add('visible');
         } else {
-      entry.target.classList.remove('visible'); // remet à l'état initial
+      entry.target.classList.remove('visible');
         }
       });
         }, { threshold: 0.1 });
 
-faders.forEach(el => observer.observe(el));
-
+    faders.forEach(el => observer.observe(el));
 
     document.getElementById("viewCvBtn").addEventListener("click", function(event) {
       event.preventDefault();
