@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  =====================================================================
+  DCF Lab – Manual & API (FMP)
+  Restructured single-file app
+  - Keeps ALL original features, ids, labels and logic
+  - Improves structure, accessibility, responsiveness, organization
+  - Nothing removed; only additions/refactors/cleanups
+  =====================================================================
+  -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>DCF Lab – Manual &amp; API (FMP)</title>
+
+  <!--
+  =====================================================================
+  Base styles: CSS reset-lite + design tokens + themes
+  =====================================================================
+  -->
+  <style>
+    /* ------------------------------
+       0. Reset-lite / base
+    ------------------------------ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.35;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg, video, canvas, audio, iframe, embed, object {
+      display: block;
+      max-width: 100%;
+    }
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+    /* Only show outline when user is keyboarding */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 3px solid rgba(11,37,69,.35);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    /* Skip link for a11y */
+    .skip-link {
+      position: absolute;
+      left: 8px;
+      top: -40px;
+      padding: .5rem .75rem;
+      background: #fff;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+      border-radius: .5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,.1);
+      transition: top .2s ease;
+      z-index: 9999;
+    }
+    .skip-link:focus { top: 8px; }
+
+    /* ------------------------------
+       1. Design tokens
+    ------------------------------ */
+    :root{
+      --navy:#0b2545;        /* bleu marine */
+      --navy-2:#0f335f;
+      --gold:#c8aa6e;        /* doré discret */
+      --gold-2:#b39359;
+      --bg:#f6f7fb;          /* fond clair pro */
+      --card:#ffffff;
+      --text:#1b1f23;
+      --muted:#6b7280;
+      --border:#e8e9ef;
+      --row-alt:#fafbfe;
+      --shadow:0 10px 28px rgba(6,24,44,0.12);
+      --radius:16px;
+      --focus: 0 0 0 3px rgba(11,37,69,.15);
+
+      --container-max: 1200px; /* élargi */
+    }
+
+    /* Dark theme tokens */
+    [data-theme="dark"]{
+      --bg:#0e131a;
+      --card:#131a22;
+      --text:#e6e9ef;
+      --muted:#9aa3b2;
+      --border:#1f2a37;
+      --row-alt:#0d1117;
+      --shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+
+    /* Respect user preference by default; overridden by saved choice */
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) { background: var(--bg); color: var(--text); }
+    }
+
+    /* ------------------------------
+       2. Global page styling
+    ------------------------------ */
+    html, body { background: var(--bg); color: var(--text); }
+
+    h1{
+      margin:1.2rem 0 .2rem 0;
+      text-align:center;
+      color:var(--navy);
+      font-weight:900;
+      letter-spacing:.2px
+    }
+    [data-theme="dark"] h1{ color:#e0e6f2 }
+    .sub{ color:var(--muted); text-align:center; margin-bottom:1.1rem }
+
+    /* Responsive container */
+    .wrap{
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 1rem;
+      width: 100%;
+    }
+
+    /* ------------------------------
+       3. Topbar
+    ------------------------------ */
+    .topbar{
+      display:flex;
+      gap:.6rem;
+      justify-content:space-between;
+      align-items:center;
+      margin:.3rem 0 1rem;
+      flex-wrap: wrap;
+    }
+    .left, .right{ display:flex; gap:.5rem; align-items:center; flex-wrap:wrap }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      background:#fff;
+      border:1px solid var(--border);
+      padding:.35rem .6rem;
+      border-radius:999px;
+      color:#333;
+      font-size:.85rem
+    }
+    [data-theme="dark"] .badge{ background:#0f1720; color:#e2e6ee }
+
+    /* ------------------------------
+       4. Tabs
+    ------------------------------ */
+    .tabs{ display:flex; gap:.6rem; flex-wrap:wrap; align-items: center }
+    .tabs[role="tablist"] { margin-bottom: .2rem; }
+    .tab{
+      background:var(--card);
+      border:1px solid var(--border);
+      padding:.55rem 1rem;
+      border-radius:999px;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      transition:.2s transform, .2s background;
+      user-select:none;
+      font-weight:800
+    }
+    .tab:hover{ transform:translateY(-1px) }
+    .tab.active{ background:var(--navy); color:#fff; border-color:var(--navy) }
+
+    /* ------------------------------
+       5. Card
+    ------------------------------ */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:1rem;
+      animation:fadeIn .35s ease;
+    }
+    .card h2{
+      margin:.1rem 0 .8rem 0;
+      color:var(--navy);
+      font-size:1.2rem
+    }
+    [data-theme="dark"] .card h2{ color:#e0e6f2 }
+
+    /* ------------------------------
+       6. Grids & layout helpers
+    ------------------------------ */
+    .grid-2{ display:grid; grid-template-columns: 1.05fr .95fr; gap:1rem }
+    .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap:.7rem }
+    .grid-4{ display:grid; grid-template-columns: repeat(4,1fr); gap:.7rem }
+    .row{ display:grid; grid-template-columns: repeat(12,1fr); gap:.7rem }
+
+    /* ------------------------------
+       7. Forms
+    ------------------------------ */
+    .field{ display:flex; flex-direction:column; gap:.35rem }
+    label{ font-size:.85rem; color:var(--muted) }
+    input[type="text"], input[type="number"], input[type="date"], select{
+      width:100%;
+      padding:.58rem .7rem;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      outline:none;
+      box-shadow: var(--focus) transparent;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    [data-theme="dark"] input, [data-theme="dark"] select{
+      background:#0f1720; color:#e6edf5; border-color:#263244
+    }
+    input:focus, select:focus{ box-shadow: var(--focus) }
+    input[type="range"]{ width:100% }
+
+    /* ------------------------------
+       8. Buttons
+    ------------------------------ */
+    .actions{ display:flex; gap:.6rem; flex-wrap:wrap }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem;
+      border:1px solid var(--navy);
+      background:var(--navy); color:#fff;
+      border-radius:10px;
+      padding:.6rem .95rem;
+      cursor:pointer;
+      font-weight:800;
+      transition:.2s transform,.2s background;
+    }
+    .btn:hover{ background:var(--navy-2); transform:translateY(-1px) }
+    .btn[disabled]{ opacity:.55; cursor:not-allowed; transform:none }
+
+    .btn-ghost{
+      display:inline-flex; align-items:center; gap:.5rem;
+      border:1px solid var(--border);
+      background:#fff; color:var(--navy);
+      border-radius:10px; padding:.6rem .95rem; cursor:pointer; font-weight:800
+    }
+    .btn-ghost:hover{ background:#f2f6ff }
+    [data-theme="dark"] .btn-ghost{ background:#0f1720; color:#e6edf5 }
+    [data-theme="dark"] .btn-ghost:hover{ background:#142033 }
+
+    /* ------------------------------
+       9. KPIs
+    ------------------------------ */
+    .kpis{
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:.7rem; margin-top:.7rem
+    }
+    .kpi{
+      border:1px solid var(--border);
+      border-radius:12px; padding:.7rem;
+      background:#fff; box-shadow:var(--shadow);
+      display:flex; flex-direction:column; gap:.25rem;
+      min-height:88px; justify-content:center;
+      animation:bounceIn .35s ease;
+    }
+    [data-theme="dark"] .kpi{ background:#0f1720 }
+    .kpi .lbl{ font-size:.8rem; color:var(--muted) }
+    .kpi .val{ font-size:1.2rem; font-weight:900; color:var(--navy) }
+    [data-theme="dark"] .kpi .val{ color:#e6edf5 }
+    .kpi.accent{ outline:2px solid rgba(200,170,110,.35) }
+
+    /* ------------------------------
+       10. Tables
+    ------------------------------ */
+    .table-wrap { overflow:auto; border-radius: 12px; }
+    table{
+      width:100%; border-collapse:collapse; font-size:.95rem; margin-top:.6rem;
+      min-width: 560px;
+    }
+    th,td{ padding:.7rem; border:1px solid #e4e6ee; text-align:left }
+    th{ background:var(--navy); color:#fff; position:sticky; top:0; z-index:1 }
+    [data-theme="dark"] th{ background:#18263a }
+    tbody tr:nth-child(even){ background:var(--row-alt) }
+    tbody tr{ transition:background .2s }
+    tbody tr:hover{ background:#eef3ff }
+    [data-theme="dark"] tbody tr:hover{ background:#172033 }
+
+    /* ------------------------------
+       11. Tags / pills
+    ------------------------------ */
+    .tag{
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:#fff; border:1px solid var(--border);
+      border-radius:999px; padding:.25rem .6rem; color:#333; font-size:.85rem
+    }
+    [data-theme="dark"] .tag{ background:#0f1720; color:#e2e6ee }
+    .sec-link{
+      text-decoration:none; display:inline-flex; align-items:center; gap:.4rem;
+      background:#fff7ea; border:1px solid #f0e1bf; padding:.35rem .6rem; border-radius:999px;
+      color:#7a5b14; font-weight:800
+    }
+
+    /* ------------------------------
+       12. Charts (vanilla canvas)
+    ------------------------------ */
+    .chart-wrap{
+      border:1px dashed var(--border);
+      border-radius:12px; padding:.7rem
+    }
+    canvas{ width:100%; height:260px; display:block }
+
+    /* ------------------------------
+       13. Footer
+    ------------------------------ */
+    .foot{
+      margin:1.2rem auto 2rem auto;
+      text-align:center; color:var(--muted);
+      max-width:980px
+    }
+
+    /* ------------------------------
+       14. Toggle switch
+    ------------------------------ */
+    .switch{
+      position:relative; display:inline-block; width:48px; height:28px; vertical-align:middle
+    }
+    .switch input{ opacity:0; width:0; height:0 }
+    .slider{
+      position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0;
+      background:#cbd5e1; transition:.2s; border-radius:999px
+    }
+    .slider:before{
+      position:absolute; content:""; height:22px; width:22px; left:3px; bottom:3px;
+      background:white; transition:.2s; border-radius:50%
+    }
+    input:checked + .slider{ background:#4f7db8 }
+    input:checked + .slider:before{ transform:translateX(20px) }
+
+    /* ------------------------------
+       15. Animations
+    ------------------------------ */
+    @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
+    @keyframes bounceIn{ from{ transform:scale(.98); opacity:.6 } to{ transform:scale(1); opacity:1 } }
+
+    /* Reduce motion for users that prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .card, .kpi { animation: none !important; }
+      .tab:hover, .btn:hover { transform: none !important; }
+    }
+
+    /* ------------------------------
+       16. Media queries
+    ------------------------------ */
+    @media (max-width:1100px){
+      .grid-2{ grid-template-columns:1fr }
+      .kpis{ grid-template-columns:repeat(2,1fr) }
+    }
+    @media (max-width:600px){
+      .kpis{ grid-template-columns:1fr }
+      .tabs { justify-content: center; }
+      h1 { font-size: 1.4rem; }
+    }
+
+    /* ------------------------------
+       17. Print styles
+    ------------------------------ */
+    @media print {
+      body { background: #fff; color:#111; }
+      .topbar, .tabs, .actions button, .badge, .sub { display:none !important; }
+      .card { border: none; box-shadow: none; padding: 0; }
+      .kpi { outline: none; }
+      .sec-link { border: none; background: none; color:#111; }
+      a[href]:after { content: " (" attr(href) ") "; font-size: 10px; color:#555; }
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <!-- Accessibility: skip link -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="wrap" role="banner" aria-label="Header">
+    <h1>DCF Lab – Manual &amp; API</h1>
+    <p class="sub">
+      Build, stress-test, and benchmark DCFs. Manual mode for pedagogy, API mode for speed.
+    </p>
+  </header>
+
+  <!-- Application wrapper -->
+  <div class="wrap" role="application" aria-label="DCF Lab App">
+
+    <!-- Topbar -->
+    <div class="topbar" role="toolbar" aria-label="App toolbar with shortcuts and theme toggle">
+      <div class="left" aria-label="Status badges">
+        <span class="badge" aria-live="polite">⌨️ Shortcuts: <b>R</b> reset • <b>S</b> save • <b>L</b> load • <b>T</b> theme</span>
+        <span class="badge">📁 LocalStorage scenarios</span>
+        <span class="badge">📤 Export CSV / Print</span>
+      </div>
+      <div class="right">
+        <label class="badge" style="gap:.6rem;" for="themeToggle">
+          Dark mode
+          <span class="switch">
+            <input id="themeToggle" type="checkbox" aria-label="Toggle dark mode" role="switch" aria-checked="false">
+            <span class="slider" aria-hidden="true"></span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabs" role="tablist" aria-label="Main tabs">
+      <button class="tab active" data-tab="manual" id="tab-manual" role="tab" aria-selected="true" aria-controls="manual">Manual DCF (No API)</button>
+      <button class="tab" data-tab="api" id="tab-api" role="tab" aria-selected="false" aria-controls="api">API DCF (FMP)</button>
+      <button class="tab" data-tab="help" id="tab-help" role="tab" aria-selected="false" aria-controls="help">Docs / Notes</button>
+    </div>
+
+    <!-- Main -->
+    <main id="main" tabindex="-1">
+      <!-- ============================
+           SECTION: MANUAL DCF
+      ============================ -->
+      <section id="manual" class="card" style="margin-top:.8rem;" role="tabpanel" aria-labelledby="tab-manual">
+        <h2>Manual DCF (Unlevered)</h2>
+
+        <!-- Inputs -->
+        <div class="row" style="margin-bottom:.7rem;">
+          <div class="field" style="grid-column: span 3;">
+            <label for="mSym">Ticker (for labeling)</label>
+            <input type="text" id="mSym" value="DEMO" placeholder="e.g., AAPL" inputmode="text" autocomplete="off" />
+          </div>
+
+          <div class="field" style="grid-column: span 3;">
+            <label for="mShares">Shares Outstanding (diluted)</label>
+            <input type="number" id="mShares" value="15000000000" step="1000000" />
+          </div>
+
+          <div class="field" style="grid-column: span 3;">
+            <label for="mNetDebt">Net Debt (Debt – Cash)</label>
+            <input type="number" id="mNetDebt" value="80000000000" step="1000000" />
+          </div>
+
+          <div class="field actions" style="grid-column: span 3; align-self:end;">
+            <button class="btn" id="mReset" type="button" aria-label="Reset manual DCF">Reset</button>
+            <button class="btn-ghost" id="mSave" type="button" aria-label="Save manual scenario">Save Scenario</button>
+            <button class="btn-ghost" id="mLoad" type="button" aria-label="Load manual scenario">Load Scenario</button>
+          </div>
+
+          <div class="field" style="grid-column: span 6;">
+            <label for="mWacc">WACC (%)</label>
+            <input type="range" id="mWacc" min="4" max="16" step="0.1" value="9.0" aria-valuemin="4" aria-valuemax="16" aria-valuenow="9.0" />
+            <div><span class="tag">Current WACC: <b id="mWaccV">9.0%</b></span></div>
+          </div>
+
+          <div class="field" style="grid-column: span 6;">
+            <label for="mTVMethod">Terminal Method</label>
+            <select id="mTVMethod">
+              <option value="gordon">Gordon Growth (perpetuity)</option>
+              <option value="multiple">Exit Multiple (EBITDA or FCF)</option>
+            </select>
+          </div>
+
+          <div class="field" style="grid-column: span 6;">
+            <label for="mG">LT Growth g (%) (Gordon)</label>
+            <input type="range" id="mG" min="0" max="6" step="0.1" value="3.0" aria-valuemin="0" aria-valuemax="6" aria-valuenow="3.0"/>
+            <div><span class="tag">g: <b id="mGV">3.0%</b></span></div>
+          </div>
+
+          <div class="field" style="grid-column: span 3;">
+            <label for="mMultiple">Exit Multiple (if Multiple)</label>
+            <input type="number" id="mMultiple" value="12" step="0.5"/>
+          </div>
+
+          <div class="field" style="grid-column: span 3;">
+            <label for="mExitBase">Exit Base (value in final year)</label>
+            <select id="mExitBase">
+              <option value="fcf">FCF</option>
+              <option value="ebitda">EBITDA</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Yearly UFCF table & left column -->
+        <div class="grid-2">
+          <div>
+            <div class="chart-wrap" aria-label="UFCF trend chart"><canvas id="mChart"></canvas></div>
+
+            <div class="table-wrap" aria-live="polite">
+              <table aria-label="Manual DCF free cash flow table">
+                <thead>
+                  <tr>
+                    <th scope="col">Year</th>
+                    <th scope="col">UFCF</th>
+                    <th scope="col">EBITDA (opt.)</th>
+                    <th scope="col">Notes</th>
+                  </tr>
+                </thead>
+                <tbody id="mRows"></tbody>
+              </table>
+            </div>
+
+            <div class="actions" style="margin-top:.7rem;">
+              <button class="btn-ghost" id="mAddYear" type="button">+ Add Year</button>
+              <button class="btn-ghost" id="mDelYear" type="button">– Remove Last</button>
+              <button class="btn" id="mExport" type="button">Export CSV</button>
+              <button class="btn" id="mPrint" type="button">Print / PDF</button>
+              <button class="btn-ghost" id="mCopyURL" type="button">Copy Shareable URL</button>
+            </div>
+          </div>
+
+          <div>
+            <!-- KPIs -->
+            <div class="kpis" role="group" aria-label="Manual DCF KPIs">
+              <div class="kpi">
+                <div class="lbl">Σ PV(UFCF)</div>
+                <div class="val" id="mPVUFCF">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">PV(Terminal)</div>
+                <div class="val" id="mPVTerm">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">Enterprise Value</div>
+                <div class="val" id="mEV">—</div>
+              </div>
+              <div class="kpi accent">
+                <div class="lbl">Equity / Share</div>
+                <div class="val" id="mEPS">—</div>
+              </div>
+            </div>
+
+            <!-- Sensitivities -->
+            <div class="card" style="margin-top:.8rem;">
+              <h2 style="margin-bottom:.3rem;">Sensitivity (WACC × g)</h2>
+              <div class="grid-3" id="mSens" aria-live="polite"></div>
+            </div>
+
+            <!-- Tornado -->
+            <div class="card" style="margin-top:.8rem;">
+              <h2 style="margin-bottom:.3rem;">Tornado (1-var sensitivities)</h2>
+              <div class="chart-wrap" aria-label="Tornado chart"><canvas id="mTornado"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           SECTION: API DCF
+      ============================ -->
+      <section id="api" class="card" style="display:none; margin-top:.8rem;" role="tabpanel" aria-labelledby="tab-api">
+        <h2>API DCF (Custom vs. Levered)</h2>
+
+        <!-- Controls -->
+        <div class="row" style="margin-bottom:.7rem;">
+          <div class="field" style="grid-column: span 3;">
+            <label for="aSym">Ticker</label>
+            <input type="text" id="aSym" value="AAPL" inputmode="text" autocomplete="off" />
+          </div>
+          <div class="field" style="grid-column: span 3;">
+            <label for="aPrice">Market price (info)</label>
+            <input type="text" id="aPrice" disabled/>
+          </div>
+          <div class="field" style="grid-column: span 3;">
+            <label for="aRF">Risk-free (info)</label>
+            <input type="text" id="aRF" disabled/>
+          </div>
+          <div class="field actions" style="grid-column: span 3; align-self:end;">
+            <button class="btn" id="aLoad" type="button">Load</button>
+            <button class="btn-ghost" id="aReset" type="button">Reset</button>
+          </div>
+
+          <div class="field" style="grid-column: span 6;">
+            <label for="aWacc">WACC (%)</label>
+            <input type="range" id="aWacc" min="4" max="16" step="0.1" value="9.1"/>
+            <div><span class="tag">WACC: <b id="aWaccV">9.1%</b></span></div>
+          </div>
+          <div class="field" style="grid-column: span 6;">
+            <label for="aG">Terminal Growth g (%)</label>
+            <input type="range" id="aG" min="0" max="6" step="0.1" value="4.0"/>
+            <div><span class="tag">g: <b id="aGV">4.0%</b></span></div>
+          </div>
+
+          <div class="field" style="grid-column: span 6;">
+            <label for="aAuto">Auto-refresh (60s)</label>
+            <label class="switch">
+              <input id="aAuto" type="checkbox" role="switch" aria-checked="false">
+              <span class="slider" aria-hidden="true"></span>
+            </label>
+          </div>
+          <div class="field actions" style="grid-column: span 6; align-self:end;">
+            <button class="btn" id="aExport" type="button">Export CSV</button>
+            <button class="btn-ghost" id="aCopyURL" type="button">Copy Shareable URL</button>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- LEFT -->
+          <div>
+            <div class="kpis" role="group" aria-label="API Custom DCF KPIs">
+              <div class="kpi">
+                <div class="lbl">Σ PV(UFCF) (API)</div>
+                <div class="val" id="aPVU">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">PV(Terminal) (recalc)</div>
+                <div class="val" id="aPVT">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">EV (recalc)</div>
+                <div class="val" id="aEV">—</div>
+              </div>
+              <div class="kpi accent">
+                <div class="lbl">Equity / Share (recalc)</div>
+                <div class="val" id="aEQPS">—</div>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table aria-label="Custom DCF snapshot (API)">
+                <thead>
+                  <tr>
+                    <th scope="col">Metric</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Source</th>
+                  </tr>
+                </thead>
+                <tbody id="aCustomTbl">
+                  <tr><td colspan="3" style="text-align:center;color:#666;">Click Load…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div>
+            <div class="kpis" role="group" aria-label="Levered DCF KPIs">
+              <div class="kpi">
+                <div class="lbl">Levered DCF / Share (API)</div>
+                <div class="val" id="aLevPS">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">Price vs. Custom DCF</div>
+                <div class="val" id="aGapC">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">Price vs. Levered DCF</div>
+                <div class="val" id="aGapL">—</div>
+              </div>
+              <div class="kpi">
+                <div class="lbl">WACC / g (active)</div>
+                <div class="val"><span id="aWmini">—</span>% / <span id="aGmini">—</span>%</div>
+              </div>
+            </div>
+
+            <div class="table-wrap" style="margin-top:.7rem;">
+              <table aria-label="Levered DCF (API)">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Note</th>
+                  </tr>
+                </thead>
+                <tbody id="aLeveredTbl">
+                  <tr><td colspan="3" style="text-align:center;color:#666;">Waiting…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="margin-top:.7rem">
+              <span class="tag">SEC/URLs styled as tags</span>
+              <span id="aSec"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="foot">
+          Note: Uses the <b>free tier</b> of Financial Modeling Prep API. Some metrics may be unavailable and feeds can lag the latest filings.
+        </div>
+      </section>
+
+      <section id="help" class="card" style="display:none; margin-top:.8rem;" role="tabpanel" aria-labelledby="tab-help">
+        <h2>Docs &amp; Notes</h2>
+        <p class="muted">
+          <b>Manual DCF</b> lets you control everything (UFCF, WACC, growth rate, exit multiple).
+          <b>API DCF</b> loads a snapshot (Custom DCF Advanced + Levered DCF) from loads a snapshot 
+          (Custom DCF Advanced + Levered DCF) from FinancialModelingPrep and allows you to stress-test WACC and growth rate on the client side, 
+          while preserving the implicit discounting structure.
+        </p>
+        <ul>
+          <li><b>Shortcuts</b>: R = reset (active tab), S = save (Manual), L = load (Manual), T = toggle theme</li>
+          <li><b>Exports</b>: Export CSV (UFCF / KPI table), Print for PDF</li>
+          <li><b>Share</b>: “Copy Shareable URL” encode tes inputs dans l’URL</li>
+        </ul>
+        <div class="grid-3" role="list">
+          <div class="badge" role="listitem">Unlevered DCF → EV → Equity = EV – Net Debt</div>
+          <div class="badge" role="listitem">Levered DCF rend directement une valeur par action post-dette</div>
+          <div class="badge" role="listitem">Levered DCF directly provides an equity value per share after debt</div>
+        </div>
+      </section>
+
+      <div class="foot">© Sabashvili Rezi — University of Reims Champagne-Ardenne.</div>
+    </main>
+  </div>
+
+  <script>
+
+    // Shorthand selector by id
+    const $ = (id)=>document.getElementById(id);
+
+    // Number formatters
+    const fmt = (n, d=2) => (n==null || isNaN(n)) ? "—"
+      : Number(n).toLocaleString(undefined,{maximumFractionDigits:d, minimumFractionDigits:d});
+    const pct = (n, d=1) => (n==null || isNaN(n)) ? "—" : `${fmt(n,d)}%`;
+    const money = (n, d=0) => (n==null || isNaN(n)) ? "—"
+      : `$${Number(n).toLocaleString(undefined,{maximumFractionDigits:d})}`;
+    const num = (x)=>{ const v=Number(x); return isNaN(v) ? null : v; };
+
+    // CSV helpers
+    function toCSV(rows){
+      return rows.map(r => r.map(v => {
+        const s = (v==null)?"":String(v);
+        return s.includes(",") ? `"${s.replace(/"/g,'""')}"` : s;
+      }).join(",")).join("\n");
+    }
+    function download(name, content, type="text/csv"){
+      const blob = new Blob([content], {type});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 100);
+    }
+
+    // Simple line chart with vanilla canvas
+    function drawLineChart(canvas, labels, values){
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width = canvas.clientWidth * devicePixelRatio;
+      const h = canvas.height = 260 * devicePixelRatio;
+      ctx.clearRect(0,0,w,h);
+      const pad = 40*devicePixelRatio;
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const y0 = Math.min(0, min);
+      const y1 = Math.max(0, max);
+      const yMin = y0, yMax = y1;
+      const xstep = (w - pad*2) / (values.length - 1 || 1);
+
+      // axes
+      ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1*devicePixelRatio;
+      ctx.beginPath(); ctx.moveTo(pad, h-pad); ctx.lineTo(w-pad, h-pad); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pad, pad); ctx.lineTo(pad, h-pad); ctx.stroke();
+
+      // line
+      ctx.strokeStyle = "#3b82f6"; ctx.lineWidth = 2*devicePixelRatio; ctx.beginPath();
+      values.forEach((v,i)=>{
+        const x = pad + i*xstep;
+        const y = h - pad - (v - yMin)/(yMax - yMin || 1)*(h - pad*2);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.stroke();
+
+      // points
+      ctx.fillStyle = "#0ea5e9";
+      values.forEach((v,i)=>{
+        const x = pad + i*xstep;
+        const y = h - pad - (v - yMin)/(yMax - yMin || 1)*(h - pad*2);
+        ctx.beginPath(); ctx.arc(x,y,3*devicePixelRatio,0,Math.PI*2); ctx.fill();
+      });
+    }
+
+    // Tornado chart (barbell left/right)
+    function drawTornado(canvas, baseValue, items){
+      // items: [{label, low, high}] where low/high are % change in output vs base (negative/positive)
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width = canvas.clientWidth * devicePixelRatio;
+      const h = canvas.height = 260 * devicePixelRatio;
+      ctx.clearRect(0,0,w,h);
+      const pad = 10*devicePixelRatio;
+      const midX = w/2;
+      const barH = (h - pad*2) / items.length * 0.6;
+      const gap = (h - pad*2) / items.length;
+
+      ctx.fillStyle = "#94a3b8";
+      ctx.textBaseline = "middle";
+      ctx.font = `${12*devicePixelRatio}px sans-serif`;
+
+      items.forEach((it, idx)=>{
+        const cy = pad + idx*gap + gap/2;
+        // left (negative)
+        const leftW = Math.max(0, -it.low/100) * (w*0.4);
+        ctx.fillStyle = "#ef4444"; // red
+        ctx.fillRect(midX - leftW, cy - barH/2, leftW, barH);
+        // right (positive)
+        const rightW = Math.max(0, it.high/100) * (w*0.4);
+        ctx.fillStyle = "#10b981"; // green
+        ctx.fillRect(midX, cy - barH/2, rightW, barH);
+
+        // labels
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillText(it.label, 8*devicePixelRatio, cy);
+      });
+
+      // center line
+      ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1*devicePixelRatio;
+      ctx.beginPath(); ctx.moveTo(midX, pad); ctx.lineTo(midX, h-pad); ctx.stroke();
+    }
+
+    // URL state helpers
+    function setURLParams(obj){
+      const usp = new URLSearchParams();
+      Object.entries(obj).forEach(([k,v])=>{
+        if(v!=null && v!=="") usp.set(k, String(v));
+      });
+      history.replaceState(null, "", `?${usp.toString()}`);
+    }
+    function getURLParams(){
+      return Object.fromEntries(new URLSearchParams(location.search).entries());
+    }
+
+    /* ===========================================================
+       THEME (toggle, URL/localStorage)
+    =========================================================== */
+    const themeToggle = $("themeToggle");
+
+    // Apply theme
+    function applyTheme(dark){
+      document.body.setAttribute("data-theme", dark ? "dark" : "light");
+      if (themeToggle) {
+        themeToggle.checked = !!dark;
+        themeToggle.setAttribute("aria-checked", String(!!dark));
+      }
+    }
+
+    // Initialize theme from URL/localStorage/user preference
+    (function initTheme(){
+      const u = getURLParams();
+      const ls = localStorage.getItem("dcfTheme");
+      const val = (u.theme || ls || "");
+      if (val === "dark") applyTheme(true);
+      else if (val === "light") applyTheme(false);
+      else {
+        // fallback to prefers-color-scheme
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark);
+      }
+    })();
+
+    // Toggle
+    themeToggle?.addEventListener("change", ()=>{
+      applyTheme(themeToggle.checked);
+    });
+
+    // Persist on click anywhere (original behavior preserved)
+    document.body.addEventListener("click", ()=>{
+      localStorage.setItem("dcfTheme", themeToggle?.checked ? "dark" : "light");
+    });
+
+    /* ===========================================================
+       KEYBOARD SHORTCUTS (R reset, S save, L load, T theme)
+    =========================================================== */
+    document.addEventListener("keydown", (e)=>{
+      // Avoid interfering with typing in inputs
+      if (["INPUT","TEXTAREA"].includes(e.target.tagName)) return;
+
+      const activeTab = document.querySelector(".tab.active")?.dataset.tab;
+      const k = e.key.toLowerCase();
+
+      if (k === "t") {
+        if (themeToggle) {
+          themeToggle.checked = !themeToggle.checked;
+          themeToggle.dispatchEvent(new Event("change"));
+        }
+      }
+      if (activeTab === "manual"){
+        if (k === "r") $("mReset")?.click();
+        if (k === "s") $("mSave")?.click();
+        if (k === "l") $("mLoad")?.click();
+      }
+      if (activeTab === "api"){
+        if (k === "r") $("aReset")?.click();
+      }
+    });
+
+    /* ===========================================================
+       TABS (ARIA updates)
+    =========================================================== */
+    const tabs = $("tabs").querySelectorAll(".tab");
+    const sections = { manual:$("manual"), api:$("api"), help:$("help") };
+
+    tabs.forEach(t=>{
+      t.addEventListener("click", ()=>{
+        tabs.forEach(x=>{
+          x.classList.remove("active");
+          x.setAttribute("aria-selected","false");
+          sections[x.dataset.tab].style.display="none";
+        });
+        t.classList.add("active");
+        t.setAttribute("aria-selected","true");
+        sections[t.dataset.tab].style.display = "";
+        // Move focus to panel for a11y when switching via keyboard
+        sections[t.dataset.tab].setAttribute("tabindex","-1");
+        sections[t.dataset.tab].focus({ preventScroll: true });
+      });
+    });
+
+    /* ===========================================================
+       MANUAL DCF
+    =========================================================== */
+    const mState = {
+      years: 5,
+      baseYear: new Date().getFullYear(),
+      rows: [],  // {year, fcf, ebitda, note}
+      wacc: 9.0,
+      g: 3.0,
+      method: "gordon",
+      multiple: 12,
+      exitBase: "fcf",
+      shares: 15000000000,
+      netDebt: 80000000000,
+      symbol: "DEMO"
+    };
+
+    function mInitRows(n=5){
+      mState.rows = [];
+      for(let i=1;i<=n;i++){
+        mState.rows.push({
+          year: mState.baseYear+i,
+          fcf: 10000000000*(1+0.05*i),
+          ebitda: 15000000000*(1+0.04*i),
+          note:""
+        });
+      }
+    }
+    mInitRows();
+
+    const mRows = $("mRows");
+
+    function mRenderRows(){
+      mRows.innerHTML = mState.rows.map((r,idx)=>`
+        <tr>
+          <td><input type="number" aria-label="Year ${idx+1}" data-idx="${idx}" data-k="year" value="${r.year}" /></td>
+          <td><input type="number" aria-label="UFCF year ${r.year}" data-idx="${idx}" data-k="fcf" value="${r.fcf}" step="1000000"/></td>
+          <td><input type="number" aria-label="EBITDA year ${r.year}" data-idx="${idx}" data-k="ebitda" value="${r.ebitda}" step="1000000"/></td>
+          <td><input type="text" aria-label="Notes for year ${r.year}" data-idx="${idx}" data-k="note" value="${r.note}" placeholder="assumption…"/></td>
+        </tr>
+      `).join("");
+    }
+    mRenderRows();
+
+    // Debounce utility for heavy recalcs from inputs
+    function debounce(fn, wait=50){
+      let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); };
+    }
+
+    mRows.addEventListener("input", debounce((e)=>{
+      const target = e.target;
+      if (!target) return;
+      const idx = +target.dataset.idx;
+      const k   = target.dataset.k;
+      const val = (k==="note") ? target.value : num(target.value);
+      if (mState.rows[idx]) {
+        mState.rows[idx][k] = val;
+        mRecalc();
+      }
+    }, 10));
+
+    $("mAddYear").addEventListener("click", ()=>{
+      const last = mState.rows[mState.rows.length-1];
+      const ny = (last?.year || mState.baseYear) + 1;
+      mState.rows.push({
+        year:ny,
+        fcf: last ? last.fcf*1.05 : 1e10,
+        ebitda: last ? last.ebitda*1.04 : 1.5e10,
+        note:""
+      });
+      mRenderRows(); mRecalc();
+    });
+
+    $("mDelYear").addEventListener("click", ()=>{
+      if (mState.rows.length>1){ mState.rows.pop(); mRenderRows(); mRecalc(); }
+    });
+
+    $("mWacc").addEventListener("input", (e)=>{
+      mState.wacc = +e.target.value;
+      $("mWaccV").textContent = `${mState.wacc.toFixed(1)}%`;
+      mRecalc();
+    });
+    $("mG").addEventListener("input", (e)=>{
+      mState.g = +e.target.value;
+      $("mGV").textContent = `${mState.g.toFixed(1)}%`;
+      mRecalc();
+    });
+    $("mTVMethod").addEventListener("change", (e)=>{ mState.method = e.target.value; mRecalc(); });
+    $("mMultiple").addEventListener("input", (e)=>{ mState.multiple = +e.target.value; mRecalc(); });
+    $("mExitBase").addEventListener("change", (e)=>{ mState.exitBase = e.target.value; mRecalc(); });
+
+    $("mShares").addEventListener("input", (e)=>{ mState.shares = num(e.target.value); mRecalc(); });
+    $("mNetDebt").addEventListener("input", (e)=>{ mState.netDebt = num(e.target.value); mRecalc(); });
+    $("mSym").addEventListener("input", (e)=>{ mState.symbol = e.target.value; });
+
+    /* Manual calc */
+    function mRecalc(){
+      const w = mState.wacc/100, g = mState.g/100;
+      const f = mState.rows.map(r=>num(r.fcf)||0);
+      const years = mState.rows.map(r=>r.year);
+
+      // PV of UFCF
+      let pvU=0;
+      f.forEach((fcf,i)=>{ pvU += fcf / Math.pow(1+w, i+1); });
+
+      // Terminal
+      let tv = 0;
+      if (mState.method==="gordon"){
+        const fT1 = f[f.length-1]*(1+g); // simplistic: grow last UFCF
+        if (w>g) tv = fT1 / (w-g);
+      } else {
+        const baseVal = (mState.exitBase==="fcf" ? f[f.length-1] : (num(mState.rows[mState.rows.length-1].ebitda)||0));
+        tv = baseVal * mState.multiple;
+      }
+      const pvT = tv / Math.pow(1+w, f.length);
+
+      const EV = pvU + pvT;
+      const Eq = EV - (mState.netDebt||0);
+      const EqPS = Eq / (mState.shares||1);
+
+      // KPIs
+      $("mPVUFCF").textContent = money(pvU,0);
+      $("mPVTerm").textContent = money(pvT,0);
+      $("mEV").textContent     = money(EV,0);
+      $("mEPS").textContent    = isFinite(EqPS) ? `$${fmt(EqPS,2)}` : "—";
+
+      // Line chart UFCF
+      drawLineChart($("mChart"), years, f);
+
+      // Sensitivity grid (WACC × g)
+      const waccs = [w-0.02, w-0.01, w, w+0.01, w+0.02].map(x=>Math.max(0.03,x));
+      const gs    = [g-0.01, g, g+0.01, g+0.02].map(x=>Math.max(0,x));
+      const grid = [];
+      gs.forEach(gg=>{
+        const row = [];
+        waccs.forEach(ww=>{
+          const pvU2 = f.reduce((acc,fcf,i)=>acc + fcf/Math.pow(1+ww,i+1),0);
+          let tv2 = (mState.method==="gordon" && ww>gg) ? (f[f.length-1]*(1+gg)/(ww-gg)) : tv; // fallback tv if invalid
+          const pvT2 = tv2 / Math.pow(1+ww, f.length);
+          const EV2 = pvU2 + pvT2;
+          const Eq2 = EV2 - (mState.netDebt||0);
+          row.push(Eq2/(mState.shares||1));
+        });
+        grid.push(row);
+      });
+      const sensDiv = $("mSens");
+      sensDiv.innerHTML = "";
+      gs.forEach((gg, i)=>{
+        const row = document.createElement("div"); row.className="grid-4";
+        waccs.forEach((ww,j)=>{
+          const val = grid[i][j];
+          const card = document.createElement("div");
+          card.className = "kpi";
+          card.innerHTML = `<div class="lbl">WACC ${pct(ww*100)} / g ${pct(gg*100)}</div><div class="val">$${fmt(val,2)}</div>`;
+          row.appendChild(card);
+        });
+        sensDiv.appendChild(row);
+      });
+
+      // Tornado: ±50 bps on WACC, ±50 bps on g, ±10% on terminal base
+      const basePS = EqPS;
+      const wUp = (()=>{ const ww=w+0.005; const pvU2=f.reduce((a,c,i)=>a+c/Math.pow(1+ww,i+1),0);
+        const tv2 = mState.method==="gordon" && ww>g ? f[f.length-1]*(1+g)/(ww-g) : tv;
+        const pvT2 = tv2/Math.pow(1+ww,f.length); return ((pvU2+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+      const wDn = (()=>{ const ww=w-0.005; const pvU2=f.reduce((a,c,i)=>a+c/Math.pow(1+ww,i+1),0);
+        const tv2 = mState.method==="gordon" && ww>g ? f[f.length-1]*(1+g)/(ww-g) : tv;
+        const pvT2 = tv2/Math.pow(1+ww,f.length); return ((pvU2+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+      const gUp = (()=>{ const gg=g+0.005; const tv2=(mState.method==="gordon" && w>gg)? f[f.length-1]*(1+gg)/(w-gg):tv;
+        const pvT2= tv2/Math.pow(1+w,f.length); return ((pvU+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+      const gDn = (()=>{ const gg=g-0.005; const tv2=(mState.method==="gordon" && w>gg)? f[f.length-1]*(1+gg)/(w-gg):tv;
+        const pvT2= tv2/Math.pow(1+w,f.length); return ((pvU+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+      const tbUp = (()=>{ const b=(mState.exitBase==="fcf"? f[f.length-1]*1.1 : (mState.rows[mState.rows.length-1].ebitda||0)*1.1);
+        const tv2 = (mState.method==="multiple") ? b*mState.multiple : tv;
+        const pvT2 = tv2/Math.pow(1+w,f.length); return ((pvU+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+      const tbDn = (()=>{ const b=(mState.exitBase==="fcf"? f[f.length-1]*0.9 : (mState.rows[mState.rows.length-1].ebitda||0)*0.9);
+        const tv2 = (mState.method==="multiple") ? b*mState.multiple : tv;
+        const pvT2 = tv2/Math.pow(1+w,f.length); return ((pvU+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
+
+      const tornadoItems = [
+        { label: "WACC ±50 bps", low: (wUp-basePS)/basePS*100, high:(wDn-basePS)/basePS*100 }, // note inversion (wUp baisse la valeur)
+        { label: "g ±50 bps",    low: (gDn-basePS)/basePS*100, high:(gUp-basePS)/basePS*100 },
+        { label: "Exit base ±10%", low:(tbDn-basePS)/basePS*100, high:(tbUp-basePS)/basePS*100 },
+      ];
+      drawTornado($("mTornado"), basePS, tornadoItems);
+    }
+    mRecalc();
+
+    /* Manual Export CSV */
+    $("mExport").addEventListener("click", ()=>{
+      const rows = [["Year","UFCF","EBITDA","Note"]];
+      mState.rows.forEach(r=>rows.push([r.year, r.fcf, r.ebitda, r.note||""]));
+      rows.push([]);
+      rows.push(["WACC", mState.wacc+"%"]); rows.push(["g", mState.g+"%"]);
+      rows.push(["Method", mState.method], ["Multiple", mState.multiple], ["ExitBase", mState.exitBase]);
+      rows.push(["NetDebt", mState.netDebt], ["Shares", mState.shares]);
+      download(`ManualDCF_${mState.symbol}.csv`, toCSV(rows));
+    });
+    $("mPrint").addEventListener("click", ()=>window.print());
+
+    /* Manual Save/Load */
+    $("mSave").addEventListener("click", ()=>{
+      const key = prompt("Scenario name to save?", `${mState.symbol}_manual`);
+      if (!key) return;
+      try{
+        localStorage.setItem(`dcf_manual_${key}`, JSON.stringify(mState));
+        alert("Saved.");
+      }catch(err){
+        console.error(err);
+        alert("Save failed (localStorage).");
+      }
+    });
+    $("mLoad").addEventListener("click", ()=>{
+      const keys = Object.keys(localStorage).filter(k=>k.startsWith("dcf_manual_"));
+      if (!keys.length){ alert("No scenarios saved."); return; }
+      const key = prompt(`Available:\n${keys.join("\n")}\n\nEnter exact key:`);
+      if (!key) return;
+      const raw = localStorage.getItem(key); if(!raw) return;
+      const obj = JSON.parse(raw);
+      Object.assign(mState, obj);
+      $("mWacc").value = mState.wacc; $("mWaccV").textContent = `${mState.wacc.toFixed(1)}%`;
+      $("mG").value    = mState.g;    $("mGV").textContent    = `${mState.g.toFixed(1)}%`;
+      $("mTVMethod").value = mState.method;
+      $("mMultiple").value = mState.multiple;
+      $("mExitBase").value = mState.exitBase;
+      $("mShares").value   = mState.shares;
+      $("mNetDebt").value  = mState.netDebt;
+      $("mSym").value      = mState.symbol;
+      mRenderRows(); mRecalc();
+    });
+    $("mCopyURL").addEventListener("click", ()=>{
+      setURLParams({
+        tab:"manual",
+        sym:mState.symbol,
+        wacc:mState.wacc,
+        g:mState.g,
+        method:mState.method,
+        mult:mState.multiple,
+        exit:mState.exitBase,
+        shares:mState.shares,
+        netDebt:mState.netDebt,
+        rows: encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(mState.rows)))))
+      });
+      navigator.clipboard.writeText(location.href).then(()=>alert("URL copied!"));
+    });
+    $("mReset").addEventListener("click", ()=>{
+      $("mSym").value="DEMO"; mState.symbol="DEMO";
+      $("mShares").value=15000000000; mState.shares=15000000000;
+      $("mNetDebt").value=80000000000; mState.netDebt=80000000000;
+      $("mWacc").value=9.0; $("mWaccV").textContent="9.0%"; mState.wacc=9.0;
+      $("mG").value=3.0; $("mGV").textContent="3.0%"; mState.g=3.0;
+      $("mTVMethod").value="gordon"; mState.method="gordon";
+      $("mMultiple").value=12; mState.multiple=12;
+      $("mExitBase").value="fcf"; mState.exitBase="fcf";
+      mInitRows(); mRenderRows(); mRecalc();
+    });
+
+    /* Load from URL (manual) */
+    (function loadManualFromURL(){
+      const q = getURLParams();
+      if (q.tab==="manual"){
+        if (q.sym) { $("mSym").value=q.sym; mState.symbol=q.sym; }
+        if (q.wacc) { $("mWacc").value=+q.wacc; $("mWaccV").textContent=`${(+q.wacc).toFixed(1)}%`; mState.wacc=+q.wacc; }
+        if (q.g)    { $("mG").value=+q.g; $("mGV").textContent=`${(+q.g).toFixed(1)}%`; mState.g=+q.g; }
+        if (q.method){ $("mTVMethod").value=q.method; mState.method=q.method; }
+        if (q.mult) { $("mMultiple").value=+q.mult; mState.multiple=+q.mult; }
+        if (q.exit) { $("mExitBase").value=q.exit; mState.exitBase=q.exit; }
+        if (q.shares){ $("mShares").value=+q.shares; mState.shares=+q.shares; }
+        if (q.netDebt){ $("mNetDebt").value=+q.netDebt; mState.netDebt=+q.netDebt; }
+        if (q.rows){
+          try{
+            const arr = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(q.rows)))));
+            if (Array.isArray(arr) && arr.length){ mState.rows = arr; mRenderRows(); }
+          }catch(e){}
+        }
+        document.querySelector('.tab[data-tab="manual"]').click();
+      }
+    })();
+
+    /* ===========================================================
+       API DCF (FMP)
+    =========================================================== */
+
+    // NOTE: Key kept as-is from original snippet
+    const API_KEY = "YwfOXlKh6wObb2vPLEsCqQfxmOzXKdan";
+    const ENDPOINT_CUSTOM  = (sym)=>`https://financialmodelingprep.com/stable/custom-discounted-cash-flow?symbol=${encodeURIComponent(sym)}&apikey=${API_KEY}`;
+    const ENDPOINT_LEVERED = (sym)=>`https://financialmodelingprep.com/stable/levered-discounted-cash-flow?symbol=${encodeURIComponent(sym)}&apikey=${API_KEY}`;
+
+    const aState = {
+      sym: "AAPL",
+      price: null,
+      rf: null,
+      sumPvUfcf: null,
+      terminalValue: null,
+      presentTerminalValue: null,
+      discountFactorTerminal: null,
+      netDebt: null,
+      shares: null,
+      wacc: 9.1,
+      g: 4.0,
+      leveredPS: null,
+      secLink: null,
+      fcfT1: null,
+      auto: false,
+      timer: null
+    };
+
+    function aSetSlidersFromState(){
+      $("aWacc").value=aState.wacc; $("aWaccV").textContent=`${aState.wacc.toFixed(1)}%`;
+      $("aG").value=aState.g; $("aGV").textContent=`${aState.g.toFixed(1)}%`;
+      $("aWmini").textContent = aState.wacc.toFixed(1);
+      $("aGmini").textContent = aState.g.toFixed(1);
+    }
+
+    function aFillCustomTable(c){
+      const tb = $("aCustomTbl");
+      const rows = [
+        ["WACC (API)",        pct(c.wacc),               "Custom DCF"],
+        ["LT Growth g (API)", pct(c.longTermGrowthRate), "Custom DCF"],
+        ["Beta",              fmt(c.beta,3),             "Custom DCF"],
+        ["Cost of Equity",    pct(c.costOfEquity),       "Custom DCF"],
+        ["Cost of Debt",      pct(c.costofDebt),         "Custom DCF"],
+        ["Tax Rate",          pct(c.taxRate),            "Custom DCF"],
+        ["UFCF (t+1)",        money(c.freeCashFlowT1,0), "Custom DCF"],
+        ["Σ PV(UFCF)",        money(c.sumPvUfcf,0),      "Custom DCF"],
+        ["Terminal Value",    money(c.terminalValue,0),  "Custom DCF"],
+        ["PV(Terminal)",      money(c.presentTerminalValue,0), "Custom DCF"],
+        ["Enterprise Value",  money(c.enterpriseValue,0),"Custom DCF"],
+        ["Net Debt",          money(c.netDebt,0),        "Custom DCF"],
+        ["Diluted Shares",    fmt(c.dilutedSharesOutstanding,0), "Custom DCF"],
+        ["Equity / Share",    `$${fmt(c.equityValuePerShare,2)}`,"Custom DCF"],
+        ["Market Price",      `$${fmt(c.price,2)}`,      "Custom DCF"],
+        ["Risk-free Rate",    pct(c.riskFreeRate),       "Custom DCF"],
+        ["MRP",               pct(c.marketRiskPremium),  "Custom DCF"],
+      ];
+      tb.innerHTML = rows.map(([k,v,s])=>`<tr><td>${k}</td><td>${v}</td><td>${s}</td></tr>`).join("");
+    }
+
+    function aFillLeveredTable(l){
+      const tb = $("aLeveredTbl");
+      const rows = [
+        ["Levered DCF / Share", `$${fmt(l.dcf,2)}`, "Levered DCF API"],
+        ["As-of Date",          l.date || "—",       "Levered DCF API"],
+      ];
+      tb.innerHTML = rows.map(([k,v,s])=>`<tr><td>${k}</td><td>${v}</td><td>${s}</td></tr>`).join("");
+    }
+
+    function aSetKPI(){
+      $("aPVU").textContent = money(aState.sumPvUfcf,0);
+      $("aPVT").textContent = money(aState.presentTerminalValue,0);
+      const EV = (aState.sumPvUfcf||0) + (aState.presentTerminalValue||0);
+      $("aEV").textContent  = money(EV,0);
+      const EqPS = (aState.shares && aState.netDebt!=null) ? ( (EV - aState.netDebt) / aState.shares ) : null;
+      $("aEQPS").textContent = isFinite(EqPS) ? `$${fmt(EqPS,2)}` : "—";
+
+      // gaps
+      if (aState.price!=null){
+        const gapC = (EqPS!=null && isFinite(EqPS) && aState.price>0) ? ((EqPS - aState.price)/aState.price*100) : null;
+        $("aGapC").textContent = (gapC==null || isNaN(gapC)) ? "—" : `${gapC>=0?"+":""}${fmt(gapC,1)}%`;
+        const gapL = (aState.leveredPS!=null && aState.price>0) ? ((aState.leveredPS - aState.price)/aState.price*100) : null;
+        $("aGapL").textContent = (gapL==null || isNaN(gapL)) ? "—" : `${gapL>=0?"+":""}${fmt(gapL,1)}%`;
+      }
+      $("aWmini").textContent = aState.wacc.toFixed(1);
+      $("aGmini").textContent = aState.g.toFixed(1);
+    }
+
+    function aRecompute(){
+      const w = aState.wacc/100, g = aState.g/100;
+      if (aState.fcfT1==null || aState.discountFactorTerminal==null){
+        aSetKPI(); return;
+      }
+      if (w>g){
+        const newTV = aState.fcfT1 * (1+g) / (w - g);
+        const newPVTV = newTV * aState.discountFactorTerminal;
+        aState.presentTerminalValue = newPVTV;
+      }
+      aSetKPI();
+    }
+
+    $("aWacc").addEventListener("input", e=>{
+      aState.wacc=+e.target.value;
+      $("aWaccV").textContent=`${aState.wacc.toFixed(1)}%`;
+      aRecompute();
+    });
+    $("aG").addEventListener("input", e=>{
+      aState.g=+e.target.value;
+      $("aGV").textContent=`${aState.g.toFixed(1)}%`;
+      aRecompute();
+    });
+
+    async function aLoad(sym){
+      $("aCustomTbl").innerHTML = `<tr><td colspan="3" style="text-align:center;color:#666;">Loading…</td></tr>`;
+      $("aLeveredTbl").innerHTML= `<tr><td colspan="3" style="text-align:center;color:#666;">Loading…</td></tr>`;
+      $("aPVU").textContent = $("aPVT").textContent = $("aEV").textContent = $("aEQPS").textContent = "—";
+      $("aLevPS").textContent = $("aGapC").textContent = $("aGapL").textContent = "—";
+      $("aSec").innerHTML = "";
+
+      try{
+        const [rC, rL] = await Promise.all([
+          fetch(ENDPOINT_CUSTOM(sym)),
+          fetch(ENDPOINT_LEVERED(sym))
+        ]);
+
+        // Basic HTTP status checks
+        if (!rC.ok || !rL.ok) {
+          throw new Error(`HTTP ${rC.status}/${rL.status}`);
+        }
+
+        const arrC = await rC.json(); const arrL = await rL.json();
+        const c = Array.isArray(arrC) && arrC.length ? arrC[0] : null;
+        const l = Array.isArray(arrL) && arrL.length ? arrL[0] : null;
+
+        if(!c){
+          $("aCustomTbl").innerHTML = `<tr><td colspan="3" style="text-align:center;color:#b00;">No Custom DCF for ${sym}</td></tr>`;
+          return;
+        }
+        aFillCustomTable(c);
+
+        aState.sym = sym;
+        aState.sumPvUfcf = num(c.sumPvUfcf);
+        aState.terminalValue = num(c.terminalValue);
+        aState.presentTerminalValue = num(c.presentTerminalValue);
+        aState.discountFactorTerminal = (aState.terminalValue && aState.presentTerminalValue)
+          ? (aState.presentTerminalValue / aState.terminalValue) : null;
+        aState.netDebt = num(c.netDebt);
+        aState.shares  = num(c.dilutedSharesOutstanding);
+        aState.price   = num(c.price);
+        aState.rf      = num(c.riskFreeRate);
+        aState.fcfT1   = num(c.freeCashFlowT1);
+        aState.secLink = c.link || null;
+
+        // init sliders with API defaults if available
+        if(num(c.wacc)!=null) { aState.wacc = num(c.wacc); }
+        if(num(c.longTermGrowthRate)!=null) { aState.g = num(c.longTermGrowthRate); }
+        aSetSlidersFromState();
+
+        $("aPrice").value = aState.price!=null ? `$${fmt(aState.price,2)}` : "—";
+        $("aRF").value    = aState.rf!=null ? `${fmt(aState.rf,2)} %` : "—";
+
+        if (l){
+          aState.leveredPS = num(l.dcf);
+          $("aLevPS").textContent = `$${fmt(aState.leveredPS,2)}`;
+          aFillLeveredTable(l);
+        }else{
+          $("aLeveredTbl").innerHTML= `<tr><td colspan="3" style="text-align:center;color:#b00;">No Levered DCF for ${sym}</td></tr>`;
+        }
+
+        if (aState.secLink){
+          $("aSec").innerHTML = `&nbsp;<a class="sec-link" href="${aState.secLink}" target="_blank" rel="noopener">🔗 SEC Filing</a>`;
+        }
+
+        aRecompute();
+      }catch(e){
+        console.error(e);
+        $("aCustomTbl").innerHTML = `<tr><td colspan="3" style="text-align:center;color:#b00;">Error loading data</td></tr>`;
+        $("aLeveredTbl").innerHTML= `<tr><td colspan="3" style="text-align:center;color:#b00;">Error loading data</td></tr>`;
+      }
+    }
+
+    $("aLoad").addEventListener("click", ()=>{
+      const s=($("aSym").value||"").trim().toUpperCase();
+      if(!s) return;
+      aLoad(s);
+    });
+    $("aReset").addEventListener("click", ()=>{
+      $("aSym").value="AAPL";
+      aLoad("AAPL");
+    });
+
+    $("aAuto").addEventListener("change", (e)=>{
+      aState.auto = e.target.checked;
+      if (aState.timer){ clearInterval(aState.timer); aState.timer=null; }
+      if (aState.auto){
+        aState.timer = setInterval(()=>{
+          const s=($("aSym").value||"").trim().toUpperCase();
+          if(s) aLoad(s);
+        }, 60000);
+      }
+    });
+
+    $("aExport").addEventListener("click", ()=>{
+      const rows = [
+        ["Symbol", aState.sym],
+        ["Price", aState.price],
+        ["RF", aState.rf],
+        ["WACC(active)", aState.wacc],
+        ["g(active)", aState.g],
+        ["Σ PV(UFCF)", aState.sumPvUfcf],
+        ["PV(Terminal)", aState.presentTerminalValue],
+        ["Net Debt", aState.netDebt],
+        ["Shares", aState.shares],
+      ];
+      download(`API_DCF_${aState.sym}.csv`, toCSV(rows));
+    });
+
+    $("aCopyURL").addEventListener("click", ()=>{
+      setURLParams({
+        tab:"api",
+        sym: $("aSym").value,
+        wacc: $("aWacc").value,
+        g: $("aG").value,
+        theme: (document.body.getAttribute("data-theme")==="dark" ? "dark" : "light")
+      });
+      navigator.clipboard.writeText(location.href).then(()=>alert("URL copied!"));
+    });
+
+    /* Load from URL (api) */
+    (function loadAPIFromURL(){
+      const q = getURLParams();
+      if (q.tab==="api"){
+        if (q.sym) $("aSym").value=q.sym;
+        if (q.wacc) { aState.wacc=+q.wacc; }
+        if (q.g)    { aState.g=+q.g; }
+        aSetSlidersFromState();
+        document.querySelector('.tab[data-tab="api"]').click();
+        if (q.sym) aLoad(q.sym);
+      }
+    })();
+
+    /* Auto-load defaults */
+    aLoad("AAPL");
+  </script>
+</body>
+</html>

@@ -498,8 +498,14 @@ h1, h2, h3 {
   }
 }
 
-#finance .project-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 30px; 
+#finance .project-grid.single {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: 3rem; /* espace entre le premier et le bas */
+}
+
+#finance .project-grid.double {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
