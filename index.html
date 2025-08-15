@@ -114,7 +114,6 @@
       <p>Feel free to reach out! You can find my contact information below, and I’m always open to discussing new opportunities or collaborations.</p>
     </section>
 
-<!-- Finance Projects -->
 <section id="finance" class="fade-in">
   <h2>Finance Projects</h2>
 
@@ -161,22 +160,63 @@
     </div>
   </div>
 
-<!-- Nouveau projet grand format -->
-<div class="project-grid single" style="margin-top: 40px;">
-  <div class="project">
-    <img src="assets/videos/4.png" alt="Equity & Bond Backtester" class="project-image" />
-    <h3>Equity & Bond Portfolio Backtester</h3>
-    <p style="font-style: italic; color: #555;">
-      Backtesting tool for equity and bond portfolios with rebalancing, performance metrics, and benchmark comparisons.
-    </p>
-    <p style="font-size: 0.9rem; color: #777;">
-      HTML, JavaScript, Financial Modeling Prep API – 2025
-    </p>
-    <a href="projects/backtester.html" target="_blank" class="btn-outline align-btn">Open Backtester →</a>
+  <!-- Nouveau projet grand format -->
+  <div class="project-grid single" style="margin-top: 40px;">
+    <div class="project">
+      <img src="assets/videos/4.png" alt="Equity & Bond Backtester" class="project-image" />
+      <h3>Equity & Bond Portfolio Backtester</h3>
+      <p style="font-style: italic; color: #555;">
+        Backtesting tool for equity and bond portfolios with rebalancing, performance metrics, and benchmark comparisons.
+      </p>
+      <p style="font-size: 0.9rem; color: #777;">
+        HTML, JavaScript, Financial Modeling Prep API – 2025
+      </p>
+      <a href="projects/backtester.html" target="_blank" class="btn-outline align-btn">Open Backtester →</a>
+    </div>
   </div>
-</div>
+</section>
 
 
+<style>
+.project-grid .project {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.project-grid .project.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.02); /* zoom léger */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const projects = document.querySelectorAll('.project-grid .project');
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // pour ne pas relancer
+      }
+    });
+  }, { threshold: 0.1 });
+
+  projects.forEach(proj => observer.observe(proj));
+});
+</script>
 
     <!-- Other Projects -->
     <section id="projects" class="fade-in">
