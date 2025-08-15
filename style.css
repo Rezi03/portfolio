@@ -497,3 +497,9 @@ h1, h2, h3 {
     border-radius: 6px;
   }
 }
+
+#finance .project-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; 
+}

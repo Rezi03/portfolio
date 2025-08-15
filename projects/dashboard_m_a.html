@@ -1,86 +1,419 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard M&A – Banques</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>M&A Dashboard – Major Banks</title>
+  <link rel="stylesheet" href="../style.css" />
   <style>
-    body { font-family: sans-serif; margin:0; padding:0; background:#f8f9fa; color:#1a1a1a;}
-    header { padding:1rem; text-align:center; background:#003366; color:white;}
-    h1 { margin:0; font-size:1.8rem;}
-    main { max-width:900px; margin:2rem auto; padding:1rem; }
-    table { width:100%; border-collapse: collapse; margin-top:1rem;}
-    th, td { padding:0.6rem; border:1px solid #ccc; text-align:left;}
-    th { background:#003366; color:white; }
-    tr:nth-child(even) { background:#f1f3f5; }
-    .refresh-time { font-size:0.9rem; color:#666; margin-top:0.5rem;}
+    :root{
+      --brand:#003366;
+      --brand-dark:#002244;
+      --bg:#f8f9fa;
+      --text:#1a1a1a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --row-alt:#f1f3f5;
+      --shadow: 0 4px 12px rgba(0,0,0,0.10);
+      --radius: 14px;
+    }
+
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:sans-serif}
+
+    header{
+      background:var(--brand);
+      color:#fff;
+      text-align:center;
+      padding:1rem 0.8rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2)
+    }
+    header h1{margin:0;font-size:1.8rem}
+    .refresh-time{font-size:.9rem;color:#dbeafe;margin-top:.35rem}
+
+    main{
+      max-width:1100px;
+      margin:2rem auto;
+      padding:1rem;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+      padding:1rem;
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      margin-bottom:1rem;
+    }
+    .controls-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:flex-end;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:180px;
+      flex:1;
+    }
+    label{font-size:.85rem;color:var(--muted)}
+    input[type="text"], input[type="date"], select{
+      padding:.55rem .7rem;border:1px solid var(--border);border-radius:10px;background:#fff;
+    }
+    .btn, .btn-outline{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:.6rem .9rem;border-radius:10px;text-decoration:none;cursor:pointer;
+      transition:.2s all ease-in-out;font-weight:600
+    }
+    .btn{background:var(--brand);color:#fff;border:1px solid var(--brand)}
+    .btn:hover{background:var(--brand-dark)}
+    .btn-outline{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+    .btn-outline:hover{background:#f0f6ff}
+
+    table{width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.95rem}
+    th,td{padding:.7rem;border:1px solid #ccc;text-align:left}
+    th{background:var(--brand);color:#fff;position:sticky;top:0}
+    tr:nth-child(even){background:var(--row-alt)}
+    .table-wrap{max-height:60vh;overflow:auto;border-radius:12px}
+
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin:.6rem 0}
+    .search{flex:1;min-width:220px}
+    .muted{color:var(--muted);font-size:.85rem}
+
+    .pagination{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:.5rem}
+    .pagination button{padding:.45rem .7rem;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer}
+    .pagination button[disabled]{opacity:.5;cursor:not-allowed}
+
+    .footer-actions{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:1rem}
+    .back-btn{
+      display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:10px;text-decoration:none;border:1px solid var(--brand)
+    }
+    .back-btn:hover{background:var(--brand-dark)}
+    .back-btn svg{width:16px;height:16px;fill:#fff}
+
+    @media (max-width: 900px){
+      .controls{grid-template-columns:1fr}
+      .controls-row{flex-direction:column;align-items:stretch}
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Dashboard M&A – Banques US</h1>
-    <div class="refresh-time">Dernière mise à jour : <span id="last-update">--:--:--</span></div>
+    <h1>M&A Dashboard – Major Banks</h1>
+    <div class="refresh-time">Last update: <span id="last-update">--:--:--</span></div>
   </header>
+
   <main>
-    <table id="ma-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Entreprise Acquéreuse</th>
-          <th>Cible</th>
-          <th>Montant ($M)</th>
-          <th>Banque</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td colspan="5" style="text-align:center;">Chargement des données...</td></tr>
-      </tbody>
-    </table>
-  </main>
+    <!-- Top Controls -->
+    <section class="card">
+      <div class="controls">
+        <div class="controls-row">
+          <div class="field" style="max-width:220px;">
+            <label>Auto-refresh</label>
+            <select id="refreshSelect">
+              <option value="off">Off</option>
+              <option value="15000">Every 15s</option>
+              <option value="30000">Every 30s</option>
+              <option value="60000" selected>Every 1 min</option>
+              <option value="120000">Every 2 min</option>
+              <option value="300000">Every 5 min</option>
+            </select>
+          </div>
+          <div class="field" style="max-width:220px;">
+            <label>Lookback period</label>
+            <select id="lookbackSelect">
+              <option value="90">Last 3 months</option>
+              <option value="180">Last 6 months</option>
+              <option value="365" selected>Last 12 months</option>
+              <option value="1825">Last 5 years</option>
+            </select>
+          </div>
+          <div>
+            <button class="btn-outline" id="exportCsvBtn">Export CSV</button>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="field search">
+            <label>Search (Acquirer / Target)</label>
+            <input type="text" id="searchInput" placeholder="Type to filter rows…" />
+          </div>
+          <div class="field" style="min-width:240px;">
+            <label>Filter banks</label>
+            <select id="bankFilter" multiple size="3">
+              <option value="GS">Goldman Sachs</option>
+              <option value="MS">Morgan Stanley</option>
+              <option value="JPM" selected>JPMorgan</option>
+              <option value="BAC">Bank of America</option>
+              <option value="C">Citigroup</option>
+              <option value="BCS">Barclays</option>
+            </select>
+            <span class="muted">Hold Ctrl/Cmd to select multiple.</span>
+          </div>
+          <div class="field">
+            <label>Date from (optional)</label>
+            <input type="date" id="dateFromInput" />
+          </div>
+          <div class="field">
+            <label>Date to (optional)</label>
+            <input type="date" id="dateToInput" />
+          </div>
+          <div class="field" style="max-width:220px;">
+            <label>&nbsp;</label>
+            <button class="btn" id="reloadBtn">Reload</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Table -->
+    <section class="card" style="margin-top:1rem;">
+      <div class="toolbar">
+        <div class="muted">Showing <span id="countShown">0</span> of <span id="countTotal">0</span> transactions</div>
+        <div class="muted">Click Date header to sort</div>
+      </div>
+      <div class="table-wrap">
+        <table id="ma-table">
+          <thead>
+            <tr>
+              <th id="thDate" style="cursor:pointer;">Date ▲▼</th>
+              <th>Acquiring Company</th>
+              <th>Target</th>
+              <th>Value ($M)</th>
+              <th>Bank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5" style="text-align:center;">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button id="prevPage">&larr; Prev</button>
+        <span class="muted">Page <span id="pageNum">1</span>/<span id="pageCount">1</span></span>
+        <button id="nextPage">Next &rarr;</button>
+      </div>
+    </section>
+
+    <!-- Footer actions -->
+    <section class="footer-actions">
+      <a href="../index.html" class="back-btn" id="goBackBtn" title="Go back to homepage">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        Go Back
+      </a>
+    </section>
+    
 
   <script>
-    const API_KEY = "YwfOXlKh6wObb2vPLEsCqQfxmOzXKdan";
-    const symbols = ["GS","MS","JPM","BAC","C"];
-    const tableBody = document.querySelector("#ma-table tbody");
-    const lastUpdate = document.getElementById("last-update");
+    const BANK_TICKERS = ["GS","MS","JPM","BAC","C","BCS"];
+    const BANK_NAME_PATTERNS = [
+      /goldman\s+sachs/i,
+      /morgan\s+stanley/i,
+      /jpmorgan/i,
+      /bank\s+of\s+america/i,
+      /citigroup/i,
+      /\bciti\b/i,
+      /barclays/i
+    ];
 
-    async function fetchMA() {
-      try {
-        const url = `https://financialmodelingprep.com/api/v3/mergers-acquisitions?symbol=${symbols.join(",")}&apikey=${API_KEY}`;
-        const response = await fetch(url);
-        const data = await response.json();
+    let DATA_ALL = [];
+    let DATA_VIEW = [];
+    let PAGE = 1;
+    const PAGE_SIZE = 25;
+    let SORT_DESC = true;
+    let refreshTimer = null;
 
-        tableBody.innerHTML = ""; // Clear table
+    const lastUpdate     = document.getElementById("last-update");
+    const lookbackSelect = document.getElementById("lookbackSelect");
+    const refreshSelect  = document.getElementById("refreshSelect");
+    const exportCsvBtn   = document.getElementById("exportCsvBtn");
+    const reloadBtn      = document.getElementById("reloadBtn");
+    const searchInput    = document.getElementById("searchInput");
+    const bankFilter     = document.getElementById("bankFilter");
+    const dateFromInput  = document.getElementById("dateFromInput");
+    const dateToInput    = document.getElementById("dateToInput");
 
-        if (data.length === 0) {
-          tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Aucune transaction trouvée.</td></tr>';
-          return;
-        }
+    const tbody          = document.querySelector("#ma-table tbody");
+    const thDate         = document.getElementById("thDate");
+    const countShown     = document.getElementById("countShown");
+    const countTotal     = document.getElementById("countTotal");
+    const pageNum        = document.getElementById("pageNum");
+    const pageCount      = document.getElementById("pageCount");
+    const prevPageBtn    = document.getElementById("prevPage");
+    const nextPageBtn    = document.getElementById("nextPage");
+    const goBackBtn      = document.getElementById("goBackBtn");
 
-        data.forEach(ma => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${ma.date || '-'}</td>
-            <td>${ma.acquirer || '-'}</td>
-            <td>${ma.target || '-'}</td>
-            <td>${ma.transactionValue || '-'}</td>
-            <td>${ma.symbol || '-'}</td>
-          `;
-          tableBody.appendChild(row);
-        });
+    function fmtNum(n){ return n ? Number(n).toLocaleString() : "-"; }
+    function parseDate(d){ const x = new Date(d); return isNaN(+x) ? null : x; }
+    function getSelectedBanks(){
+      return Array.from(bankFilter.selectedOptions).map(o=>o.value);
+    }
+    function withinBank(ma){
+      const ticker = String(ma.acquirerTicker || ma.symbol || "").toUpperCase();
+      const acq = String(ma.acquirer || "");
+      if (BANK_TICKERS.includes(ticker)) return true;
+      return BANK_NAME_PATTERNS.some(re => re.test(acq));
+    }
+    function withinSearch(ma, q){
+      if(!q) return true;
+      q = q.toLowerCase();
+      return ma.acquirer?.toLowerCase().includes(q) || ma.target?.toLowerCase().includes(q);
+    }
+    function withinDate(ma, from, to){
+      const d = parseDate(ma.date);
+      if (!d) return false;
+      if (from && d < from) return false;
+      if (to   && d > to)   return false;
+      return true;
+    }
+    function matchesSelectedTicker(ma, selected){
+      if (!selected.length) return true;
+      const ticker = String(ma.acquirerTicker || ma.symbol || "").toUpperCase();
+      if (ticker && selected.includes(ticker)) return true;
+      for(const t of selected){
+        if (t==="GS"  && /goldman/i.test(ma.acquirer||"")) return true;
+        if (t==="MS"  && /morgan\s+stanley/i.test(ma.acquirer||"")) return true;
+        if (t==="JPM" && /jpmorgan/i.test(ma.acquirer||"")) return true;
+        if (t==="BAC" && /bank\s+of\s+america/i.test(ma.acquirer||"")) return true;
+        if (t==="C"   && /(citigroup|\bciti\b)/i.test(ma.acquirer||"")) return true;
+        if (t==="BCS" && /barclays/i.test(ma.acquirer||"")) return true;
+      }
+      return false;
+    }
 
-        const now = new Date();
-        lastUpdate.textContent = now.toLocaleTimeString();
-      } catch (error) {
-        console.error("Erreur fetch M&A :", error);
-        tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Erreur lors du chargement des données</td></tr>';
+    function renderTable(){
+      const q = searchInput.value.trim();
+      const selected = getSelectedBanks();
+      const from = dateFromInput.value ? new Date(dateFromInput.value) : null;
+      const to   = dateToInput.value   ? new Date(dateToInput.value)   : null;
+
+      DATA_VIEW = DATA_ALL
+        .filter(row => withinSearch(row, q))
+        .filter(row => matchesSelectedTicker(row, selected))
+        .filter(row => withinDate(row, from, to));
+
+      DATA_VIEW.sort((a,b)=>{
+        const da = parseDate(a.date), db = parseDate(b.date);
+        if (!da && !db) return 0;
+        if (!da) return 1;
+        if (!db) return -1;
+        return SORT_DESC ? (db - da) : (da - db);
+      });
+
+      countTotal.textContent = DATA_ALL.length;
+      countShown.textContent = DATA_VIEW.length;
+
+      const totalPages = Math.max(1, Math.ceil(DATA_VIEW.length / PAGE_SIZE));
+      PAGE = Math.min(PAGE, totalPages);
+      const start = (PAGE-1) * PAGE_SIZE;
+      const slice = DATA_VIEW.slice(start, start+PAGE_SIZE);
+
+      pageNum.textContent = PAGE;
+      pageCount.textContent = totalPages;
+      prevPageBtn.disabled = PAGE<=1;
+      nextPageBtn.disabled = PAGE>=totalPages;
+
+      tbody.innerHTML = slice.length
+        ? slice.map(ma => `
+          <tr>
+            <td>${ma.date || "-"}</td>
+            <td>${ma.acquirer || "-"}</td>
+            <td>${ma.target || "-"}</td>
+            <td>${fmtNum(ma.transactionValue)}</td>
+            <td>${(ma.acquirerTicker || ma.symbol || "-").toUpperCase()}</td>
+          </tr>`).join("")
+        : `<tr><td colspan="5" style="text-align:center;">No transactions match your filters.</td></tr>`;
+    }
+
+    function updateTime(){
+      lastUpdate.textContent = new Date().toLocaleTimeString();
+    }
+
+    function scheduleRefresh(){
+      if (refreshTimer) clearInterval(refreshTimer);
+      const v = refreshSelect.value;
+      if (v === "off") return;
+      refreshTimer = setInterval(loadData, parseInt(v,10));
+    }
+
+    async function fetchJSON(url, options={}, timeoutMs=15000){
+      const controller = new AbortController();
+      const id = setTimeout(()=>controller.abort(), timeoutMs);
+      try{
+        const res = await fetch(url, {...options, signal: controller.signal});
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } finally {
+        clearTimeout(id);
       }
     }
 
-    // Actualisation toutes les 60 secondes
-    fetchMA();
-    setInterval(fetchMA, 60000);
-  </script>
-</body>
-</html>
+    function buildMAUrl(){
+      const days = parseInt(lookbackSelect.value,10) || 365;
+      const fromDate = new Date(Date.now() - days*24*3600*1000);
+      const from = fromDate.toISOString().split("T")[0];
+      return `https://financialmodelingprep.com/api/v3/mergers-acquisitions?from=${from}&apikey=YwfOXlKh6wObb2vPLEsCqQfxmOzXKdan`;
+    }
+
+    function normalizeMA(item){
+      return {
+        date: item.date || item.announcedDate || item.effectiveDate || null,
+        acquirer: item.acquirer || item.buyer || item.acquiringCompany || "",
+        target: item.target || item.seller || item.sellingCompany || "",
+        transactionValue: item.transactionValue ?? item.value ?? item.dealValue ?? null,
+        acquirerTicker: item.acquirerTicker || item.symbol || item.ticker || ""
+      };
+    }
+
+    function filterForBanks(rows){
+      return rows.filter(r => withinBank(r));
+    }
+
+    async function loadData(){
+      try{
+        let js = await fetchJSON(buildMAUrl(), {}, 20000);
+        if (!Array.isArray(js)) js = js.data || js.items || [];
+        DATA_ALL = filterForBanks(js.map(normalizeMA));
+        updateTime();
+        PAGE = 1;
+        renderTable();
+      }catch(e){
+        updateTime();
+        renderTable();
+      }
+    }
+
+    exportCsvBtn.addEventListener("click", ()=>{
+      const header = ["date","acquirer","target","transactionValue","acquirerTicker_or_symbol"];
+      const lines = [header.join(",")];
+      for(const r of (DATA_VIEW.length ? DATA_VIEW : DATA_ALL)){
+        const line = [
+          r.date || "",
+          (r.acquirer || "").replace(/[,\\n]/g," "),
+          (r.target || "").replace(/[,\\n]/g," "),
+          r.transactionValue ?? "",
+          (r.acquirerTicker || r.symbol || "").toUpperCase()
+        ].join(",");
+        lines.push(line);
+      }
+
+    const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "mergers_acquisitions.csv";
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
