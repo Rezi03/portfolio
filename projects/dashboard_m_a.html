@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard M&A – Banques</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: sans-serif; margin:0; padding:0; background:#f8f9fa; color:#1a1a1a;}
+    header { padding:1rem; text-align:center; background:#003366; color:white;}
+    h1 { margin:0; font-size:1.8rem;}
+    main { max-width:900px; margin:2rem auto; padding:1rem; }
+    table { width:100%; border-collapse: collapse; margin-top:1rem;}
+    th, td { padding:0.6rem; border:1px solid #ccc; text-align:left;}
+    th { background:#003366; color:white; }
+    tr:nth-child(even) { background:#f1f3f5; }
+    .refresh-time { font-size:0.9rem; color:#666; margin-top:0.5rem;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard M&A – Banques US</h1>
+    <div class="refresh-time">Dernière mise à jour : <span id="last-update">--:--:--</span></div>
+  </header>
+  <main>
+    <table id="ma-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Entreprise Acquéreuse</th>
+          <th>Cible</th>
+          <th>Montant ($M)</th>
+          <th>Banque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" style="text-align:center;">Chargement des données...</td></tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const API_KEY = "YwfOXlKh6wObb2vPLEsCqQfxmOzXKdan";
+    const symbols = ["GS","MS","JPM","BAC","C"];
+    const tableBody = document.querySelector("#ma-table tbody");
+    const lastUpdate = document.getElementById("last-update");
+
+    async function fetchMA() {
+      try {
+        const url = `https://financialmodelingprep.com/api/v3/mergers-acquisitions?symbol=${symbols.join(",")}&apikey=${API_KEY}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        tableBody.innerHTML = ""; // Clear table
+
+        if (data.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Aucune transaction trouvée.</td></tr>';
+          return;
+        }
+
+        data.forEach(ma => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${ma.date || '-'}</td>
+            <td>${ma.acquirer || '-'}</td>
+            <td>${ma.target || '-'}</td>
+            <td>${ma.transactionValue || '-'}</td>
+            <td>${ma.symbol || '-'}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        const now = new Date();
+        lastUpdate.textContent = now.toLocaleTimeString();
+      } catch (error) {
+        console.error("Erreur fetch M&A :", error);
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Erreur lors du chargement des données</td></tr>';
+      }
+    }
+
+    // Actualisation toutes les 60 secondes
+    fetchMA();
+    setInterval(fetchMA, 60000);
+  </script>
+</body>
+</html>
