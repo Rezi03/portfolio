@@ -14,15 +14,13 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Styles responsive -->
   <style>
-    /* ==== Header optimisé pour mobile ==== */
     @media (max-width: 768px) {
       header {
-        flex-direction: row;           /* Garde la disposition horizontale */
+        flex-direction: row;         
         justify-content: space-between;
         align-items: center;
-        padding: 0.3rem 0.8rem;         /* Réduit la hauteur */
+        padding: 0.3rem 0.8rem;    
         gap: 0;
       }
 
@@ -45,9 +43,7 @@
       }
     }
 
-    /* ==== Autres adaptations mobile ==== */
     @media (max-width: 768px) {
-      /* Hero section */
       .hero {
         flex-direction: column;
         text-align: center;
@@ -60,7 +56,6 @@
         height: auto;
       }
 
-      /* Projets et documents */
       .project-grid, .document-grid {
         grid-template-columns: 1fr !important;
         gap: 20px;
@@ -69,13 +64,11 @@
         text-align: center;
       }
 
-      /* Images et vidéos */
       img, video {
         max-width: 100%;
         height: auto;
       }
 
-      /* Conteneur global */
       .container {
         padding: 10px;
       }
@@ -93,7 +86,6 @@
   </header>
 
   <main class="container">
-    <!-- Hero -->
     <section class="hero fade-in">
       <div class="hero-left">
         <img src="assets/images/me.png" alt="Profile Picture" class="profile-img hover-zoom" />
@@ -106,7 +98,6 @@
       </div>
     </section>
 
-    <!-- About -->
     <section id="about" class="fade-in">
       <h2>About Me</h2>
       <p>I’m Rezi Sabashvili, currently in my second year of a Master’s degree in Economic Analysis and Policy, with a specialization in Statistics for Evaluation and Forecasting at the University of Reims Champagne-Ardenne. I’m actively looking for a 6-month internship, from March to August 2026. I have strong skills in data analysis, programming, and digital tools, as well as a solid background in economics and finance, enabling me to understand and interpret financial challenges. I adapt quickly to new environments.</p>
@@ -117,7 +108,6 @@
 <section id="finance" class="fade-in">
   <h2>Finance Projects</h2>
 
-  <!-- Projet principal -->
   <div class="project-grid single">
     <div class="project">
       <video autoplay loop muted playsinline class="project-video">
@@ -133,7 +123,6 @@
     </div>
   </div>
 
-  <!-- Deux projets côte à côte -->
   <div class="project-grid double">
     <div class="project">
       <img src="assets/videos/2.png" alt="M&A Dashboard" class="project-image" />
@@ -160,7 +149,6 @@
     </div>
   </div>
 
-  <!-- Nouveau projet grand format -->
   <div class="project-grid single" style="margin-top: 40px;">
     <div class="project">
       <img src="assets/videos/4.png" alt="Equity & Bond Backtester" class="project-image" />
@@ -196,7 +184,7 @@
 }
 
 .project-image:hover {
-  transform: scale(1.02); /* zoom léger */
+  transform: scale(1.02); 
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 </style>
@@ -209,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
     entries.forEach(entry => {
       if(entry.isIntersecting){
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // pour ne pas relancer
+        observer.unobserve(entry.target); 
       }
     });
   }, { threshold: 0.1 });
@@ -218,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-    <!-- Other Projects -->
     <section id="projects" class="fade-in">
       <h2>My Projects</h2>
       <div class="project-grid">
@@ -237,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
     </section>
 
-    <!-- Documents -->
     <section id="cv-reco" class="fade-in">
       <h2>Documents & Recommendations</h2>
       <div class="document-grid">
@@ -258,7 +244,6 @@ document.addEventListener("DOMContentLoaded", function() {
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="fade-in">
     <div class="social-icons">
       <a href="mailto:rezisabashvili1@gmail.com" class="underline-hover"><img src="assets/logos/mail.png" alt="Email" /></a>
@@ -267,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </footer>
 
-  <!-- Script fade-in & CV toggle -->
   <script>
     const faders = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {

@@ -1,30 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-  =====================================================================
-  DCF Lab – Manual & API (FMP)
-  Restructured single-file app
-  - Keeps ALL original features, ids, labels and logic
-  - Improves structure, accessibility, responsiveness, organization
-  - Nothing removed; only additions/refactors/cleanups
-  =====================================================================
-  -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>DCF Lab – Manual &amp; API (FMP)</title>
-
-  <!--
-  =====================================================================
-  Base styles: CSS reset-lite + design tokens + themes
-  =====================================================================
-  -->
   <style>
-    /* ------------------------------
-       0. Reset-lite / base
-    ------------------------------ */
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
       margin: 0;
@@ -46,7 +27,6 @@
       font: inherit;
       color: inherit;
     }
-    /* Only show outline when user is keyboarding */
     :focus { outline: none; }
     :focus-visible {
       outline: 3px solid rgba(11,37,69,.35);
@@ -54,7 +34,6 @@
       border-radius: 6px;
     }
 
-    /* Skip link for a11y */
     .skip-link {
       position: absolute;
       left: 8px;
@@ -70,15 +49,12 @@
     }
     .skip-link:focus { top: 8px; }
 
-    /* ------------------------------
-       1. Design tokens
-    ------------------------------ */
     :root{
-      --navy:#0b2545;        /* bleu marine */
+      --navy:#0b2545; 
       --navy-2:#0f335f;
-      --gold:#c8aa6e;        /* doré discret */
+      --gold:#c8aa6e;    
       --gold-2:#b39359;
-      --bg:#f6f7fb;          /* fond clair pro */
+      --bg:#f6f7fb;  
       --card:#ffffff;
       --text:#1b1f23;
       --muted:#6b7280;
@@ -88,10 +64,9 @@
       --radius:16px;
       --focus: 0 0 0 3px rgba(11,37,69,.15);
 
-      --container-max: 1200px; /* élargi */
+      --container-max: 1200px; 
     }
 
-    /* Dark theme tokens */
     [data-theme="dark"]{
       --bg:#0e131a;
       --card:#131a22;
@@ -102,14 +77,10 @@
       --shadow: 0 10px 28px rgba(0,0,0,.35);
     }
 
-    /* Respect user preference by default; overridden by saved choice */
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) { background: var(--bg); color: var(--text); }
     }
 
-    /* ------------------------------
-       2. Global page styling
-    ------------------------------ */
     html, body { background: var(--bg); color: var(--text); }
 
     h1{
@@ -122,7 +93,6 @@
     [data-theme="dark"] h1{ color:#e0e6f2 }
     .sub{ color:var(--muted); text-align:center; margin-bottom:1.1rem }
 
-    /* Responsive container */
     .wrap{
       max-width: var(--container-max);
       margin: 0 auto;
@@ -130,9 +100,6 @@
       width: 100%;
     }
 
-    /* ------------------------------
-       3. Topbar
-    ------------------------------ */
     .topbar{
       display:flex;
       gap:.6rem;
@@ -155,9 +122,6 @@
     }
     [data-theme="dark"] .badge{ background:#0f1720; color:#e2e6ee }
 
-    /* ------------------------------
-       4. Tabs
-    ------------------------------ */
     .tabs{ display:flex; gap:.6rem; flex-wrap:wrap; align-items: center }
     .tabs[role="tablist"] { margin-bottom: .2rem; }
     .tab{
@@ -174,9 +138,6 @@
     .tab:hover{ transform:translateY(-1px) }
     .tab.active{ background:var(--navy); color:#fff; border-color:var(--navy) }
 
-    /* ------------------------------
-       5. Card
-    ------------------------------ */
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -192,17 +153,11 @@
     }
     [data-theme="dark"] .card h2{ color:#e0e6f2 }
 
-    /* ------------------------------
-       6. Grids & layout helpers
-    ------------------------------ */
     .grid-2{ display:grid; grid-template-columns: 1.05fr .95fr; gap:1rem }
     .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap:.7rem }
     .grid-4{ display:grid; grid-template-columns: repeat(4,1fr); gap:.7rem }
     .row{ display:grid; grid-template-columns: repeat(12,1fr); gap:.7rem }
 
-    /* ------------------------------
-       7. Forms
-    ------------------------------ */
     .field{ display:flex; flex-direction:column; gap:.35rem }
     label{ font-size:.85rem; color:var(--muted) }
     input[type="text"], input[type="number"], input[type="date"], select{
@@ -221,9 +176,6 @@
     input:focus, select:focus{ box-shadow: var(--focus) }
     input[type="range"]{ width:100% }
 
-    /* ------------------------------
-       8. Buttons
-    ------------------------------ */
     .actions{ display:flex; gap:.6rem; flex-wrap:wrap }
     .btn{
       display:inline-flex; align-items:center; gap:.5rem;
@@ -248,9 +200,6 @@
     [data-theme="dark"] .btn-ghost{ background:#0f1720; color:#e6edf5 }
     [data-theme="dark"] .btn-ghost:hover{ background:#142033 }
 
-    /* ------------------------------
-       9. KPIs
-    ------------------------------ */
     .kpis{
       display:grid; grid-template-columns:repeat(4,1fr);
       gap:.7rem; margin-top:.7rem
@@ -269,9 +218,6 @@
     [data-theme="dark"] .kpi .val{ color:#e6edf5 }
     .kpi.accent{ outline:2px solid rgba(200,170,110,.35) }
 
-    /* ------------------------------
-       10. Tables
-    ------------------------------ */
     .table-wrap { overflow:auto; border-radius: 12px; }
     table{
       width:100%; border-collapse:collapse; font-size:.95rem; margin-top:.6rem;
@@ -285,9 +231,6 @@
     tbody tr:hover{ background:#eef3ff }
     [data-theme="dark"] tbody tr:hover{ background:#172033 }
 
-    /* ------------------------------
-       11. Tags / pills
-    ------------------------------ */
     .tag{
       display:inline-flex; align-items:center; gap:.35rem;
       background:#fff; border:1px solid var(--border);
@@ -300,27 +243,18 @@
       color:#7a5b14; font-weight:800
     }
 
-    /* ------------------------------
-       12. Charts (vanilla canvas)
-    ------------------------------ */
     .chart-wrap{
       border:1px dashed var(--border);
       border-radius:12px; padding:.7rem
     }
     canvas{ width:100%; height:260px; display:block }
 
-    /* ------------------------------
-       13. Footer
-    ------------------------------ */
     .foot{
       margin:1.2rem auto 2rem auto;
       text-align:center; color:var(--muted);
       max-width:980px
     }
 
-    /* ------------------------------
-       14. Toggle switch
-    ------------------------------ */
     .switch{
       position:relative; display:inline-block; width:48px; height:28px; vertical-align:middle
     }
@@ -336,21 +270,14 @@
     input:checked + .slider{ background:#4f7db8 }
     input:checked + .slider:before{ transform:translateX(20px) }
 
-    /* ------------------------------
-       15. Animations
-    ------------------------------ */
     @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
     @keyframes bounceIn{ from{ transform:scale(.98); opacity:.6 } to{ transform:scale(1); opacity:1 } }
 
-    /* Reduce motion for users that prefer it */
     @media (prefers-reduced-motion: reduce) {
       .card, .kpi { animation: none !important; }
       .tab:hover, .btn:hover { transform: none !important; }
     }
 
-    /* ------------------------------
-       16. Media queries
-    ------------------------------ */
     @media (max-width:1100px){
       .grid-2{ grid-template-columns:1fr }
       .kpis{ grid-template-columns:repeat(2,1fr) }
@@ -361,9 +288,6 @@
       h1 { font-size: 1.4rem; }
     }
 
-    /* ------------------------------
-       17. Print styles
-    ------------------------------ */
     @media print {
       body { background: #fff; color:#111; }
       .topbar, .tabs, .actions button, .badge, .sub { display:none !important; }
@@ -376,10 +300,8 @@
 </head>
 
 <body data-theme="light">
-  <!-- Accessibility: skip link -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Header -->
   <header class="wrap" role="banner" aria-label="Header">
     <h1>DCF Lab – Manual &amp; API</h1>
     <p class="sub">
@@ -387,15 +309,13 @@
     </p>
   </header>
 
-  <!-- Application wrapper -->
   <div class="wrap" role="application" aria-label="DCF Lab App">
 
-    <!-- Topbar -->
     <div class="topbar" role="toolbar" aria-label="App toolbar with shortcuts and theme toggle">
       <div class="left" aria-label="Status badges">
-        <span class="badge" aria-live="polite">⌨️ Shortcuts: <b>R</b> reset • <b>S</b> save • <b>L</b> load • <b>T</b> theme</span>
-        <span class="badge">📁 LocalStorage scenarios</span>
-        <span class="badge">📤 Export CSV / Print</span>
+        <span class="badge" aria-live="polite">Shortcuts: <b>R</b> reset • <b>S</b> save • <b>L</b> load • <b>T</b> theme</span>
+        <span class="badge">LocalStorage scenarios</span>
+        <span class="badge">Export CSV / Print</span>
       </div>
       <div class="right">
         <label class="badge" style="gap:.6rem;" for="themeToggle">
@@ -408,22 +328,16 @@
       </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs" id="tabs" role="tablist" aria-label="Main tabs">
       <button class="tab active" data-tab="manual" id="tab-manual" role="tab" aria-selected="true" aria-controls="manual">Manual DCF (No API)</button>
       <button class="tab" data-tab="api" id="tab-api" role="tab" aria-selected="false" aria-controls="api">API DCF (FMP)</button>
       <button class="tab" data-tab="help" id="tab-help" role="tab" aria-selected="false" aria-controls="help">Docs / Notes</button>
     </div>
 
-    <!-- Main -->
     <main id="main" tabindex="-1">
-      <!-- ============================
-           SECTION: MANUAL DCF
-      ============================ -->
       <section id="manual" class="card" style="margin-top:.8rem;" role="tabpanel" aria-labelledby="tab-manual">
         <h2>Manual DCF (Unlevered)</h2>
 
-        <!-- Inputs -->
         <div class="row" style="margin-bottom:.7rem;">
           <div class="field" style="grid-column: span 3;">
             <label for="mSym">Ticker (for labeling)</label>
@@ -480,7 +394,6 @@
           </div>
         </div>
 
-        <!-- Yearly UFCF table & left column -->
         <div class="grid-2">
           <div>
             <div class="chart-wrap" aria-label="UFCF trend chart"><canvas id="mChart"></canvas></div>
@@ -509,7 +422,6 @@
           </div>
 
           <div>
-            <!-- KPIs -->
             <div class="kpis" role="group" aria-label="Manual DCF KPIs">
               <div class="kpi">
                 <div class="lbl">Σ PV(UFCF)</div>
@@ -529,13 +441,11 @@
               </div>
             </div>
 
-            <!-- Sensitivities -->
             <div class="card" style="margin-top:.8rem;">
               <h2 style="margin-bottom:.3rem;">Sensitivity (WACC × g)</h2>
               <div class="grid-3" id="mSens" aria-live="polite"></div>
             </div>
 
-            <!-- Tornado -->
             <div class="card" style="margin-top:.8rem;">
               <h2 style="margin-bottom:.3rem;">Tornado (1-var sensitivities)</h2>
               <div class="chart-wrap" aria-label="Tornado chart"><canvas id="mTornado"></canvas></div>
@@ -544,13 +454,9 @@
         </div>
       </section>
 
-      <!-- ============================
-           SECTION: API DCF
-      ============================ -->
       <section id="api" class="card" style="display:none; margin-top:.8rem;" role="tabpanel" aria-labelledby="tab-api">
         <h2>API DCF (Custom vs. Levered)</h2>
 
-        <!-- Controls -->
         <div class="row" style="margin-bottom:.7rem;">
           <div class="field" style="grid-column: span 3;">
             <label for="aSym">Ticker</label>
@@ -594,7 +500,6 @@
         </div>
 
         <div class="grid-2">
-          <!-- LEFT -->
           <div>
             <div class="kpis" role="group" aria-label="API Custom DCF KPIs">
               <div class="kpi">
@@ -631,7 +536,6 @@
             </div>
           </div>
 
-          <!-- RIGHT -->
           <div>
             <div class="kpis" role="group" aria-label="Levered DCF KPIs">
               <div class="kpi">
@@ -705,10 +609,8 @@
 
   <script>
 
-    // Shorthand selector by id
     const $ = (id)=>document.getElementById(id);
 
-    // Number formatters
     const fmt = (n, d=2) => (n==null || isNaN(n)) ? "—"
       : Number(n).toLocaleString(undefined,{maximumFractionDigits:d, minimumFractionDigits:d});
     const pct = (n, d=1) => (n==null || isNaN(n)) ? "—" : `${fmt(n,d)}%`;
@@ -716,7 +618,6 @@
       : `$${Number(n).toLocaleString(undefined,{maximumFractionDigits:d})}`;
     const num = (x)=>{ const v=Number(x); return isNaN(v) ? null : v; };
 
-    // CSV helpers
     function toCSV(rows){
       return rows.map(r => r.map(v => {
         const s = (v==null)?"":String(v);
@@ -734,7 +635,6 @@
       setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 100);
     }
 
-    // Simple line chart with vanilla canvas
     function drawLineChart(canvas, labels, values){
       const ctx = canvas.getContext("2d");
       const w = canvas.width = canvas.clientWidth * devicePixelRatio;
@@ -748,12 +648,10 @@
       const yMin = y0, yMax = y1;
       const xstep = (w - pad*2) / (values.length - 1 || 1);
 
-      // axes
       ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1*devicePixelRatio;
       ctx.beginPath(); ctx.moveTo(pad, h-pad); ctx.lineTo(w-pad, h-pad); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(pad, pad); ctx.lineTo(pad, h-pad); ctx.stroke();
 
-      // line
       ctx.strokeStyle = "#3b82f6"; ctx.lineWidth = 2*devicePixelRatio; ctx.beginPath();
       values.forEach((v,i)=>{
         const x = pad + i*xstep;
@@ -762,7 +660,6 @@
       });
       ctx.stroke();
 
-      // points
       ctx.fillStyle = "#0ea5e9";
       values.forEach((v,i)=>{
         const x = pad + i*xstep;
@@ -771,9 +668,8 @@
       });
     }
 
-    // Tornado chart (barbell left/right)
     function drawTornado(canvas, baseValue, items){
-      // items: [{label, low, high}] where low/high are % change in output vs base (negative/positive)
+
       const ctx = canvas.getContext("2d");
       const w = canvas.width = canvas.clientWidth * devicePixelRatio;
       const h = canvas.height = 260 * devicePixelRatio;
@@ -789,26 +685,21 @@
 
       items.forEach((it, idx)=>{
         const cy = pad + idx*gap + gap/2;
-        // left (negative)
         const leftW = Math.max(0, -it.low/100) * (w*0.4);
-        ctx.fillStyle = "#ef4444"; // red
+        ctx.fillStyle = "#ef4444"; 
         ctx.fillRect(midX - leftW, cy - barH/2, leftW, barH);
-        // right (positive)
         const rightW = Math.max(0, it.high/100) * (w*0.4);
-        ctx.fillStyle = "#10b981"; // green
+        ctx.fillStyle = "#10b981"; 
         ctx.fillRect(midX, cy - barH/2, rightW, barH);
 
-        // labels
         ctx.fillStyle = "#94a3b8";
         ctx.fillText(it.label, 8*devicePixelRatio, cy);
       });
 
-      // center line
       ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 1*devicePixelRatio;
       ctx.beginPath(); ctx.moveTo(midX, pad); ctx.lineTo(midX, h-pad); ctx.stroke();
     }
 
-    // URL state helpers
     function setURLParams(obj){
       const usp = new URLSearchParams();
       Object.entries(obj).forEach(([k,v])=>{
@@ -820,12 +711,8 @@
       return Object.fromEntries(new URLSearchParams(location.search).entries());
     }
 
-    /* ===========================================================
-       THEME (toggle, URL/localStorage)
-    =========================================================== */
     const themeToggle = $("themeToggle");
 
-    // Apply theme
     function applyTheme(dark){
       document.body.setAttribute("data-theme", dark ? "dark" : "light");
       if (themeToggle) {
@@ -834,7 +721,6 @@
       }
     }
 
-    // Initialize theme from URL/localStorage/user preference
     (function initTheme(){
       const u = getURLParams();
       const ls = localStorage.getItem("dcfTheme");
@@ -842,27 +728,20 @@
       if (val === "dark") applyTheme(true);
       else if (val === "light") applyTheme(false);
       else {
-        // fallback to prefers-color-scheme
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         applyTheme(prefersDark);
       }
     })();
 
-    // Toggle
     themeToggle?.addEventListener("change", ()=>{
       applyTheme(themeToggle.checked);
     });
 
-    // Persist on click anywhere (original behavior preserved)
     document.body.addEventListener("click", ()=>{
       localStorage.setItem("dcfTheme", themeToggle?.checked ? "dark" : "light");
     });
 
-    /* ===========================================================
-       KEYBOARD SHORTCUTS (R reset, S save, L load, T theme)
-    =========================================================== */
     document.addEventListener("keydown", (e)=>{
-      // Avoid interfering with typing in inputs
       if (["INPUT","TEXTAREA"].includes(e.target.tagName)) return;
 
       const activeTab = document.querySelector(".tab.active")?.dataset.tab;
@@ -884,9 +763,6 @@
       }
     });
 
-    /* ===========================================================
-       TABS (ARIA updates)
-    =========================================================== */
     const tabs = $("tabs").querySelectorAll(".tab");
     const sections = { manual:$("manual"), api:$("api"), help:$("help") };
 
@@ -900,19 +776,15 @@
         t.classList.add("active");
         t.setAttribute("aria-selected","true");
         sections[t.dataset.tab].style.display = "";
-        // Move focus to panel for a11y when switching via keyboard
         sections[t.dataset.tab].setAttribute("tabindex","-1");
         sections[t.dataset.tab].focus({ preventScroll: true });
       });
     });
 
-    /* ===========================================================
-       MANUAL DCF
-    =========================================================== */
     const mState = {
       years: 5,
       baseYear: new Date().getFullYear(),
-      rows: [],  // {year, fcf, ebitda, note}
+      rows: [], 
       wacc: 9.0,
       g: 3.0,
       method: "gordon",
@@ -950,7 +822,6 @@
     }
     mRenderRows();
 
-    // Debounce utility for heavy recalcs from inputs
     function debounce(fn, wait=50){
       let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), wait); };
     }
@@ -1001,20 +872,17 @@
     $("mNetDebt").addEventListener("input", (e)=>{ mState.netDebt = num(e.target.value); mRecalc(); });
     $("mSym").addEventListener("input", (e)=>{ mState.symbol = e.target.value; });
 
-    /* Manual calc */
     function mRecalc(){
       const w = mState.wacc/100, g = mState.g/100;
       const f = mState.rows.map(r=>num(r.fcf)||0);
       const years = mState.rows.map(r=>r.year);
 
-      // PV of UFCF
       let pvU=0;
       f.forEach((fcf,i)=>{ pvU += fcf / Math.pow(1+w, i+1); });
 
-      // Terminal
       let tv = 0;
       if (mState.method==="gordon"){
-        const fT1 = f[f.length-1]*(1+g); // simplistic: grow last UFCF
+        const fT1 = f[f.length-1]*(1+g);
         if (w>g) tv = fT1 / (w-g);
       } else {
         const baseVal = (mState.exitBase==="fcf" ? f[f.length-1] : (num(mState.rows[mState.rows.length-1].ebitda)||0));
@@ -1026,16 +894,13 @@
       const Eq = EV - (mState.netDebt||0);
       const EqPS = Eq / (mState.shares||1);
 
-      // KPIs
       $("mPVUFCF").textContent = money(pvU,0);
       $("mPVTerm").textContent = money(pvT,0);
       $("mEV").textContent     = money(EV,0);
       $("mEPS").textContent    = isFinite(EqPS) ? `$${fmt(EqPS,2)}` : "—";
 
-      // Line chart UFCF
       drawLineChart($("mChart"), years, f);
 
-      // Sensitivity grid (WACC × g)
       const waccs = [w-0.02, w-0.01, w, w+0.01, w+0.02].map(x=>Math.max(0.03,x));
       const gs    = [g-0.01, g, g+0.01, g+0.02].map(x=>Math.max(0,x));
       const grid = [];
@@ -1043,7 +908,7 @@
         const row = [];
         waccs.forEach(ww=>{
           const pvU2 = f.reduce((acc,fcf,i)=>acc + fcf/Math.pow(1+ww,i+1),0);
-          let tv2 = (mState.method==="gordon" && ww>gg) ? (f[f.length-1]*(1+gg)/(ww-gg)) : tv; // fallback tv if invalid
+          let tv2 = (mState.method==="gordon" && ww>gg) ? (f[f.length-1]*(1+gg)/(ww-gg)) : tv; 
           const pvT2 = tv2 / Math.pow(1+ww, f.length);
           const EV2 = pvU2 + pvT2;
           const Eq2 = EV2 - (mState.netDebt||0);
@@ -1065,7 +930,6 @@
         sensDiv.appendChild(row);
       });
 
-      // Tornado: ±50 bps on WACC, ±50 bps on g, ±10% on terminal base
       const basePS = EqPS;
       const wUp = (()=>{ const ww=w+0.005; const pvU2=f.reduce((a,c,i)=>a+c/Math.pow(1+ww,i+1),0);
         const tv2 = mState.method==="gordon" && ww>g ? f[f.length-1]*(1+g)/(ww-g) : tv;
@@ -1085,7 +949,7 @@
         const pvT2 = tv2/Math.pow(1+w,f.length); return ((pvU+pvT2)-(mState.netDebt||0))/(mState.shares||1); })();
 
       const tornadoItems = [
-        { label: "WACC ±50 bps", low: (wUp-basePS)/basePS*100, high:(wDn-basePS)/basePS*100 }, // note inversion (wUp baisse la valeur)
+        { label: "WACC ±50 bps", low: (wUp-basePS)/basePS*100, high:(wDn-basePS)/basePS*100 }, 
         { label: "g ±50 bps",    low: (gDn-basePS)/basePS*100, high:(gUp-basePS)/basePS*100 },
         { label: "Exit base ±10%", low:(tbDn-basePS)/basePS*100, high:(tbUp-basePS)/basePS*100 },
       ];
@@ -1093,7 +957,6 @@
     }
     mRecalc();
 
-    /* Manual Export CSV */
     $("mExport").addEventListener("click", ()=>{
       const rows = [["Year","UFCF","EBITDA","Note"]];
       mState.rows.forEach(r=>rows.push([r.year, r.fcf, r.ebitda, r.note||""]));
@@ -1105,7 +968,6 @@
     });
     $("mPrint").addEventListener("click", ()=>window.print());
 
-    /* Manual Save/Load */
     $("mSave").addEventListener("click", ()=>{
       const key = prompt("Scenario name to save?", `${mState.symbol}_manual`);
       if (!key) return;
@@ -1162,7 +1024,6 @@
       mInitRows(); mRenderRows(); mRecalc();
     });
 
-    /* Load from URL (manual) */
     (function loadManualFromURL(){
       const q = getURLParams();
       if (q.tab==="manual"){
@@ -1184,11 +1045,6 @@
       }
     })();
 
-    /* ===========================================================
-       API DCF (FMP)
-    =========================================================== */
-
-    // NOTE: Key kept as-is from original snippet
     const API_KEY = "YwfOXlKh6wObb2vPLEsCqQfxmOzXKdan";
     const ENDPOINT_CUSTOM  = (sym)=>`https://financialmodelingprep.com/stable/custom-discounted-cash-flow?symbol=${encodeURIComponent(sym)}&apikey=${API_KEY}`;
     const ENDPOINT_LEVERED = (sym)=>`https://financialmodelingprep.com/stable/levered-discounted-cash-flow?symbol=${encodeURIComponent(sym)}&apikey=${API_KEY}`;
@@ -1260,7 +1116,6 @@
       const EqPS = (aState.shares && aState.netDebt!=null) ? ( (EV - aState.netDebt) / aState.shares ) : null;
       $("aEQPS").textContent = isFinite(EqPS) ? `$${fmt(EqPS,2)}` : "—";
 
-      // gaps
       if (aState.price!=null){
         const gapC = (EqPS!=null && isFinite(EqPS) && aState.price>0) ? ((EqPS - aState.price)/aState.price*100) : null;
         $("aGapC").textContent = (gapC==null || isNaN(gapC)) ? "—" : `${gapC>=0?"+":""}${fmt(gapC,1)}%`;
@@ -1308,7 +1163,6 @@
           fetch(ENDPOINT_LEVERED(sym))
         ]);
 
-        // Basic HTTP status checks
         if (!rC.ok || !rL.ok) {
           throw new Error(`HTTP ${rC.status}/${rL.status}`);
         }
@@ -1336,7 +1190,6 @@
         aState.fcfT1   = num(c.freeCashFlowT1);
         aState.secLink = c.link || null;
 
-        // init sliders with API defaults if available
         if(num(c.wacc)!=null) { aState.wacc = num(c.wacc); }
         if(num(c.longTermGrowthRate)!=null) { aState.g = num(c.longTermGrowthRate); }
         aSetSlidersFromState();
@@ -1411,7 +1264,6 @@
       navigator.clipboard.writeText(location.href).then(()=>alert("URL copied!"));
     });
 
-    /* Load from URL (api) */
     (function loadAPIFromURL(){
       const q = getURLParams();
       if (q.tab==="api"){
@@ -1424,7 +1276,6 @@
       }
     })();
 
-    /* Auto-load defaults */
     aLoad("AAPL");
   </script>
 </body>

@@ -6,17 +6,17 @@
   <title>Credit Risk & Bond Analytics — IB Style</title>
   <style>
     :root{
-      --bg:#f6f9ff;         /* light banking white */
-      --panel:#ffffff;      /* cards */
-      --ink:#0b2a53;        /* deep navy text */
-      --muted:#6b7ea6;      /* muted slate */
-      --line:#dfe7fb;       /* hairline */
-      --navy:#0b2a53;       /* brand navy */
-      --blue:#0d5bd7;       /* action */
-      --cyan:#17a6ff;       /* accent */
-      --good:#13a47f;       /* positive */
-      --bad:#e14b64;        /* negative */
-      --warn:#d68a00;       /* warning */
+      --bg:#f6f9ff;
+      --panel:#ffffff;  
+      --ink:#0b2a53;       
+      --muted:#6b7ea6;    
+      --line:#dfe7fb; 
+      --navy:#0b2a53;      
+      --blue:#0d5bd7; 
+      --cyan:#17a6ff;      
+      --good:#13a47f;       
+      --bad:#e14b64;    
+      --warn:#d68a00;      
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -57,7 +57,10 @@
     .legend{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:12px; color:#4d6aa1}
     .swatch{width:10px; height:10px; border-radius:2px; display:inline-block; margin-right:6px; border:1px solid #b6ccff}
 
-    .charts{display:grid; grid-template-columns: 1fr; gap:12px}
+    .charts{display:grid; grid-template-columns: 1fr; gap:8px}
+    .mini-legend{display:flex; gap:12px; align-items:center; font-size:12px; color:#4d6aa1; margin:4px 0 10px}
+    .mini-legend .swatch{width:10px; height:10px; border-radius:2px; display:inline-block; margin-right:6px; border:1px solid #b6ccff}
+
     canvas{width:100%; height:340px; background:linear-gradient(180deg,#ffffff,#f4f7ff); border:1px solid var(--line); border-radius:12px}
 
     .table-wrap{overflow:auto; max-height:320px; border:1px solid var(--line); border-radius:10px}
@@ -81,7 +84,6 @@
   </header>
 
   <main>
-    <!-- ================= Controls ================= -->
     <section class="card" id="controls">
       <h2>1) Data</h2>
       <label>Financial Modeling Prep API Key</label>
@@ -157,7 +159,6 @@
       </div>
     </section>
 
-    <!-- ================= Results ================= -->
     <section class="card">
       <h2>Key Metrics</h2>
       <div class="kpis">
@@ -168,16 +169,30 @@
         <div class="kpi"><h3>Sortino</h3><div class="v" id="kSortino">—</div></div>
       </div>
 
-      <div class="legend" style="margin-top:10px">
-        <span><span class="swatch" style="background:var(--blue)"></span>Portfolio equity</span>
-        <span><span class="swatch" style="background:var(--cyan)"></span>Benchmark</span>
-        <span><span class="swatch" style="background:var(--warn)"></span>Yield curve</span>
-      </div>
-
       <div class="charts">
+        <h3 style="margin:8px 0 2px; font-size:14px; color:#173b77;">Portfolio vs Benchmark</h3>
+        <div class="mini-legend">
+          <span><span class="swatch" style="background:var(--blue)"></span>Portfolio equity</span>
+          <span><span class="swatch" style="background:var(--cyan)"></span>Benchmark</span>
+        </div>
         <canvas id="chartEq"></canvas>
+
+        <h3 style="margin:12px 0 2px; font-size:14px; color:#173b77;">Max Drawdown</h3>
+        <div class="mini-legend">
+          <span><span class="swatch" style="background:var(--bad)"></span>Drawdown</span>
+        </div>
         <canvas id="chartDD"></canvas>
+
+        <h3 style="margin:12px 0 2px; font-size:14px; color:#173b77;">Yield Curve (with Stress Shift)</h3>
+        <div class="mini-legend">
+          <span><span class="swatch" style="background:var(--warn)"></span>Yield Curve</span>
+        </div>
         <canvas id="chartCurve"></canvas>
+
+        <h3 style="margin:12px 0 2px; font-size:14px; color:#173b77;">Bond Screener: Spread vs Rating</h3>
+        <div class="mini-legend">
+          <span><span class="swatch" style="background:var(--blue)"></span>Spread (bps) vs Rating</span>
+        </div>
         <canvas id="chartScatter"></canvas>
       </div>
 
@@ -190,12 +205,11 @@
     </section>
   </main>
 
-  <!-- ================= Footer ================= -->
   <div class="footer">
     <div class="foot-card">
-      <a href="../index.html" class="go-back">← Go Back</a>
+      <a href="../index.html" class="btn-outline">← Go Back</a>
       <div class="muted" style="max-width:900px;">
-        Note: Uses the <b>Financial Modeling Prep</b> API on the free tier when available. If API calls fail or rate‑limited, the app falls back to demo data.
+        Note: Uses the <b>Financial Modeling Prep</b> API on the free tier when available. If API calls fail or rate-limited, the app falls back to demo data.
       </div>
       <div class="stack">
         <a class="btn" href="#top">Back to Top</a>
@@ -205,7 +219,6 @@
   </div>
 
   <script>
-    // ================= Utilities =================
     const fmtPct = x => (x*100).toFixed(2)+'%';
     const fmtNum = x => Intl.NumberFormat('en-US', {maximumFractionDigits:2}).format(x);
     const mean = a => a.reduce((m,x)=>m+x,0)/Math.max(1,a.length);
@@ -249,15 +262,14 @@
       });
     }
 
-    // ================= Demo Generators =================
     function demoEqBd(range='3y'){
       const months = range==='1y'?12:range==='5y'?60:range==='max'?120:36;
       const outEq=[], outBd=[], outBm=[]; let d = new Date(); d.setDate(28); d.setMonth(d.getMonth()-months);
       let eq=100, bd=100, bm=100;
       for(let i=0;i<months;i++){
-        const rEq = (Math.random()*0.06-0.03)+0.008; // ~0.8% avg monthly
-        const rBd = (Math.random()*0.03-0.015)+0.0025; // ~0.25% avg monthly
-        const rBm = (Math.random()*0.035-0.02)+0.004;  // benchmark
+        const rEq = (Math.random()*0.06-0.03)+0.008; 
+        const rBd = (Math.random()*0.03-0.015)+0.0025;
+        const rBm = (Math.random()*0.035-0.02)+0.004; 
         eq *= (1+rEq); bd *= (1+rBd); bm *= (1+rBm);
         outEq.push({t:new Date(d), v:eq}); outBd.push({t:new Date(d), v:bd}); outBm.push({t:new Date(d), v:bm});
         d.setMonth(d.getMonth()+1); d.setDate(28);
@@ -266,7 +278,7 @@
     }
 
     function demoCurve(){
-      const tenors=["1M","3M","6M","1Y","2Y","3Y","5Y","7Y","10Y","20Y","30Y"]; // % yields
+      const tenors=["1M","3M","6M","1Y","2Y","3Y","5Y","7Y","10Y","20Y","30Y"]; 
       const base=[5.3,5.35,5.4,5.25,4.9,4.7,4.4,4.2,4.0,4.1,4.2];
       return tenors.map((tenor,i)=>({tenor, y: base[i] + (Math.random()*0.1-0.05)}));
     }
@@ -276,14 +288,13 @@
       const rows=[]; for(let i=0;i<80;i++){
         const sec = sectors[Math.floor(Math.random()*sectors.length)];
         const rat = ratings[Math.floor(Math.random()*ratings.length)];
-        const dur = +(Math.random()*9+1).toFixed(1); const spr = +(Math.random()*350+50).toFixed(0); // bps
+        const dur = +(Math.random()*9+1).toFixed(1); const spr = +(Math.random()*350+50).toFixed(0); 
         const yld = +(3 + spr/100 + (Math.random()*0.6-0.3)).toFixed(2);
         rows.push({issuer:`Corp ${String.fromCharCode(65+(i%26))}${i}`, sector:sec, rating:rat, duration:dur, spread:spr, yield:yld, coupon:(Math.random()*4+2).toFixed(1)+"%", maturity:`20${25+Math.floor(Math.random()*10)}-0${1+Math.floor(Math.random()*9)}-15`});
       }
       return rows;
     }
 
-    // ================= Light Backtest =================
     function rebalanceFlag(freq, date){
       if(freq==='none') return false; const m=date.getMonth();
       if(freq==='monthly') return true; if(freq==='quarterly') return [2,5,8,11].includes(m); if(freq==='yearly') return m===11; return false;
@@ -294,7 +305,7 @@
       let valEq = 100*wEq, valBd = 100*wBd; let pv = valEq+valBd; let last=pv;
       const equity=[], rets=[], dd=[]; let peak=100;
       for(let i=0;i<n;i++){
-        const d = eqSeries[i].t; // assume aligned by construction here (demo or matched fetch)
+        const d = eqSeries[i].t; 
         const rEq = i===0?0:(eqSeries[i].v/eqSeries[i-1].v - 1);
         const rBd = i===0?0:(bdSeries[i].v/bdSeries[i-1].v - 1);
         valEq *= (1+rEq); valBd *= (1+rBd); pv = valEq+valBd;
@@ -311,15 +322,12 @@
       return {equity, dd, CAGR, volAnn, mdd, sharpe, sortino};
     }
 
-    // ================= API (with graceful fallback) =================
     async function fetchFMPPrices(ticker, apikey, range){
-      // We try the /historical-price-full endpoint, then slice to range if needed.
       const url = `https://financialmodelingprep.com/api/v3/historical-price-full/${encodeURIComponent(ticker)}?serietype=line&apikey=${apikey}`;
       const r = await fetch(url); if(!r.ok) throw new Error('HTTP '+r.status);
       const data = await r.json();
       if(!data || !data.historical) throw new Error('Malformed response');
       let hist = data.historical.map(d=>({t:new Date(d.date), v: d.close ?? d.adjClose ?? d.price})).sort((a,b)=>a.t-b.t);
-      // reduce to monthly end-of-month
       const monthly=[]; let lastM=-1; hist.forEach(p=>{ const m=p.t.getMonth(), y=p.t.getFullYear(); const key=`${y}-${m}`; if(lastM!==key){ monthly.push(p); lastM=key; } else { monthly[monthly.length-1]=p; } });
       let months = range==='1y'?12:range==='5y'?60:range==='max'?9999:36; if(monthly.length>months) monthly.splice(0, monthly.length-months);
       return monthly;
@@ -347,26 +355,21 @@
       }
     }
 
-    // ================= Yield curve + stress =================
     function applyCurveShift(curve, bps){
-      const add = bps/100; // bps to %
+      const add = bps/100; 
       return curve.map(pt=>({tenor:pt.tenor, y: +(pt.y + add).toFixed(2)}));
     }
 
     function bondPriceChangeApprox(durationYears, deltaYieldPct){
-      // Price change ≈ -Duration * Δy (ignoring convexity). Δy in percentage points (e.g., 0.50 for +50 bps)
       return -durationYears * (deltaYieldPct/100);
     }
 
-    // ================= Rendering =================
     function renderEquity(eq, bm){
       const base = eq[0]?.v || 100; const s1 = eq.map(p=>({t:p.t, v: (p.v/base)*100}));
       drawLine(document.getElementById('chartEq'), s1, '#0d5bd7');
       if(bm && bm.length){
         const baseB = bm[0].v; const s2 = bm.map(p=>({t:p.t, v:(p.v/baseB)*100}));
         const c = document.getElementById('chartEq');
-        const tmp = s2.map(p=>({v:p.v})); // reuse drawer expects v
-        // overlay benchmark: draw without clearing grid
         const ctx = c.getContext('2d'); const W=c.clientWidth,H=c.clientHeight; const dpr=devicePixelRatio||1; ctx.setTransform(dpr,0,0,dpr,0,0);
         const area={x0:48, y0:12, x1:W-12, y1:H-28};
         const vals = s1.map(x=>x.v).concat(s2.map(x=>x.v)); const min=Math.min(...vals), max=Math.max(...vals);
@@ -402,13 +405,12 @@
       document.getElementById('kSortino').textContent= isFinite(res.sortino)? res.sortino.toFixed(2):'—';
     }
 
-    // ================= Orchestration =================
     let seriesEq=[], seriesBd=[], seriesBm=[], curve=[], bonds=[];
 
     async function loadAPIThenRender(){
       const {eq, bd, bm} = await tryLoadAPI();
       seriesEq = eq; seriesBd = bd; seriesBm = bm;
-      curve = applyCurveShift(demoCurve(), +document.getElementById('shiftBps').value); // placeholder curve (can replace by API curve)
+      curve = applyCurveShift(demoCurve(), +document.getElementById('shiftBps').value);
       bonds = demoBonds();
       runAll();
     }
@@ -426,7 +428,6 @@
       renderEquity(res.equity, seriesBm);
       renderDD(res.dd);
       const shift=+document.getElementById('shiftBps').value||0; curve = applyCurveShift(demoCurve(), shift); renderCurve(curve);
-      // Scatter: spread vs rating (rating mapped to numeric)
       const map = {AAA:1,AA:2,A:3,BBB:4,BB:5,B:6};
       const points = bonds.map(b=>({x: map[b.rating]||4, y: b.spread}));
       drawScatter(document.getElementById('chartScatter'), points);
@@ -435,7 +436,6 @@
       window.__last = {res, curve, bonds};
     }
 
-    // ================= Exports =================
     document.getElementById('exportCSV').addEventListener('click', ()=>{
       const rows = (window.__last?.bonds)||[]; if(!rows.length) return alert('Nothing to export');
       const out = ['issuer,sector,rating,duration,spread,yield,coupon,maturity'];
@@ -443,34 +443,38 @@
       const blob = new Blob([out.join('\n')], {type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='bond_screener.csv'; a.click(); URL.revokeObjectURL(url);
     });
 
-    document.getElementById('exportPNG').addEventListener('click', ()=>{
-      const canvases=['chartEq','chartDD','chartCurve','chartScatter'].map(id=>document.getElementById(id));
-      canvases.forEach((c,i)=>{ const url=c.toDataURL('image/png'); const a=document.createElement('a'); a.href=url; a.download=`chart_${i+1}.png`; a.click(); });
+    document.getElementById('exportPNG').addEventListener('click', async ()=>{
+      const ids=['chartEq','chartDD','chartCurve','chartScatter'];
+      for(const id of ids){
+        const c=document.getElementById(id);
+        if(!c) continue;
+        await new Promise(r=>setTimeout(r,60));
+        const url=c.toDataURL('image/png');
+        const a=document.createElement('a');
+        a.href=url; a.download=`${id}.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
     });
 
-    // ================= Events =================
     document.getElementById('loadData').addEventListener('click', loadAPIThenRender);
     document.getElementById('useDemo').addEventListener('click', useDemo);
     document.getElementById('run').addEventListener('click', runAll);
 
-    // ================= Quick Tests =================
     function assert(name, cond){ if(!cond) throw new Error('Test failed: '+name); }
     function runQuickTests(){
       const out=[];
-      // 1) Duration price change approx sign
-      const pc = bondPriceChangeApprox(5, 100); // +100 bps
+      const pc = bondPriceChangeApprox(5, 100); 
       assert('duration approx negative', pc < 0); out.push('duration ✓');
-      // 2) Backtest monotone if series equal
       const s = Array.from({length:12}, (_,i)=>({t:new Date(2024, i, 28), v:100*(1+i*0.01)}));
       const res = backtestFromSeries(s, s, 0.5, 0.5, 'monthly');
       assert('equity len', res.equity.length===12); out.push('backtest ✓');
-      // 3) Curve shift adds ~1% for 100 bps
       const c = demoCurve(); const c2 = applyCurveShift(c,100); assert('shift +1%', Math.abs(c2[0].y - (c[0].y + 1)) < 0.11); out.push('curve ✓');
       document.getElementById('diag').textContent = out.join(' | ');
     }
     document.getElementById('runTests').addEventListener('click', ()=>{ try{ runQuickTests(); } catch(e){ document.getElementById('diag').textContent = e.message; console.error(e); } });
 
-    // Default: try API, then demo fallback
     loadAPIThenRender();
   </script>
 </body>
