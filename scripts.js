@@ -1,4 +1,3 @@
-// Script simple pour scroll smooth
 document.querySelectorAll('.scroll-link').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
