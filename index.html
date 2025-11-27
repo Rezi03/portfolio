@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rezi's Portfolio</title>
+  <title>Rezi Sabashvili | Portfolio</title>
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLN2SS4TBC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,244 +13,291 @@
     gtag('config', 'G-VLN2SS4TBC');
   </script>
 
-  <link rel="stylesheet" href="style.css" />
-
-  <style>
-    @media (max-width: 768px) {
-      header {
-        flex-direction: row;         
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.3rem 0.8rem;    
-        gap: 0;
-      }
-
-      .header-left {
-        font-size: 1.1rem;
-        font-weight: bold;
-      }
-
-      .header-right {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 0.4rem;
-      }
-
-      .header-right .btn {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
-        border-radius: 6px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-left, .hero-right {
-        width: 100%;
-      }
-      .profile-img {
-        max-width: 150px;
-        height: auto;
-      }
-
-      .project-grid, .document-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-      }
-      .project, .doc-block {
-        text-align: center;
-      }
-
-      img, video {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .container {
-        padding: 10px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <header class="sticky-header fade-in">
-    <div class="header-left">Rezi's Portfolio</div>
-    <div class="header-right">
-      <a href="#finance" class="btn">Finance Projects</a>
-      <a href="#projects" class="btn">Other Projects</a>
-      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+<body class="loading">
+
+  <div class="background-blobs">
+    <div class="blob blob-1 floating"></div>
+    <div class="blob blob-2 floating-delayed"></div>
+  </div>
+
+<header class="glass-header fade-in">
+    <div class="header-content">
+      <div class="header-left">Rezi Sabashvili</div>
+      <nav class="header-right">
+        <a href="#about">
+            <span class="lang-en">About</span>
+            <span class="lang-fr" style="display:none">À propos</span>
+        </a>
+        <a href="#finance">
+            <span class="lang-en">Finance</span>
+            <span class="lang-fr" style="display:none">Finance</span>
+        </a>
+        <a href="#projects">
+            <span class="lang-en">Personal Projects</span>
+            <span class="lang-fr" style="display:none">Projets Perso</span>
+        </a>
+        
+        <button id="lang-toggle" class="lang-btn">
+          <span class="lang-text">EN</span>
+        </button>
+        
+        <button class="btn-primary" onclick="document.getElementById('contactModal').classList.add('active')">
+          Contact
+        </button>
+      </nav>
     </div>
   </header>
 
   <main class="container">
+    
     <section class="hero fade-in">
-      <div class="hero-left">
-        <img src="assets/images/me.png" alt="Profile Picture" class="profile-img hover-zoom" />
-        <p class="img-description">Master's Student in Data Analytics</p>
+      <div class="hero-content">
+        <div class="badge">
+          <span class="lang-en">Master's Student in Data Analytics</span>
+          <span class="lang-fr" style="display:none">Master en Data Analytics</span>
+        </div>
+        
+        <h1>
+          <span class="lang-en">Turning Complex Data<br>Into <span class="gradient-text">Actionable Strategy.</span></span>
+          <span class="lang-fr" style="display:none">Transformer la Data<br>en <span class="gradient-text">Stratégie Actionnable.</span></span>
+        </h1>
+        
+        <p class="subtitle justified-text">
+          <span class="lang-en">Passionate about the intersection of Finance and Technology. I interpret data to uncover insights and anticipate trends before they emerge.</span>
+          <span class="lang-fr" style="display:none">Passionné par la Finance et Technologie. J'interprète les données pour révéler des insights et anticiper les tendances avant qu'elles n'émergent.</span>
+        </p>
       </div>
-      <div class="hero-right">
-        <p class="intro">Passionate about data, finance, and technology.</p>
-        <h1>Hey, I'm Rezi</h1>
-        <p>I interpret data to uncover insights and anticipate trends before they emerge. My goal is to transform complex information into actionable strategies that drive informed decisions.</p>
+      <div class="hero-image">
+        <img src="assets/images/me.png" alt="Rezi Sabashvili" class="profile-img" />
       </div>
     </section>
 
     <section id="about" class="fade-in">
-      <h2>About Me</h2>
-      <p>I’m Rezi Sabashvili, currently in my second year of a Master’s degree in Economic Analysis and Policy, with a specialization in Statistics for Evaluation and Forecasting at the University of Reims Champagne-Ardenne. I’m actively looking for a 6-month internship, from March to August 2026. I have strong skills in data analysis, programming, and digital tools, as well as a solid background in economics and finance, enabling me to understand and interpret financial challenges. I adapt quickly to new environments.</p>
-      <p>This portfolio showcases my academic and personal projects, especially my Master 1 thesis on Learning Analytics. You’ll also find my resume and recommendation letters written by professors and researchers who supervised my work.</p>
-      <p>Feel free to reach out! You can find my contact information below, and I’m always open to discussing new opportunities or collaborations.</p>
+      <div class="section-header">
+        <h2>
+          <span class="lang-en">Profile</span>
+          <span class="lang-fr" style="display:none">Profil</span>
+        </h2>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card large glass-panel hover-lift">
+          <h3>
+            <span class="lang-en">About Me</span>
+            <span class="lang-fr" style="display:none">À propos</span>
+          </h3>
+          <p class="justified-text">
+            <span class="lang-en">I’m Rezi Sabashvili, a Master’s student in Data Science at the University of Reims. I combine strong technical skills in data analysis with a solid background in economics to interpret financial challenges.</span>
+            <span class="lang-fr" style="display:none">Je suis Rezi Sabashvili, étudiant en Master de Data Science à l'Université de Reims. J'allie de solides compétences techniques en analyse de données à un background économique pour interpréter les défis financiers.</span>
+          </p>
+        </div>
+
+        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank" class="bento-card small highlight hover-lift linkedin-card">
+          <h3>
+            <span class="lang-en">Open for Internship</span>
+            <span class="lang-fr" style="display:none">Recherche de Stage</span>
+          </h3>
+          <p style="color: rgba(255,255,255,0.8);">
+            <span class="lang-en">February — August 2026</span>
+            <span class="lang-fr" style="display:none">Février — Août 2026</span>
+          </p>
+          <div class="bottom-row">
+             <span style="font-size: 0.8rem; opacity: 0.8;">
+                <span class="lang-en">Visit LinkedIn &nearr;</span>
+                <span class="lang-fr" style="display:none">Voir LinkedIn &nearr;</span>
+             </span>
+             <div class="status-dot"></div>
+          </div>
+        </a>
+      </div>
     </section>
 
-<section id="finance" class="fade-in">
-  <h2>Finance Projects</h2>
+    <section id="finance" class="fade-in">
+      <div class="section-header">
+        <h2>
+            <span class="lang-en">Finance Projects</span>
+            <span class="lang-fr" style="display:none">Projets Finance</span>
+        </h2>
+      </div>
+      
+      <div class="projects-wrapper">
+        <article class="project-card glass-panel hover-lift">
+          <div class="media-frame">
+            <video autoplay loop muted playsinline poster="assets/videos/finteker.mp4">
+              <source src="assets/videos/finteker.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="tags"><span>Python</span><span>Java</span><span>HTML/CSS</span><span>Chatbot</span><span>API</span></div>
+              <h3>Finteker Intelligence</h3>
+              <p class="justified-text">
+                <span class="lang-en">An educational platform designed to demystify finance. Centralizing learning resources, market news, and interactive predictive analysis tools.</span>
+                <span class="lang-fr" style="display:none">Une plateforme éducative conçue pour démystifier la finance. Centralisation des ressources d'apprentissage, actualités boursières et outils d'analyse prédictive interactifs.</span>
+              </p>
+            </div>
+            <a href="https://finteker.fr" target="_blank" class="btn-gradient blue">
+              <span class="lang-en">Visit Platform</span>
+              <span class="lang-fr" style="display:none">Voir la Plateforme</span>
+            </a>
+          </div>
+        </article>
 
-<div class="project-grid single" style="margin-bottom: 40px;">
-  <div class="project">
-    <video autoplay loop muted playsinline class="project-video">
-      <source src="assets/videos/finteker.mp4" type="video/mp4" />
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
-    <h3>Finteker - Financial Intelligence</h3>
-    <p style="font-style: italic; color: #555;">
-      An educational platform designed to demystify finance. Finteker centralizes learning resources, market news, and interactive analysis tools, predictive analyses, chatbots to make financial intelligence accessible to all.
-    </p>
-    <p style="font-size: 0.9rem; color: #777;">University Project, HTML, CSS, JS, Python – 2025</p>
-    <a href="https://finteker.fr" target="_blank" class="btn-outline align-btn">Visit Finteker →</a>
-  </div>
-</div>
-
-  <div class="project-grid single">
-    <div class="project">
-      <video autoplay loop muted playsinline class="project-video">
-        <source src="assets/videos/dashboard-preview.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <h3>Banking Market Intelligence Dashboard</h3>
-      <p style="font-style: italic; color: #555;">
-        Interactive financial dashboard comparing multiple banks with technical indicators, risk metrics, and downloadable reports.
-      </p>
-      <p style="font-size: 0.9rem; color: #777;">Python, Streamlit, Yahoo Finance API – 2025</p>
-      <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-outline align-btn">Visit Dashboard →</a>
-    </div>
-  </div>
-
-</section>
-
-
-<style>
-.project-grid .project {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.project-grid .project.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.project-image {
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-image:hover {
-  transform: scale(1.02); 
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const projects = document.querySelectorAll('.project-grid .project');
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); 
-      }
-    });
-  }, { threshold: 0.1 });
-
-  projects.forEach(proj => observer.observe(proj));
-});
-</script>
+        <article class="project-card glass-panel hover-lift">
+          <div class="media-frame">
+            <video autoplay loop muted playsinline>
+              <source src="assets/videos/dashboard-preview.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="card-content">
+            <div>
+              <div class="tags"><span>Python</span><span>Streamlit</span><span>Yahoo Finance API</span></div>
+              <h3>Banking Market Dashboard</h3>
+              <p class="justified-text">
+                <span class="lang-en">Interactive dashboard comparing multiple banks with technical indicators, risk metrics, and downloadable automated reports.</span>
+                <span class="lang-fr" style="display:none">Tableau de bord interactif comparant plusieurs banques avec indicateurs techniques, métriques de risque et rapports automatisés téléchargeables.</span>
+              </p>
+            </div>
+            <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-gradient blue">
+              <span class="lang-en">View Dashboard</span>
+              <span class="lang-fr" style="display:none">Voir le Dashboard</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <section id="projects" class="fade-in">
-      <h2>Other Projects</h2>
-      <div class="project-grid">
-        <div class="project">
-          <img src="assets/images/thesis/thesis.png" alt="Learning Analytics" />
-          <h3>Learning Analytics - Thesis</h3>
-          <p style="font-style: italic; color: #555;">Exploration of a large-scale dataset using Learning Analytics and Big Data techniques to understand student interaction dynamics within a digital learning environment.</p>
-          <a href="projects/projet1.html" class="btn-outline align-btn">Read more →</a>
-        </div>
+      <div class="section-header">
+        <h2>
+            <span class="lang-en">Personal Projects</span>
+            <span class="lang-fr" style="display:none">Projets Personnels</span>
+        </h2>
+      </div>
+      <div class="projects-wrapper compact">
+        
+        <article class="project-card glass-panel hover-lift">
+          <div class="media-frame">
+            <img src="assets/images/thesis/thesis.png" alt="Thesis Learning Analytics" />
+          </div>
+          <div class="card-content">
+             <div>
+                <h3>
+                 <span class="lang-en">Learning Analytics Thesis</span>
+                 <span class="lang-fr" style="display:none">Mémoire Learning Analytics</span>
+               </h3>
+               <p class="justified-text">
+                 <span class="lang-en">Exploration of a large-scale dataset using Big Data techniques to understand student interaction dynamics within a digital learning environment.</span>
+                 <span class="lang-fr" style="display:none">Exploration d'un grand jeu de données via des techniques Big Data pour comprendre la dynamique des interactions étudiantes dans un environnement numérique.</span>
+               </p>
+             </div>
+             <a href="projects/projet1.html" class="btn-gradient grey">
+               <span class="lang-en">Read Case Study</span>
+               <span class="lang-fr" style="display:none">Lire l'Étude</span>
+             </a>
+          </div>
+        </article>
 
-        <div class="project">
-          <img src="assets/videos/be.png" alt="Bulles Étudiantes Website" />
-          <h3>Bulles Étudiantes - Radio ICP</h3>
-          <p style="font-style: italic; color: #555;">
-            Website for the "Bulles Étudiantes" student radio at ICP (Institut Catholique de Paris), featuring recent recordings, broadcast schedules, and team info.
-          </p>
-          <a href="https://www.bullesetudiantes.fr/" target="_blank" class="btn-outline align-btn">Visit Website →</a>
-        </div>
-        </div>
+        <article class="project-card glass-panel hover-lift">
+          <div class="media-frame">
+            <img src="assets/videos/be.png" alt="Bulles Étudiantes" />
+          </div>
+          <div class="card-content">
+             <div>
+               <h3>Radio ICP Website</h3>
+               <p class="justified-text">
+                 <span class="lang-en">Official website for "Bulles Étudiantes", featuring recent recordings and broadcast schedules.</span>
+                 <span class="lang-fr" style="display:none">Site officiel de "Bulles Étudiantes", présentant les enregistrements récents et les grilles de diffusion.</span>
+               </p>
+             </div>
+             <a href="https://www.bullesetudiantes.fr/" target="_blank" class="btn-gradient orange">
+               <span class="lang-en">Visit Website</span>
+               <span class="lang-fr" style="display:none">Voir le Site</span>
+             </a>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <section id="cv-reco" class="fade-in">
-      <h2>Documents & Recommendations</h2>
-      <div class="document-grid">
-        <div class="doc-block fade-in">
-          <h3>My Resume</h3>
-          <a href="#" class="btn-outline align-btn" id="viewCvBtn">View CV</a>
-          <div id="cvLanguages" style="display: none; margin-top: 10px;">
-            <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline align-btn">View in English</a>
-            <a href="assets/cv/cv_fr.pdf" target="_blank" class="btn-outline align-btn">View in French</a>
-          </div>
+    <section id="documents" class="fade-in">
+       <div class="section-header">
+        <h2>
+          <span class="lang-en">Downloads & References</span>
+          <span class="lang-fr" style="display:none">Téléchargements & Références</span>
+        </h2>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card file-card glass-panel hover-lift">
+          <h3>
+             <span class="lang-en">Resume / CV</span>
+             <span class="lang-fr" style="display:none">Mon CV</span>
+          </h3>
+          <p>
+            <span class="lang-en">Available in English.</span>
+            <span class="lang-fr" style="display:none">Disponible en français.</span>
+          </p>
+          <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline" id="cv-link">
+            <span class="lang-en">Download CV (EN)</span>
+            <span class="lang-fr" style="display:none">Télécharger le CV (FR)</span>
+          </a>
         </div>
 
-        <div class="doc-block fade-in">
-          <h3>Recommendation Letters</h3>
-          <a href="projects/recommendations.html" class="btn-outline align-btn">See All Letters</a>
+        <div class="bento-card file-card glass-panel hover-lift">
+          <h3>
+            <span class="lang-en">Recommendations</span>
+            <span class="lang-fr" style="display:none">Recommandations</span>
+          </h3>
+          <p>
+            <span class="lang-en">Letters from professors and researchers.</span>
+            <span class="lang-fr" style="display:none">Lettres de professeurs et chercheurs.</span>
+          </p>
+          <a href="projects/recommendations.html" class="btn-outline">
+             <span class="lang-en">Read Letters</span>
+             <span class="lang-fr" style="display:none">Lire les lettres</span>
+          </a>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="fade-in">
-    <div class="social-icons">
-      <a href="mailto:rezisabashvili1@gmail.com" class="underline-hover"><img src="assets/logos/mail.png" alt="Email" /></a>
-      <a href="https://github.com/Rezi03" target="_blank" class="underline-hover"><img src="assets/logos/github.png" alt="GitHub" /></a>
-      <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank" class="underline-hover"><img src="assets/logos/linkedin.png" alt="LinkedIn" /></a>
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>&copy; 2025 Rezi Sabashvili.</p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rezisabashvili1@gmail.com"><img src="assets/logos/mail.png" alt="Email" class="footer-icon"></a>
+        <a href="https://github.com/Rezi03" target="_blank"><img src="assets/logos/github.png" alt="GitHub" class="footer-icon"></a>
+        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank"><img src="assets/logos/linkedin.png" alt="LinkedIn" class="footer-icon"></a>
+      </div>
     </div>
   </footer>
 
-  <script>
-    const faders = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+<div id="contactModal" class="modal-overlay" onclick="if(event.target === this) this.classList.remove('active')">
+    <div class="modal-content">
+      <h3>Contact</h3>
+      <div class="contact-links">
+        <a href="mailto:rezisabashvili1@gmail.com" class="contact-item">
+          <img src="assets/logos/mail.png" alt="Mail" class="icon-svg"/>
+          <span>rezisabashvili1@gmail.com</span>
+        </a>
+        <a href="tel:+33618579173" class="contact-item">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>+33 6 18 57 91 73</span>
+        </a>
+      </div>
+<button class="btn-close" onclick="document.getElementById('contactModal').classList.remove('active')">
+  <span class="lang-en">Close</span>
+  <span class="lang-fr" style="display:none">Fermer</span>
+</button>
+    </div>
+  </div>
 
-    faders.forEach(el => observer.observe(el));
-
-    document.getElementById("viewCvBtn").addEventListener("click", function(event) {
-      event.preventDefault();
-      const langButtons = document.getElementById("cvLanguages");
-      langButtons.style.display = (langButtons.style.display === "none") ? "block" : "none";
-    });
-  </script>
+  <script src="js/script.js"></script>
+  <script src="js/trad.js"></script>
 </body>
 </html>

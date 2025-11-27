@@ -2,166 +2,218 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Learning Analytics</title>
-  <link rel="stylesheet" href="../style.css" />
-  <style>
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Analytics | Rezi Sabashvili</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLN2SS4TBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VLN2SS4TBC');
+  </script>
 
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* CSS SPÉCIFIQUE À CETTE PAGE (GALERIE) */
+    .project-header {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 1rem;
+    }
+    
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      justify-items: center;
+      margin-top: 2rem;
     }
 
     .project-grid img {
       width: 100%;
-      max-width: 100%;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
       cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: white;
     }
 
-
-    .project-grid img {
-  width: 100%;
-  max-width: 100%;
-  height: 250px; 
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: zoom-in;
-  border: 3px solid #e0e0e0; 
-  box-sizing: border-box;
-}
-
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    .project-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
 
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .modal {
+    /* Modal pour le Zoom Image */
+    .image-modal {
       display: none;
-      position: fixed;
-      z-index: 999;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
+      position: fixed; z-index: 9999;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      justify-content: center; align-items: center;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .image-modal.show { display: flex; opacity: 1; }
+    
+    .image-modal img {
+      max-width: 90%; max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     }
 
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 10px;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .centered {
-      text-align: center;
+    .list-styled li {
+      margin-bottom: 10px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
     }
   </style>
 </head>
-<body>
-  <header class="sticky-header">
-    <div class="header-left">Rezi's Portfolio</div>
-    <div class="header-right">
-      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+<body class="loading">
+
+  <div class="background-blobs">
+    <div class="blob blob-1 floating"></div>
+    <div class="blob blob-2 floating-delayed"></div>
+  </div>
+
+  <header class="glass-header fade-in">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="../index.html">Rezi Sabashvili</a>
+      </div>
+      <nav class="header-right">
+        <a href="../index.html#projects">
+            <span class="lang-en">&larr; Back to Portfolio</span>
+            <span class="lang-fr" style="display:none">&larr; Retour au Portfolio</span>
+        </a>
+        
+        <button id="lang-toggle" class="lang-btn">
+          <span class="lang-text">EN</span>
+        </button>
+      </nav>
     </div>
   </header>
 
   <main class="container">
-  <section class="centered">
-    <h2>Learning Analytics - Master Thesis</h2>
+    
+    <section class="glass-panel fade-in" style="padding: 3rem; margin-top: 2rem;">
+        
+        <div class="project-header">
+            <div class="badge" style="margin-bottom:10px;">Data Analysis / Research</div>
+            <h1>
+                <span class="lang-en">Learning Analytics - Master Thesis</span>
+                <span class="lang-fr" style="display:none">Learning Analytics - Mémoire de Master</span>
+            </h1>
+        </div>
 
-    <p>
-      This thesis was conducted as part of the Master's in Economic Analysis and Policy (specialization: Statistics for Evaluation and Forecasting) at the University of Reims Champagne-Ardenne. It explores <strong>Learning Analytics</strong> through a case study of the online learning platform <em>Éducapacités</em>.
-    </p>
+        <div class="justified-text">
+            <p>
+              <span class="lang-en">This thesis was conducted as part of the Master's in Economic Analysis and Policy (specialization: Statistics for Evaluation and Forecasting) at the University of Reims Champagne-Ardenne. It explores <strong>Learning Analytics</strong> through a case study of the online learning platform <em>Éducapacités</em>.</span>
+              <span class="lang-fr" style="display:none">Ce mémoire a été réalisé dans le cadre du Master en Analyse Économique et Politique (spécialisation : Statistique pour l'Évaluation et la Prévision) à l'Université de Reims Champagne-Ardenne. Il explore le <strong>Learning Analytics</strong> à travers une étude de cas de la plateforme d'apprentissage en ligne <em>Éducapacités</em>.</span>
+            </p>
 
-    <p>
-      In response to the digital transformation of education—intensified by the 2020 global health crisis—the thesis investigates how user interaction data can help improve learner engagement. The core objective is to develop a structured analytical framework for understanding user behaviors on digital platforms, thereby identifying improvement pathways tailored to diverse learner profiles.
-    </p>
+            <p>
+              <span class="lang-en">In response to the digital transformation of education—intensified by the 2020 global health crisis—the thesis investigates how user interaction data can help improve learner engagement. The core objective is to develop a structured analytical framework for understanding user behaviors on digital platforms, thereby identifying improvement pathways tailored to diverse learner profiles.</span>
+              <span class="lang-fr" style="display:none">En réponse à la transformation numérique de l'éducation — intensifiée par la crise sanitaire de 2020 — ce mémoire étudie comment les données d'interaction utilisateur peuvent améliorer l'engagement des apprenants. L'objectif principal est de développer un cadre analytique structuré pour comprendre les comportements sur les plateformes numériques.</span>
+            </p>
 
-    <h3>Key Contributions:</h3>
-    <ul style="text-align: left; max-width: 800px; margin: 0 auto;">
-      <li><strong>Data Anonymization & Cleaning:</strong> Applied GDPR-compliant SHA-256 hashing to anonymize sensitive user data, followed by extensive cleaning and restructuring of a large dataset (initially over 4,000 columns).</li>
-      <li><strong>Engagement Indicators:</strong> Defined measurable engagement indicators based on literature, including session duration, visit frequency, and navigation diversity.</li>
-      <li><strong>Behavioral Analysis:</strong> Identified common navigation paths and engagement patterns, using both exploratory statistics and visual analytics.</li>
-      <li><strong>Limitations:</strong> Highlighted critical limitations such as lack of granularity in content-level interactions and potential teacher-driven bias in student navigation.</li>
-      <li><strong>Tools Used:</strong> Analysis was conducted using both R and Python, with a transition to Python to align with the research team's stack.</li>
-    </ul>
+            <h3>
+                <span class="lang-en">Key Contributions:</span>
+                <span class="lang-fr" style="display:none">Contributions Clés :</span>
+            </h3>
+            
+            <ul class="list-styled">
+              <li>
+                  <span class="lang-en"><strong>Data Anonymization & Cleaning:</strong> Applied GDPR-compliant SHA-256 hashing to anonymize sensitive user data, followed by extensive cleaning and restructuring of a large dataset (initially over 4,000 columns).</span>
+                  <span class="lang-fr" style="display:none"><strong>Anonymisation & Nettoyage :</strong> Application du hachage SHA-256 conforme au RGPD pour anonymiser les données sensibles, suivi d'un nettoyage approfondi d'un grand jeu de données (initialement plus de 4 000 colonnes).</span>
+              </li>
+              <li>
+                  <span class="lang-en"><strong>Engagement Indicators:</strong> Defined measurable engagement indicators based on literature, including session duration, visit frequency, and navigation diversity.</span>
+                  <span class="lang-fr" style="display:none"><strong>Indicateurs d'Engagement :</strong> Définition d'indicateurs mesurables basés sur la littérature, incluant la durée des sessions, la fréquence des visites et la diversité de navigation.</span>
+              </li>
+              <li>
+                  <span class="lang-en"><strong>Behavioral Analysis:</strong> Identified common navigation paths and engagement patterns, using both exploratory statistics and visual analytics.</span>
+                  <span class="lang-fr" style="display:none"><strong>Analyse Comportementale :</strong> Identification des parcours de navigation communs et des modèles d'engagement via des statistiques exploratoires et l'analyse visuelle.</span>
+              </li>
+              <li>
+                  <span class="lang-en"><strong>Tools Used:</strong> Analysis was conducted using both R and Python, with a transition to Python to align with the research team's stack.</span>
+                  <span class="lang-fr" style="display:none"><strong>Outils Utilisés :</strong> L'analyse a été menée en R et Python, avec une transition vers Python pour s'aligner sur la stack technique de l'équipe de recherche.</span>
+              </li>
+            </ul>
 
-    <p>
-      Despite the constraints, the project provides a first operational layer for future research in Learning Analytics, contributing directly to a doctoral project and collaborative research involving Éducapacités’ development team.
-    </p>
+            <p>
+              <span class="lang-en">Despite the constraints, the project provides a first operational layer for future research in Learning Analytics, contributing directly to a doctoral project and collaborative research involving Éducapacités’ development team.</span>
+              <span class="lang-fr" style="display:none">Malgré les contraintes, le projet fournit une première couche opérationnelle pour la recherche future en Learning Analytics, contribuant directement à un projet doctoral et à la recherche collaborative impliquant l'équipe de développement d'Éducapacités.</span>
+            </p>
+        </div>
 
-    <p style="font-style: italic; color: #666;">
-      Here are a few images of the work. If you want to explore the full project, including scripts and reports, open the thesis repository below.
-    </p>
+        <div style="text-align: center; margin: 3rem 0;">
+            <p style="font-style: italic; color: #86868b; margin-bottom: 1rem;">
+                <span class="lang-en">Explore the full project, including scripts and reports:</span>
+                <span class="lang-fr" style="display:none">Explorez le projet complet, incluant scripts et rapports :</span>
+            </p>
+            <a href="https://github.com/Rezi03/project-portfolio.git" target="_blank" rel="noopener" class="btn-gradient blue">
+                <span class="lang-en">Open GitHub Repository</span>
+                <span class="lang-fr" style="display:none">Voir le dépôt GitHub</span>
+            </a>
+        </div>
 
-    <div style="text-align: center; margin-top: 12px;">
-    <a href="https://github.com/Rezi03/project-portfolio.git" target="_blank" rel="noopener" class="btn-outline">Open Thesis GitHub Repository</a>
+        <h3 style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem;">
+            <span class="lang-en">Visual Gallery</span>
+            <span class="lang-fr" style="display:none">Galerie Visuelle</span>
+        </h3>
+        
+        <div class="project-grid">
+          <img src="../assets/images/thesis/la1.png" alt="Data Structure" />
+          <img src="../assets/images/thesis/la2.png" alt="Correlation Matrix" />
+          <img src="../assets/images/thesis/la3.png" alt="Engagement Graphs" />
+          <img src="../assets/images/thesis/la4.png" alt="User Clusters" />
+        </div>
+
+    </section>
+
+  </main>
+
+  <footer class="fade-in">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>&copy; 2025 Rezi Sabashvili.</p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rezisabashvili1@gmail.com"><img src="../assets/logos/mail.png" alt="Email" class="footer-icon"></a>
+        <a href="https://github.com/Rezi03" target="_blank"><img src="../assets/logos/github.png" alt="GitHub" class="footer-icon"></a>
+        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank"><img src="../assets/logos/linkedin.png" alt="LinkedIn" class="footer-icon"></a>
+      </div>
     </div>
+  </footer>
 
-    <h3>Image Gallery</h3>
-    <div class="project-grid">
-      <img src="../assets/images/thesis/la1.png" alt="img1" class="fade-in" />
-      <img src="../assets/images/thesis/la2.png" alt="img2" class="fade-in" />
-      <img src="../assets/images/thesis/la3.png" alt="img3" class="fade-in" />
-      <img src="../assets/images/thesis/la4.png" alt="img4" class="fade-in" />
-    </div>
-
-    <div style="margin-top: 2rem;">
-      <a href="../index.html" class="btn-outline">← Go Back to Homepage</a>
-    </div>
-  </section>
-</main>
-
-  <div class="modal" id="imageModal">
-    <img src="" alt="Full-size image" id="modalImage" />
+  <div class="image-modal" id="imageModal">
+    <img src="" alt="Full size" id="modalImage" />
   </div>
 
+  <script src="../js/script.js"></script>
+  <script src="../js/trad.js"></script>
+
   <script>
-    const faders = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const images = document.querySelectorAll('.project-grid img');
 
-    faders.forEach(el => observer.observe(el));
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                modalImg.src = img.src;
+                modal.classList.add('show');
+            });
+        });
 
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-
-    document.querySelectorAll('.project-grid img').forEach(img => {
-      img.addEventListener('click', () => {
-        modalImage.src = img.src;
-        modal.classList.add('show');
-      });
-    });
-
-    modal.addEventListener('click', () => {
-      modal.classList.remove('show');
+        modal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
     });
   </script>
+
 </body>
 </html>

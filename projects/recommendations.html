@@ -1,130 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recommendation Letters</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommendations | Rezi Sabashvili</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLN2SS4TBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VLN2SS4TBC');
+  </script>
+
+  <link rel="stylesheet" href="../css/style.css" />
+
   <style>
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .reco-card {
-      background-color: #f9f9f9;
-      padding: 1rem;
+    /* Styles spécifiques pour les cartes de contact */
+    .reco-details {
       margin-bottom: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      line-height: 1.6;
     }
-    .reco-buttons {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
+    .reco-details strong {
+      font-size: 1.1rem;
+      color: var(--accent);
     }
-    .hidden {
-      display: none;
+    .reco-details a {
+      color: var(--text-main);
+      text-decoration: underline;
+      text-decoration-color: rgba(0,0,0,0.2);
     }
-    .no-link-style a {
-      color: inherit;
-      text-decoration: none;
+    .reco-details a:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
     }
+    
     .translation-note {
       font-size: 0.85rem;
-      color: #666;
+      color: var(--text-muted);
       margin-top: 1rem;
       font-style: italic;
+      border-left: 2px solid var(--accent-orange);
+      padding-left: 10px;
+    }
+
+    .wrapper-cards {
+        display: grid;
+        gap: 2rem;
+        margin-top: 2rem;
     }
   </style>
 </head>
-<body>
-  <header class="sticky-header">
-    <div class="header-left">Rezi's Portfolio</div>
-    <div class="header-right">
-      <a href="mailto:rezisabashvili1@gmail.com" class="btn">Contact Me</a>
+<body class="loading">
+
+  <div class="background-blobs">
+    <div class="blob blob-1 floating"></div>
+    <div class="blob blob-2 floating-delayed"></div>
+  </div>
+
+  <header class="glass-header fade-in">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="../index.html">Rezi Sabashvili</a>
+      </div>
+      <nav class="header-right">
+        <a href="../index.html#documents">
+            <span class="lang-en">&larr; Back to Portfolio</span>
+            <span class="lang-fr" style="display:none">&larr; Retour au Portfolio</span>
+        </a>
+        
+        <button id="lang-toggle" class="lang-btn">
+          <span class="lang-text">EN</span>
+        </button>
+      </nav>
     </div>
   </header>
 
   <main class="container">
-    <h2>Recommendation Letters</h2>
-
-    <div class="reco-card no-link-style">
-      <p><strong>Bart Lamiroy</strong><br>
-        Full Professor<br>
-        Deputy Director of CReSTIC<br>
-        <a href="mailto:Bart.Lamiroy@univ-reims.fr">Bart.Lamiroy@univ-reims.fr</a><br>
-        +33 6 02 14 69 73
-      </p>
-
-      <p><strong>Eric Bittar</strong><br>
-        Associate Professor in Computer Science<br>
-        Accredited to Supervise Research (HDR)<br>
-        <a href="mailto:Eric.Bittar@univ-reims.fr">Eric.Bittar@univ-reims.fr</a><br>
-        +33 6 21 86 60 06
-      </p>
-
-      <button onclick="toggleLetters('bl_eb')" class="btn-outline">Read Letter</button>
-      <div id="letter-buttons-bl_eb" class="reco-buttons hidden">
-        <a href="../assets/recommendations/rl_bl_eb_fr.pdf" target="_blank" class="btn-outline">Read in French</a>
-        <a href="../assets/recommendations/rl_bl_eb_en.pdf" target="_blank" class="btn-outline">Read in English</a>
-      </div>
-
-      <div class="translation-note">
-        Note: The English version is a self-made translation and has no official value. The original signed document is in French.
-      </div>
+    
+    <div class="section-header fade-in" style="text-align: center; margin-bottom: 2rem;">
+        <h1>
+            <span class="lang-en">Recommendation Letters</span>
+            <span class="lang-fr" style="display:none">Lettres de Recommandation</span>
+        </h1>
+        <p class="subtitle" style="margin: 0 auto;">
+            <span class="lang-en">Academic references from professors and researchers.</span>
+            <span class="lang-fr" style="display:none">Références académiques de professeurs et chercheurs.</span>
+        </p>
     </div>
 
-    <div class="reco-card no-link-style">
-      <p><strong>Emmanuelle Gautherat</strong><br>
-        Head of the Master’s Program <em>Statistics for Evaluation and Forecasting</em><br>
-        Faculty of Economic, Social and Management Sciences, University of Reims<br>
-        Member of the REGARDS Research Laboratory, University of Reims<br>
-        Associate Member of the Modal’X Laboratory, University of Nanterre<br>
-        <a href="mailto:emmanuelle.gautherat@univ-reims.fr">emmanuelle.gautherat@univ-reims.fr</a><br>
-        +33 6 81 22 01 06
-      </p>
+    <div class="wrapper-cards">
 
-      <button onclick="toggleLetters('eg')" class="btn-outline">Read Letter</button>
-      <div id="letter-buttons-eg" class="reco-buttons hidden">
-        <a href="../assets/recommendations/rl_eg_fr.pdf" target="_blank" class="btn-outline">Read in French</a>
-        <a href="../assets/recommendations/rl_eg_en.pdf" target="_blank" class="btn-outline">Read in English</a>
-      </div>
+        <div class="glass-panel fade-in" style="padding: 2.5rem;">
+            
+            <div class="reco-details">
+                <p>
+                    <strong>Bart Lamiroy</strong><br>
+                    <span class="lang-en">Full Professor, Deputy Director of CReSTIC</span>
+                    <span class="lang-fr" style="display:none">Professeur des Universités, Directeur Adjoint du CReSTIC</span><br>
+                    <a href="mailto:Bart.Lamiroy@univ-reims.fr">Bart.Lamiroy@univ-reims.fr</a><br>
+                    +33 6 02 14 69 73
+                </p>
+                <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 1.5rem 0;">
+                <p>
+                    <strong>Eric Bittar</strong><br>
+                    <span class="lang-en">Associate Professor in Computer Science (HDR)</span>
+                    <span class="lang-fr" style="display:none">Maître de Conférences en Informatique (HDR)</span><br>
+                    <a href="mailto:Eric.Bittar@univ-reims.fr">Eric.Bittar@univ-reims.fr</a><br>
+                    +33 6 21 86 60 06
+                </p>
+            </div>
 
-      <div class="translation-note">
-        Note: The English version is a self-made translation and has no official value. The original signed document is in French.
-      </div>
+            <div class="lang-en">
+                <a href="../assets/recommendations/rl_bl_eb_en.pdf" target="_blank" class="btn-gradient blue">
+                    Read Letter (PDF)
+                </a>
+                <div class="translation-note">
+                    Note: The English version is a self-made translation and has no official value. The original signed document is in French.
+                </div>
+            </div>
+
+            <div class="lang-fr" style="display:none;">
+                <a href="../assets/recommendations/rl_bl_eb_fr.pdf" target="_blank" class="btn-gradient blue">
+                    Lire la lettre (Original Signé)
+                </a>
+            </div>
+
+        </div>
+
+        <div class="glass-panel fade-in" style="padding: 2.5rem;">
+            
+            <div class="reco-details">
+                <p>
+                    <strong>Emmanuelle Gautherat</strong><br>
+                    <span class="lang-en">Head of the Master’s Program <em>Statistics for Evaluation and Forecasting</em></span>
+                    <span class="lang-fr" style="display:none">Responsable du Master <em>Statistique pour l'Évaluation et la Prévision</em></span><br>
+                    
+                    <span class="lang-en" style="font-size: 0.9rem; color: #666;">
+                        Faculty of Economic, Social and Management Sciences, University of Reims<br>
+                        Member of the REGARDS Research Laboratory
+                    </span>
+                    <span class="lang-fr" style="display:none; font-size: 0.9rem; color: #666;">
+                        UFR de Sciences Économiques, Sociales et de Gestion, Université de Reims<br>
+                        Membre du laboratoire REGARDS
+                    </span>
+                    <br>
+                    <a href="mailto:emmanuelle.gautherat@univ-reims.fr" style="margin-top: 5px; display:inline-block;">emmanuelle.gautherat@univ-reims.fr</a><br>
+                    +33 6 81 22 01 06
+                </p>
+            </div>
+
+            <div class="lang-en">
+                <a href="../assets/recommendations/rl_eg_en.pdf" target="_blank" class="btn-gradient blue">
+                    Read Letter (PDF)
+                </a>
+                <div class="translation-note">
+                    Note: The English version is a self-made translation and has no official value. The original signed document is in French.
+                </div>
+            </div>
+
+            <div class="lang-fr" style="display:none;">
+                <a href="../assets/recommendations/rl_eg_fr.pdf" target="_blank" class="btn-gradient blue">
+                    Lire la lettre (Original Signé)
+                </a>
+            </div>
+
+        </div>
+
     </div>
 
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="../index.html" class="btn-outline">← Go Back</a>
-    </div>
   </main>
 
-  <script>
-    function toggleLetters(id) {
-      const section = document.getElementById(`letter-buttons-${id}`);
-      section.classList.toggle('hidden');
-    }
-  </script>
+  <footer class="fade-in">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>&copy; 2025 Rezi Sabashvili.</p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rezisabashvili1@gmail.com"><img src="../assets/logos/mail.png" alt="Email" class="footer-icon"></a>
+        <a href="https://github.com/Rezi03" target="_blank"><img src="../assets/logos/github.png" alt="GitHub" class="footer-icon"></a>
+        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank"><img src="../assets/logos/linkedin.png" alt="LinkedIn" class="footer-icon"></a>
+      </div>
+    </div>
+  </footer>
 
-  <script>
-    const faders = document.querySelectorAll('.fade-in');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-
-    faders.forEach(el => observer.observe(el));
-  </script>
+  <script src="../js/script.js"></script>
+  <script src="../js/trad.js"></script>
 
 </body>
 </html>
