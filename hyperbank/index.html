@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray - Cyberpunk Final</title>
+    <link rel="icon" type="image/png" href="assets/favicon_hyp.png?v=2" />
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <div id="ui">
+            CONTROLES:<br>
+            Flèches = Bouger<br>
+            Espace = Sauter<br>
+            Bas = S'accroupir (Maintenir)<br>
+            A = Boire | Z = Ramasser
+        </div>
+        <div id="ground"></div>
+        <img id="ray" src="assets/ray/idle_east_ray.gif" alt="Personnage">
+    </div>
+
+    <audio id="bgMusic" loop hidden>
+        <source src="assets/music/background.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('bgMusic');
+            
+            music.volume = 0.05; 
+
+            function startMusic() {
+                music.play().then(() => {
+                    console.log("Musique lancée !");
+                }).catch(error => {
+                    console.log("Lecture bloquée par le navigateur :", error);
+                });
+                
+                document.removeEventListener('keydown', startMusic);
+                document.removeEventListener('click', startMusic);
+            }
+
+            document.addEventListener('keydown', startMusic);
+            document.addEventListener('click', startMusic);
+        });
+    </script>
+
+</body>
+</html>

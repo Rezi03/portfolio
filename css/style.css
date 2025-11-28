@@ -172,3 +172,216 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--t
   .lang-btn, .btn-primary { display: inline-block; }
   .blob { opacity: 0.4; }
 }
+
+/* --- NOUVEAUX STYLES POUR LA RESTRUCTURATION --- */
+
+/* 1. Placeholder (Onglet vide) */
+.placeholder-card {
+  border: 2px dashed rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px; /* Même hauteur que les autres à peu près */
+  cursor: default;
+}
+
+.placeholder-card:hover {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.placeholder-content {
+  text-align: center;
+  opacity: 0.6;
+}
+
+/* 2. Grille 4 colonnes pour l'associatif */
+.grid-4-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 5rem;
+}
+
+/* 3. Styles "Petite Carte" */
+.card-small {
+  padding: 12px;
+}
+
+.small-frame {
+  height: 140px; /* Image moins haute */
+  background: white; /* Fond blanc pour les logos si transparents */
+}
+
+.small-frame img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Change en 'contain' si les logos sont coupés */
+}
+
+/* Ajustement pour que les logos apparaissent proprement (optionnel) */
+.small-frame img[alt="AFEV"], 
+.small-frame img[alt="Data For Good"], 
+.small-frame img[alt="Pyronear"] {
+   object-fit: contain; 
+   padding: 15px; /* Un peu d'espace autour du logo */
+}
+
+.small-content h3 {
+  font-size: 1.1rem;
+  margin: 10px 0 5px 0;
+}
+
+.text-small {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.btn-small {
+  margin-top: 0.5rem;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  width: 100%; /* Bouton prend toute la largeur sur les petites cartes */
+}
+
+/* Responsive pour la grille de 4 */
+@media (max-width: 1024px) {
+  .grid-4-cols {
+    grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes sur tablette */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4-cols {
+    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+  }
+  .placeholder-card {
+    min-height: 250px;
+  }
+}
+
+/* Ajoute ceci avec les autres boutons */
+.btn-gradient.green { 
+  background: linear-gradient(135deg, #34c759 0%, #30d158 100%); 
+  box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3); 
+}
+
+.btn-gradient.red {
+  background: linear-gradient(135deg, #ff3b30 0%, #ff2d55 100%);
+  box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+}
+
+/* --- ART GALLERY PAGE --- */
+
+.art-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 120px; /* Grand espace entre les œuvres */
+}
+
+.art-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.art-image-wrapper {
+    position: relative;
+    border-radius: 4px; /* Bordures plus nettes pour les tableaux */
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Ombre portée douce */
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.art-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(20%); /* Légère désaturation par défaut pour le style */
+    transition: filter 0.5s ease;
+}
+
+.art-image-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+}
+
+.art-image-wrapper:hover img {
+    filter: grayscale(0%); /* Retour à la couleur au survol */
+}
+
+.art-info {
+    padding: 20px;
+}
+
+.art-year {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-orange); /* Touche de couleur discrète */
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.art-info h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+}
+
+.art-info p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .art-grid {
+        gap: 80px;
+    }
+    
+    .art-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .art-info h3 {
+        font-size: 2rem;
+    }
+
+    .art-info p {
+        margin: 0 auto;
+    }
+
+    /* Sur mobile, l'image est toujours en premier (ordre visuel) */
+    .order-mobile-1 { order: 1; }
+    .order-mobile-2 { order: 2; }
+}
+
+/* --- NOUVELLE GRILLE 3 COLONNES --- */
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+  gap: 20px;
+  margin-bottom: 5rem;
+}
+
+/* Responsive pour la grille de 3 */
+@media (max-width: 900px) {
+  .grid-3-cols {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-3-cols {
+    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+  }
+}

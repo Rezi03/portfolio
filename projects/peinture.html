@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rezi Sabashvili | Art Gallery</title>
+  <link rel="icon" type="image/png" href="../assets/logos/favicon.png" />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLN2SS4TBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VLN2SS4TBC');
+  </script>
+
+  <link rel="stylesheet" href="../css/style.css" />
+  
+  <style>
+    body {
+        background-color: #d4d4d7;
+    }
+    
+    .gallery-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px 20px 50px 20px;
+    }
+
+    .art-header {
+        text-align: center;
+        margin-bottom: 80px;
+        margin-top: 20px;
+    }
+    .art-header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+    }
+    .art-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+    }
+
+    /* Grille Zig-Zag */
+    .art-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+    }
+
+    .art-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .art-image-wrapper {
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        transition: transform 0.4s ease;
+        cursor: zoom-in; /* AJOUT : Curseur loupe */
+    }
+    .art-image-wrapper:hover {
+        transform: scale(1.02);
+    }
+    .art-image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .art-info h3 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        line-height: 1.1;
+    }
+    .art-info p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+    .art-year {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--accent-orange);
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    /* --- NOUVEAU : STYLE DU MODAL (ZOOM) --- */
+    .image-modal {
+        display: none; /* Caché par défaut */
+        position: fixed;
+        z-index: 9999; /* Au dessus de tout */
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.85); /* Fond noir transparent */
+        backdrop-filter: blur(10px); /* Le fameux flou */
+        -webkit-backdrop-filter: blur(10px);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: zoom-out;
+    }
+    
+    .image-modal.active {
+        display: flex;
+        opacity: 1;
+    }
+
+    .image-modal img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 4px;
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .image-modal.active img {
+        transform: scale(1);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .art-card {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+        .art-info h3 { font-size: 2rem; }
+        .order-mobile-1 { order: 1; }
+        .order-mobile-2 { order: 2; }
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <div class="background-blobs">
+    <div class="blob blob-1 floating"></div>
+    <div class="blob blob-2 floating-delayed"></div>
+  </div>
+
+  <header class="glass-header fade-in">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="../index.html">Rezi Sabashvili</a>
+      </div>
+      <nav class="header-right">
+        <a href="../index.html#hobbies">
+            <span class="lang-en">&larr; Back to Portfolio</span>
+            <span class="lang-fr" style="display:none">&larr; Retour au Portfolio</span>
+        </a>
+        
+        <button id="lang-toggle" class="lang-btn">
+          <span class="lang-text">EN</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="gallery-container fade-in">
+    
+    <div class="art-header">
+      <h1>
+        <span class="lang-en">Oil & Canvas</span>
+        <span class="lang-fr" style="display:none">Huile sur toile</span>
+      </h1>
+    </div>
+
+ <div class="art-grid">
+
+      <article class="art-card fade-in">
+        <div class="art-image-wrapper">
+            <img src="../assets/peint/peint_1.png" alt="Broken Boundary">
+        </div>
+        <div class="art-info">
+            <span class="art-year">2023</span>
+            <h3>
+                <span class="lang-en">Broken Boundary</span>
+                <span class="lang-fr" style="display:none">Frontière Brisée</span>
+            </h3>
+            <p>
+                <span class="lang-en">Observed through the wire. The distorted geometry of the fence breaking the silence of the parked car. A study of separation.</span>
+                <span class="lang-fr" style="display:none">Observé à travers le grillage. La géométrie distordue de la clôture brisant le silence de la voiture stationnée. Une étude de la séparation.</span>
+            </p>
+        </div>
+      </article>
+
+      <article class="art-card fade-in">
+        <div class="art-info order-mobile-2"> 
+            <span class="art-year">2024</span>
+            <h3>
+                <span class="lang-en">Steel Grip</span>
+                <span class="lang-fr" style="display:none">Étreinte d'Acier</span>
+            </h3>
+            <p>
+                <span class="lang-en">The raw contrast of cold metal chains biting into dark rubber. A memory of winter roads.</span>
+                <span class="lang-fr" style="display:none">Le contraste brut des chaînes métalliques mordant le caoutchouc sombre. Un souvenir de routes d'hiver.</span>
+            </p>
+        </div>
+        <div class="art-image-wrapper order-mobile-1">
+            <img src="../assets/peint/peint_2.png" alt="Steel Grip">
+        </div>
+      </article>
+
+      <article class="art-card fade-in">
+        <div class="art-image-wrapper">
+            <img src="../assets/peint/peint_3.png" alt="Silent Faith">
+        </div>
+        <div class="art-info">
+            <span class="art-year">2024</span>
+            <h3>
+                <span class="lang-en">Silent Faith</span>
+                <span class="lang-fr" style="display:none">Foi Silencieuse</span>
+            </h3>
+            <p>
+                <span class="lang-en">Capturing a moment of deep introspection. The high contrast lighting emphasizes the strength and fragility of the gaze.</span>
+                <span class="lang-fr" style="display:none">Capture d'un moment de profonde introspection. La lumière à fort contraste souligne la force et la fragilité du regard.</span>
+            </p>
+        </div>
+      </article>
+
+      <article class="art-card fade-in">
+        <div class="art-info order-mobile-2">
+            <span class="art-year">2025</span>
+            <h3>
+                <span class="lang-en">Night Drift</span>
+                <span class="lang-fr" style="display:none">Dérive Nocturne</span>
+            </h3>
+            <p>
+                <span class="lang-en">A classic silhouette against a cold backdrop. Where the sharp industrial lines meet the absolute stillness of the night.</span>
+                <span class="lang-fr" style="display:none">Une silhouette classique sur fond froid. Là où les lignes industrielles rencontrent le calme absolu de la nuit.</span>
+            </p>
+        </div>
+        <div class="art-image-wrapper order-mobile-1">
+            <img src="../assets/peint/peint_4.png" alt="Night Drift">
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="fade-in">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p>&copy; 2025 Rezi Sabashvili.</p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rezisabashvili1@gmail.com"><img src="../assets/logos/mail.png" alt="Email" class="footer-icon"></a>
+        <a href="https://github.com/Rezi03" target="_blank"><img src="../assets/logos/github.png" alt="GitHub" class="footer-icon"></a>
+        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank"><img src="../assets/logos/linkedin.png" alt="LinkedIn" class="footer-icon"></a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="imageModal" class="image-modal">
+    <img id="modalImage" src="" alt="Full Screen Art">
+  </div>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/trad.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const wrappers = document.querySelectorAll('.art-image-wrapper');
+
+        wrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (img) {
+                    modalImg.src = img.src; 
+                    modal.classList.add('active'); 
+                }
+            });
+        });
+
+        modal.addEventListener('click', function() {
+            modal.classList.remove('active');
+        });
+    });
+  </script>
+
+</body>
+</html>
