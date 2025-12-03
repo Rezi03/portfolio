@@ -75,7 +75,38 @@ img, video { max-width: 100%; display: block; }
 /* SECTIONS */
 .hero { display: flex; align-items: center; justify-content: space-between; padding: 5rem 0; gap: 3rem; max-width: 980px; margin: 0 auto; }
 .hero-content h1 { font-size: 3.5rem; line-height: 1.05; letter-spacing: -1.5px; margin: 1.5rem 0; font-weight: 700; }
-.gradient-text { background: linear-gradient(135deg, #1d1d1f 30%, #0071e3 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+/* Animation du dégradé */
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #1d1d1f 0%,
+    #005bb5 25%,
+    #00c6ff 50%,
+    #005bb5 75%,
+    #1d1d1f 100%
+  );
+  
+  background-size: 200% auto;
+  
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  animation: gradient-move 4s linear infinite;
+  
+  /* Optionnel : pour que ce soit fluide */
+  display: inline-block; 
+}
 .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; }
 .profile-img { width: 280px; height: auto; border-radius: 24px; box-shadow: var(--shadow-md); border: 8px solid rgba(255,255,255,0.8); }
 
@@ -118,8 +149,11 @@ img, video { max-width: 100%; display: block; }
   box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none;
 }
 .btn-gradient:hover { transform: translateY(-2px); filter: brightness(1.1); }
-.btn-gradient.blue { background: linear-gradient(135deg, #0071e3 0%, #00c6ff 100%); box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3); }
-.btn-gradient.orange { background: linear-gradient(135deg, #f56300 0%, #ff9a00 100%); box-shadow: 0 4px 15px rgba(245, 99, 0, 0.3); }
+.btn-gradient.blue {
+  background: linear-gradient(135deg, #004e92 0%, #0071e3 100%);
+  box-shadow: 0 4px 15px rgba(0, 78, 146, 0.3);
+}
+.btn-gradient.orange { background: linear-gradient(135deg, #bf4e03 0%, #ce7d03 100%); box-shadow: 0 4px 15px rgba(245, 99, 0, 0.3); }
 .btn-gradient.grey { background: linear-gradient(135deg, #434344 0%, #666666 100%); box-shadow: 0 4px 15px rgba(60, 60, 60, 0.2); }
 
 .btn-outline {
@@ -263,13 +297,15 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--t
 }
 
 /* Ajoute ceci avec les autres boutons */
-.btn-gradient.green { 
-  background: linear-gradient(135deg, #34c759 0%, #30d158 100%); 
-  box-shadow: 0 4px 15px rgba(52, 199, 89, 0.3); 
+.btn-gradient.green {
+  /* Dégradé vert émeraude/forêt */
+  background: linear-gradient(135deg, #2ea043 0%, #1f6e2c 100%);
+  /* Ombre assortie mais plus discrète */
+  box-shadow: 0 4px 15px rgba(46, 160, 67, 0.3);
 }
 
 .btn-gradient.red {
-  background: linear-gradient(135deg, #ff3b30 0%, #ff2d55 100%);
+  background: linear-gradient(135deg, #8d0b04 0%, #a80220 100%);
   box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
 }
 
@@ -385,3 +421,238 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--t
     grid-template-columns: 1fr; /* 1 colonne sur mobile */
   }
 }
+
+
+
+
+
+.glass-panel {
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.glass-panel:hover {
+    /* La carte monte un peu plus */
+    transform: translateY(-8px) scale(1.01);
+    
+    /* Lueur externe bleue (Néon) */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2), /* Ombre normale */
+        0 0 20px rgba(0, 113, 227, 0.2); /* Lueur bleue */
+        
+    /* La bordure devient plus blanche/brillante */
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* On définit l'animation : glissement vers le haut + fondu */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(10px); /* Part du flou */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0); /* Devient net */
+    }
+}
+
+
+/* On prépare le bouton pour masquer ce qui dépasse */
+.btn-gradient, .btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+/* La barre de lumière invisible au départ */
+.btn-gradient::after, .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%; /* Caché loin à gauche */
+    width: 100%;
+    height: 100%;
+    /* Un dégradé blanc transparent */
+    background: linear-gradient(
+        to right, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.3) 50%, 
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg); /* On penche la lumière */
+    pointer-events: none;
+}
+
+/* Au survol, la lumière traverse le bouton */
+.btn-gradient:hover::after, .btn-primary:hover::after {
+    left: 150%; /* Part loin à droite */
+    transition: 0.7s ease-in-out; /* Vitesse de l'éclair */
+}
+
+/* On prépare le lien */
+.header-right a {
+    position: relative;
+    display: inline-block;
+}
+
+/* On crée la ligne invisible en dessous */
+.header-right a::after {
+    content: '';
+    position: absolute;
+    width: 0; /* Largeur nulle au départ */
+    height: 2px;
+    bottom: -4px; /* Un peu sous le texte */
+    left: 0;
+    background-color: var(--accent); /* Ta couleur bleue */
+    transition: width 0.3s ease-out; /* Animation fluide */
+    border-radius: 2px;
+}
+
+/* Au survol, la ligne grandit à 100% */
+.header-right a:hover::after {
+    width: 100%;
+}
+
+/* Change la couleur de fond et du texte lors de la sélection */
+::selection {
+    background: rgba(0, 113, 227, 0.2); /* Ton bleu, mais transparent */
+    color: #0071e3; /* Ton bleu en solide */
+    text-shadow: none;
+}
+
+/* Pour Firefox spécifiquement */
+::-moz-selection {
+    background: rgba(0, 113, 227, 0.2);
+    color: #0071e3;
+}
+
+/* Style de base des tags pour l'animation */
+.tags span {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet "rebond" */
+    cursor: default;
+    display: inline-block;
+}
+
+/* Au survol d'un tag spécifique */
+.tags span:hover {
+    transform: translateY(-4px) scale(1.05); /* Saute et grandit un peu */
+    background: #ffffff; /* Devient blanc pur */
+    border-color: var(--accent); /* Bordure bleue */
+    color: var(--accent); /* Texte bleu */
+    box-shadow: 0 4px 8px rgba(0, 113, 227, 0.15); /* Petite ombre */
+}
+
+html {
+    /* Tout le site défile de manière fluide */
+    scroll-behavior: smooth;
+    
+    /* Pour éviter les saccades sur les écrans modernes */
+    scroll-padding-top: 100px; /* Laisse de la place pour ton header fixe */
+}
+
+/* État de base (gris et transparent) */
+.footer-icon {
+    opacity: 0.6;
+    filter: grayscale(100%); /* Noir et blanc */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond */
+}
+
+/* Au survol */
+.footer-icon:hover {
+    opacity: 1; /* Pleine visibilité */
+    filter: grayscale(0%); /* Retour de la couleur */
+    transform: translateY(-5px) rotate(8deg) scale(1.1); /* Monte, tourne et grandit */
+}
+
+/* Quand on clique (état active) sur n'importe quel bouton */
+.btn-gradient:active, .btn-primary:active, .btn-outline:active {
+    transform: scale(0.95) translateY(2px) !important; /* Rétrécit et descend */
+    /* Ombre intérieure pour simuler le creux */
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.2) !important; 
+    transition: transform 0.05s; /* Très rapide pour la réactivité */
+}
+
+
+/* Ajout de la grille par-dessus le fond */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 200%; height: 200%;
+    z-index: -1;
+    /* Création de la grille en CSS pur */
+    background-image: 
+        linear-gradient(rgba(0, 113, 227, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 113, 227, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; /* Taille des carreaux */
+    pointer-events: none;
+    
+    /* Animation de défilement lent (Diagonale) */
+    animation: grid-scroll 100s linear infinite;
+}
+
+@keyframes grid-scroll {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-40px, -40px); }
+}
+
+.header-left {
+    position: relative;
+    display: inline-block;
+}
+
+.header-left:hover {
+    animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: var(--accent);
+}
+
+@keyframes glitch-anim {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.section-header h2 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* La ligne invisible au départ */
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    /* Dégradé bleu/cyan */
+    background: linear-gradient(90deg, #0071e3, #00c6ff);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 2px;
+}
+
+/* Quand on survole le titre (ou la section), la ligne se dessine */
+.section-header:hover h2::after {
+    width: 100%;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    5% { transform: scale(1.05); }
+    10% { transform: scale(1); }
+    15% { transform: scale(1.05); }
+    20% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* On applique l'animation uniquement au bouton Contact du header */
+.header-right .btn-primary {
+    animation: heartbeat 4s infinite;
+    transform-origin: center;
+}
+
+

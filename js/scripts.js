@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+
   
   document.body.classList.add('js-loaded');
 
@@ -57,3 +58,4 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error("Bouton contact ou Modal introuvable !");
   }
 });
+
