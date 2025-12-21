@@ -655,4 +655,168 @@ body::after {
     transform-origin: center;
 }
 
+/* Animation Radar Bleu pour le stage actuel */
+@keyframes radar-pulse-blue {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.7); /* Bleu de ton thème */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 113, 227, 0); /* S'agrandit et disparaît */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+    }
+}
 
+/* La classe spécifique pour le point bleu */
+.status-dot.blue {
+    background-color: #0071e3; /* Bleu */
+    animation: radar-pulse-blue 2s infinite; /* Utilise l'animation bleue */
+}
+
+/* --- STYLE BDF FINAL (Gauche / Centre / Gauche) --- */
+
+.bdf-final-card {
+    /* Fond Bleu Nuit */
+    background: linear-gradient(180deg, #0f1c3f 0%, #003366 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* Coins bien arrondis */
+    border-radius: 24px !important; 
+    
+    /* Layout Vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    /* ALIGNEMENT A GAUCHE PAR DÉFAUT */
+    align-items: flex-start; 
+    text-align: left;
+    
+    padding: 1.5rem !important;
+}
+
+/* 1. TITRE (Gauche) */
+.bdf-text-top h3 {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+.bdf-text-top p {
+    color: #a3c2e0;
+    font-size: 0.95rem;
+    margin: 2px 0 0 0;
+    font-weight: 500;
+}
+
+/* 2. LOGO (Centré) */
+.bdf-logo-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    /* On réduit un peu le padding pour laisser la place au gros logo */
+    padding: 5px 0; 
+}
+
+.bdf-logo-img {
+    height: 90px; /* AUGMENTÉ (Avant: 65px) - Le logo est maintenant massif */
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 1; /* Opacité à 100% pour qu'il claque */
+    transition: transform 0.3s ease;
+}
+
+.bdf-final-card:hover .bdf-logo-img {
+    transform: scale(1.1);
+}
+
+/* 3. STATUT (Gauche) */
+.bdf-status-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* Petit fond pour faire ressortir le statut */
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+/* --- EFFETS AU SURVOL SPÉCIAUX (HOVER) --- */
+
+/* On s'assure que la transition est fluide sur la carte de base */
+.bdf-final-card {
+    /* Transition douce pour tous les changements */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bdf-final-card:hover {
+    /* 1. CHANGEMENT DE COULEUR DE FOND (Plus vif/électrique) */
+    /* On passe du bleu nuit sombre à un dégradé bleu roi plus lumineux */
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%) !important;
+
+    /* 2. OMBRAGE COLORÉ INTENSE (Glow Effect) */
+    /* Au lieu d'une ombre noire, on projette une lumière bleue profonde */
+    box-shadow: 0 30px 60px -15px rgba(30, 80, 160, 0.8) !important;
+
+    /* 3. BORDURE LUMINEUSE */
+    /* La bordure devient bleu clair brillant pour définir les contours */
+    border-color: rgba(135, 206, 250, 0.9) !important;
+
+    /* 4. SOULÈVEMENT MARQUÉ */
+    /* Elle monte plus haut que les autres cartes */
+    transform: translateY(-12px) scale(1.03) !important;
+    
+    /* On s'assure qu'elle passe devant tout le reste */
+    z-index: 10;
+}
+
+/* Petit bonus : le badge du bas s'illumine aussi légèrement */
+.bdf-final-card:hover .bdf-status-bottom {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* --- EFFET 3D LÉVITATION (Depth) --- */
+
+/* 1. On active l'espace 3D sur la carte */
+.bdf-final-card {
+    /* Perspective : plus le chiffre est petit, plus l'effet 3D est fort */
+    perspective: 1000px; 
+    transform-style: preserve-3d; /* Permet aux enfants de bouger en 3D */
+}
+
+/* 2. Au survol, on incline légèrement la carte vers l'arrière */
+.bdf-final-card:hover {
+    transform: rotateX(5deg) translateY(-10px) !important; /* Inclinaison subtile */
+    box-shadow: 0 30px 50px -10px rgba(0, 0, 0, 0.5) !important; /* Ombre profonde au sol */
+}
+
+/* 3. LE LOGO SORT DE L'ÉCRAN (Premier plan) */
+.bdf-final-card:hover .bdf-logo-center {
+    /* TranslateZ rapproche l'élément de tes yeux */
+    transform: translateZ(60px) scale(1.1); 
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* On ajoute une ombre portée DERRIÈRE le logo pour accentuer l'effet de vol */
+.bdf-final-card:hover .bdf-logo-img {
+    filter: brightness(0) invert(1) drop-shadow(0 20px 15px rgba(0,0,0,0.6));
+}
+
+/* 4. LE TEXTE ET LE STATUT FLOTTENT AUSSI (Plan intermédiaire) */
+.bdf-final-card:hover .bdf-text-top {
+    transform: translateZ(30px); /* Flotte un peu moins haut que le logo */
+    transition: transform 0.4s ease 0.05s; /* Petit retard */
+}
+
+.bdf-final-card:hover .bdf-status-bottom {
+    transform: translateZ(20px);
+    transition: transform 0.4s ease 0.1s; /* Retard un peu plus long */
+}
