@@ -103,8 +103,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const navAnchors = [
     { href: '#about', en: 'About', fr: 'À propos' },
     { href: '#experience', en: 'Experience', fr: 'Expérience' },
-    { href: '#education', en: 'Education', fr: 'Formation' },
     { href: '#finance', en: 'Finance', fr: 'Finance' },
+    { href: '#education', en: 'Education', fr: 'Formation' },
     { href: '#skills', en: 'Skills', fr: 'Compétences' },
     { href: '#documents', en: 'Documents', fr: 'Documents' },
   ];
@@ -146,22 +146,25 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     reporting: {
       en: { title: 'Reporting Automation', gains: [
+        'Context: CPPI = Comité du Pilotage du Portefeuille Informatique — quarterly IT governance committee chaired by the First Deputy Governor',
         '100% of manual data extraction eliminated',
         'End-to-end autonomous pipeline — runs without human intervention',
         'Output: dynamic Power BI dashboard + automated PowerPoint deck',
-        'Delivered quarterly to the First Deputy Governor (CPPI steering committee)',
+        'Delivered quarterly to the First Deputy Governor',
         'Python handles the full chain: extraction → transformation → formatting → export'
       ]},
       fr: { title: 'Automatisation du Reporting', gains: [
+        'Contexte : CPPI = Comité du Pilotage du Portefeuille Informatique — comité de gouvernance IT trimestriel présidé par le Premier Sous-Gouverneur',
         '100% de l\'extraction manuelle supprimée',
         'Pipeline autonome bout-en-bout — tourne sans intervention humaine',
         'Livrable : tableau de bord Power BI dynamique + PowerPoint automatisé',
-        'Présenté trimestriellement au Premier Sous-Gouverneur (comité CPPI)',
+        'Présenté trimestriellement au Premier Sous-Gouverneur',
         'Python gère toute la chaîne : extraction → transformation → mise en forme → export'
       ]}
     },
     cppi: {
       en: { title: 'Budget Collection System', gains: [
+        'Context: CPPI = Comité du Pilotage du Portefeuille Informatique — the committee that governs all IT investment decisions at the Banque de France',
         '9 Banque de France directorates onboarded on the system',
         'VBA-locked templates pre-filled by Python — deployed on SharePoint',
         'Automated consolidation: historical data + live SharePoint inputs merged automatically',
@@ -171,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
         'Per-directorate comment files for documentation and traceability'
       ]},
       fr: { title: 'Système de Collecte Budgétaire', gains: [
+        'Contexte : CPPI = Comité du Pilotage du Portefeuille Informatique — instance qui gouverne l\'ensemble des décisions d\'investissement informatique de la Banque de France',
         '9 directions de la Banque de France intégrées dans le système',
         'Maquettes VBA verrouillables pré-remplies par Python — déployées sur SharePoint',
         'Consolidation automatique : données historiques + saisies SharePoint fusionnées',
@@ -181,19 +185,19 @@ document.addEventListener("DOMContentLoaded", function() {
       ]}
     },
     training: {
-      en: { title: 'Internal Training', gains: [
+      en: { title: 'Training Instructor', gains: [
+        'Designed and led VBA & Python courses for colleagues in the Financial Directorate',
         'VBA: Excel automation, custom tool development, macro design',
         'Python: data manipulation, automation scripts, financial use cases',
-        'Sessions tailored to the real workflows of the Financial Directorate',
-        'Custom course materials created from scratch',
-        'Colleagues autonomised on tools used directly in daily work'
+        'Course materials created from scratch, tailored to real workflows',
+        'Colleagues autonomised on tools they now use daily'
       ]},
-      fr: { title: 'Formation Interne', gains: [
+      fr: { title: 'Formateur', gains: [
+        'Conception et animation de cours VBA & Python pour les collègues de la Direction Financière',
         'VBA : automatisation Excel, développement d\'outils sur mesure, conception de macros',
         'Python : manipulation de données, scripts d\'automatisation, cas d\'usage financiers',
-        'Sessions adaptées aux workflows réels de la Direction Financière',
-        'Supports de cours créés de zéro',
-        'Collègues autonomisés sur des outils utilisés au quotidien'
+        'Supports de cours créés de zéro, adaptés aux workflows réels',
+        'Collègues autonomisés sur des outils qu\'ils utilisent au quotidien'
       ]}
     }
   };
@@ -218,8 +222,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // CONTACT MODAL (fix)
-  const contactBtn = document.querySelector('.btn-primary[onclick]');
-  // Already handled via inline onclick
+  // COPY EMAIL BUTTON
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText('rezisabashvili1@gmail.com').then(() => {
+        const lang = localStorage.getItem('siteLanguage') || 'en';
+        const origHTML = copyEmailBtn.innerHTML;
+        copyEmailBtn.textContent = lang === 'fr' ? '✓ Copié !' : '✓ Copied!';
+        setTimeout(() => { copyEmailBtn.innerHTML = origHTML; }, 1600);
+      });
+    });
+  }
 
 });
