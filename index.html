@@ -26,28 +26,18 @@
 <header class="glass-header fade-in">
     <div class="header-content">
       <div class="header-left">Rezi Sabashvili</div>
-      <nav class="header-right">
-        <a href="#about">
-            <span class="lang-en">About</span>
-            <span class="lang-fr" style="display:none">À propos</span>
-        </a>
-        <a href="#finance">
-            <span class="lang-en">Finance</span>
-            <span class="lang-fr" style="display:none">Finance</span>
-        </a>
-        <a href="#projects">
-            <span class="lang-en">Academic Projects</span>
-            <span class="lang-fr" style="display:none">Projets Académique</span>
-        </a>
-        
-        <button id="lang-toggle" class="lang-btn">
-          <span class="lang-text">EN</span>
-        </button>
-        
-        <button class="btn-primary" onclick="document.getElementById('contactModal').classList.add('active')">
-          Contact
-        </button>
+      <nav class="header-right" id="mainNav">
+        <a href="#about"><span class="lang-en">About</span><span class="lang-fr" style="display:none">À propos</span></a>
+        <a href="#experience"><span class="lang-en">Experience</span><span class="lang-fr" style="display:none">Expérience</span></a>
+        <a href="#education"><span class="lang-en">Education</span><span class="lang-fr" style="display:none">Formation</span></a>
+        <a href="#finance"><span class="lang-en">Finance</span><span class="lang-fr" style="display:none">Finance</span></a>
+        <a href="#skills"><span class="lang-en">Skills</span><span class="lang-fr" style="display:none">Compétences</span></a>
+        <button id="lang-toggle" class="lang-btn"><span class="lang-text">EN</span></button>
+        <button class="btn-primary" onclick="document.getElementById('contactModal').classList.add('active')">Contact</button>
       </nav>
+      <button class="hamburger" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -56,17 +46,17 @@
     <section class="hero fade-in">
       <div class="hero-content">
         <div class="badge">
-          <span class="lang-en">Master's Student in Data Analytics</span>
-          <span class="lang-fr" style="display:none">Master en Data Analytics</span>
+          <span class="lang-en">MSc Statistics &amp; Data Analytics · Open to Opportunities</span>
+          <span class="lang-fr" style="display:none">Fondateur de Finteker · Plateforme d'Analyse Financière (DCF, Backtesting, IA)</span>
         </div>
-        
-<h1 class="gradient-text">
-          <span class="lang-en">Turning Complex Data<br>Into Actionable Strategy.</span>
-          <span class="lang-fr" style="display:none">Transformer la Data<br>en Stratégie Actionnable.</span>
+
+        <h1 class="gradient-text">
+          <span class="lang-en">Where Finance<br>Meets Precision.</span>
+          <span class="lang-fr" style="display:none">Là où la Finance<br>Rencontre la Précision.</span>
         </h1>
-        <p class="subtitle justified-text">
-          <span class="lang-en">Passionate about the intersection of Finance and Technology. I interpret data to uncover insights and anticipate trends before they emerge.</span>
-          <span class="lang-fr" style="display:none">Passionné par la Finance et Technologie. J'interprète les données pour révéler des insights et anticiper les tendances avant qu'elles n'émergent.</span>
+        <p class="subtitle">
+          <span class="lang-en">MSc in Data Analytics with hands-on experience at the Banque de France. I build financial automation systems and data tools for high-stakes decisions.</span>
+          <span class="lang-fr" style="display:none">Master en Data Analytics avec une expérience à la Banque de France. Je conçois des systèmes d'automatisation financière et des outils de données pour des décisions à forts enjeux.</span>
         </p>
       </div>
       <div class="hero-image">
@@ -88,8 +78,8 @@
             <span class="lang-fr" style="display:none">À propos</span>
           </h3>
           <p class="justified-text">
-            <span class="lang-en">I am Rezi Sabashvili, a Master’s student in Data Science at the University of Reims. I combine strong technical skills in data analysis with a solid background in economics to interpret financial challenges.</span>
-            <span class="lang-fr" style="display:none">Je suis Rezi Sabashvili, étudiant en Master de Data Science à l'Université de Reims. J'allie de solides compétences techniques en analyse de données à un background économique pour interpréter les défis financiers.</span>
+            <span class="lang-en">MSc in Statistics for Evaluation and Forecasting (Highest Honors), University of Reims. Currently Financial Developer &amp; Analyst Intern at the Banque de France. Profile spanning data science, AI, quantitative finance, and financial risk — with a strong interest in investment banking and capital markets.</span>
+            <span class="lang-fr" style="display:none">Master en Statistique pour l’Évaluation et la Prévision (Mention Très Bien), Université de Reims. Développeur &amp; Analyste Financier en stage à la Banque de France. Profil couvrant la data science, l’IA, la finance quantitative et le risque financier — fort intérêt pour la banque d’investissement et les marchés de capitaux.</span>
           </p>
         </div>
 
@@ -97,10 +87,13 @@
           
           <div class="bdf-text-top">
               <h3>
-                <span class="lang-en">Developer -Financial Analyst</span>
-                <span class="lang-fr" style="display:none">Développeur - Analyste Financier</span>
+                <span class="lang-en">Financial Developer & Analyst</span>
+                <span class="lang-fr" style="display:none">Développeur & Analyste Financier</span>
               </h3>
-              <p>Banque de France</p>
+              <p>
+                <span class="lang-en">Banque de France · Direction Financière</span>
+                <span class="lang-fr" style="display:none">Banque de France · Direction Financière</span>
+              </p>
           </div>
 
           <div class="bdf-logo-center">
@@ -114,6 +107,229 @@
           </div>
 
         </a>
+      </div>
+    </section>
+
+    <section id="experience" class="fade-in">
+      <div class="section-header">
+        <h2>
+          <span class="lang-en">Current Role</span>
+          <span class="lang-fr" style="display:none">Poste Actuel</span>
+        </h2>
+      </div>
+
+      <div class="exp-header glass-panel">
+        <div class="exp-title-block">
+          <div class="exp-role">
+            <span class="lang-en">Financial Developer &amp; Analyst Intern</span>
+            <span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire</span>
+          </div>
+          <div class="exp-org">Banque de France · Secrétariat Général · DEFI · SBCGP</div>
+          <div class="exp-cppi">
+            <span class="lang-en">CPPI = Comité du Pilotage du Portefeuille Informatique</span>
+            <span class="lang-fr" style="display:none">CPPI = Comité du Pilotage du Portefeuille Informatique</span>
+          </div>
+        </div>
+        <div class="exp-path">
+          <span>Secrétariat Général</span>
+          <span class="path-arrow">›</span>
+          <span>
+            <span class="lang-en">Financial Directorate</span>
+            <span class="lang-fr" style="display:none">Direction Financière</span>
+          </span>
+          <span class="path-arrow">›</span>
+          <span>SBCGP</span>
+          <span class="path-arrow">›</span>
+          <span>
+            <span class="lang-en">Cross-functional Division</span>
+            <span class="lang-fr" style="display:none">Pôle Transverse</span>
+          </span>
+        </div>
+        <div class="exp-date">
+          <div class="status-dot blue"></div>
+          <span class="lang-en">Feb 2026 — Present</span>
+          <span class="lang-fr" style="display:none">Fév 2026 — En cours</span>
+        </div>
+      </div>
+
+      <div class="missions-grid">
+
+        <div class="mission-card glass-panel hover-lift" data-mission="hub">
+          <div class="mission-tags"><span>Excel</span><span>VBA</span><span>SQL</span></div>
+          <h4>Financial Data Hub</h4>
+          <p>
+            <span class="lang-en">Live SQL databases wired into a single Excel hub — one source of truth replacing scattered manual files across the team.</span>
+            <span class="lang-fr" style="display:none">Bases SQL connectées en temps réel dans un hub Excel centralisé — source unique remplaçant les fichiers dispersés.</span>
+          </p>
+          <div class="mission-expand">
+            <span class="lang-en">View details</span>
+            <span class="lang-fr" style="display:none">Voir les détails</span>
+            <span class="expand-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="mission-card glass-panel hover-lift" data-mission="reporting">
+          <div class="mission-tags"><span>Python</span><span>Power BI</span><span>PowerPoint</span></div>
+          <h4>
+            <span class="lang-en">Reporting Automation</span>
+            <span class="lang-fr" style="display:none">Automatisation du Reporting</span>
+          </h4>
+          <p>
+            <span class="lang-en">Python pipeline from raw data to Power BI — CPPI reports delivered autonomously to the First Deputy Governor.</span>
+            <span class="lang-fr" style="display:none">Pipeline Python des données brutes au Power BI — rapports CPPI livrés automatiquement au Premier Sous-Gouverneur.</span>
+          </p>
+          <div class="mission-expand">
+            <span class="lang-en">View details</span>
+            <span class="lang-fr" style="display:none">Voir les détails</span>
+            <span class="expand-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="mission-card glass-panel hover-lift" data-mission="cppi">
+          <div class="mission-tags"><span>Python</span><span>VBA</span><span>SharePoint</span><span>NLP</span></div>
+          <h4>
+            <span class="lang-en">Budget Collection System</span>
+            <span class="lang-fr" style="display:none">Système de Collecte Budgétaire</span>
+          </h4>
+          <p>
+            <span class="lang-en">9 directorates submit quarterly budgets via SharePoint templates — auto-consolidated into governance presentations and Power BI dashboards.</span>
+            <span class="lang-fr" style="display:none">9 directions saisissent leurs budgets trimestriels via SharePoint — consolidation automatique en présentations de gouvernance et tableaux Power BI.</span>
+          </p>
+          <div class="mission-expand">
+            <span class="lang-en">View details</span>
+            <span class="lang-fr" style="display:none">Voir les détails</span>
+            <span class="expand-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="mission-card glass-panel hover-lift" data-mission="training">
+          <div class="mission-tags"><span>VBA</span><span>Python</span><span>Training</span></div>
+          <h4>
+            <span class="lang-en">Internal Training</span>
+            <span class="lang-fr" style="display:none">Formation Interne</span>
+          </h4>
+          <p>
+            <span class="lang-en">VBA &amp; Python courses delivered to colleagues in the Financial Directorate, focused on financial automation.</span>
+            <span class="lang-fr" style="display:none">Cours VBA &amp; Python dispensés aux collègues de la Direction Financière, orientés automatisation financière.</span>
+          </p>
+          <div class="mission-expand">
+            <span class="lang-en">View details</span>
+            <span class="lang-fr" style="display:none">Voir les détails</span>
+            <span class="expand-arrow">→</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ca-card glass-panel fade-in">
+        <div class="ca-left">
+          <div class="ca-org">Crédit Agricole</div>
+          <div class="ca-date">Jan 2024 · Feb 2024</div>
+          <div class="ca-role">
+            <span class="lang-en">Sales &amp; Data Analyst Intern — Reims</span>
+            <span class="lang-fr" style="display:none">Analyste Commercial &amp; Data Stagiaire — Reims</span>
+          </div>
+        </div>
+        <div class="ca-right">
+          <ul class="ca-bullets">
+            <li>
+              <span class="lang-en">Designed interactive Power BI dashboards to monitor commercial KPIs</span>
+              <span class="lang-fr" style="display:none">Conception de dashboards Power BI interactifs pour le suivi des KPIs commerciaux</span>
+            </li>
+            <li>
+              <span class="lang-en">Developed VBA scripts to automate weekly reporting, eliminating manual tracking</span>
+              <span class="lang-fr" style="display:none">Scripts VBA pour automatiser le reporting hebdomadaire et supprimer le suivi manuel</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="education" class="fade-in">
+      <div class="section-header">
+        <h2>
+          <span class="lang-en">Education</span>
+          <span class="lang-fr" style="display:none">Formation</span>
+        </h2>
+      </div>
+
+      <div class="edu-grid">
+
+        <div class="edu-card glass-panel hover-lift">
+          <div class="edu-header">
+            <div class="edu-degree">
+              <span class="lang-en">MSc Statistics for Evaluation &amp; Forecasting</span>
+              <span class="lang-fr" style="display:none">Master Statistique pour l'Évaluation et la Prévision</span>
+            </div>
+            <div class="edu-school">
+              <span class="lang-en">University of Reims · 2024–2026</span>
+              <span class="lang-fr" style="display:none">Université de Reims · 2024–2026</span>
+            </div>
+            <div class="edu-honor">
+              <span class="lang-en">Highest Honors</span>
+              <span class="lang-fr" style="display:none">Mention Très Bien</span>
+            </div>
+          </div>
+          <div class="edu-courses">
+            <div class="edu-course-highlight">
+              <span class="course-grade perfect">20/20</span>
+              <span class="lang-en">Quantitative Financial Risk Management</span>
+              <span class="lang-fr" style="display:none">Gestion des Risques Quantitatifs Financiers</span>
+            </div>
+            <div class="edu-course-highlight">
+              <span class="course-grade">16/20</span>
+              <span class="lang-en">Time Series &amp; Financial Econometrics</span>
+              <span class="lang-fr" style="display:none">Séries Temporelles &amp; Économétrie Financière</span>
+            </div>
+            <div class="edu-course-highlight">
+              <span class="course-grade">16/20</span>
+              <span class="lang-en">Big Data Ecosystems</span>
+              <span class="lang-fr" style="display:none">Écosystèmes Big Data</span>
+            </div>
+            <div class="edu-tags">
+              <span>NLP</span><span>Deep Learning</span><span>Data Mining</span><span>
+                <span class="lang-en">Unsupervised Learning</span>
+                <span class="lang-fr" style="display:none">Apprentissage Non-Supervisé</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-side">
+          <div class="edu-card-small glass-panel hover-lift">
+            <div class="edu-degree">
+              <span class="lang-en">BSc Economics &amp; Management</span>
+              <span class="lang-fr" style="display:none">Licence Économie &amp; Gestion</span>
+            </div>
+            <div class="edu-school">
+              <span class="lang-en">University of Reims · 2021–2024</span>
+              <span class="lang-fr" style="display:none">Université de Reims · 2021–2024</span>
+            </div>
+            <div class="edu-honor">
+              <span class="lang-en">With Honors · Applied Mathematics &amp; Economic Analysis</span>
+              <span class="lang-fr" style="display:none">Mention Bien · Mathématiques Appliquées &amp; Analyse Économique</span>
+            </div>
+          </div>
+
+          <div class="edu-card-small glass-panel hover-lift amf-card">
+            <div class="edu-degree">
+              <span class="lang-en">AMF Certification</span>
+              <span class="lang-fr" style="display:none">Certification AMF</span>
+            </div>
+            <div class="edu-school">
+              <span class="lang-en">Autorité des Marchés Financiers</span>
+              <span class="lang-fr" style="display:none">Autorité des Marchés Financiers</span>
+            </div>
+            <div class="edu-honor amf-status">
+              <span class="status-dot blue"></span>
+              <span class="lang-en">In preparation</span>
+              <span class="lang-fr" style="display:none">En préparation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
     <section id="finance" class="fade-in">
@@ -125,27 +341,6 @@
       </div>
       
       <div class="projects-wrapper">
-        <article class="project-card glass-panel hover-lift">
-          <div class="media-frame">
-            <video autoplay loop muted playsinline poster="assets/videos/finteker.mp4">
-              <source src="assets/videos/finteker.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="tags"><span>Python</span><span>Java</span><span>HTML/CSS</span><span>Chatbot</span><span>API</span></div>
-              <h3>Finteker Intelligence</h3>
-              <p class="justified-text">
-                <span class="lang-en">An educational platform designed to demystify finance. Centralizing learning resources, market news, and interactive predictive analysis tools.</span>
-                <span class="lang-fr" style="display:none">Une plateforme éducative conçue pour démystifier la finance. Centralisation des ressources d'apprentissage, actualités boursières et outils d'analyse prédictive interactifs.</span>
-              </p>
-            </div>
-            <a href="https://finteker.fr" target="_blank" class="btn-gradient blue">
-              <span class="lang-en">Visit Platform</span>
-              <span class="lang-fr" style="display:none">Voir la Plateforme</span>
-            </a>
-          </div>
-        </article>
 
         <article class="project-card glass-panel hover-lift">
           <div class="media-frame">
@@ -158,8 +353,8 @@
               <div class="tags"><span>Python</span><span>Streamlit</span><span>Yahoo Finance API</span></div>
               <h3>Banking Market Dashboard</h3>
               <p class="justified-text">
-                <span class="lang-en">Interactive dashboard comparing multiple banks with technical indicators, risk metrics, and downloadable automated reports.</span>
-                <span class="lang-fr" style="display:none">Tableau de bord interactif comparant plusieurs banques avec indicateurs techniques, métriques de risque et rapports automatisés téléchargeables.</span>
+                <span class="lang-en">Interactive dashboard tracking major banks — live price data, technical indicators (RSI, Bollinger, MACD), risk metrics (Beta, Sharpe, VaR), and automated PDF reports.</span>
+                <span class="lang-fr" style="display:none">Dashboard interactif sur les grandes banques — données en temps réel, indicateurs techniques (RSI, Bollinger, MACD), métriques de risque (Bêta, Sharpe, VaR) et rapports PDF automatisés.</span>
               </p>
             </div>
             <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-gradient blue">
@@ -168,181 +363,95 @@
             </a>
           </div>
         </article>
-      </div>
-    </section>
-
-<section id="projects" class="fade-in">
-      <div class="section-header">
-        <h2>
-            <span class="lang-en">Academic Projects</span>
-            <span class="lang-fr" style="display:none">Projets Académique</span>
-        </h2>
-      </div>
-      <div class="projects-wrapper compact">
-        
-<article class="project-card glass-panel hover-lift">
-          <div class="media-frame">
-            <img src="assets/images/thesis/thesis.png" alt="Thesis Learning Analytics" />
-          </div>
-          <div class="card-content">
-             <div>
-                <div class="tags">
-                    <span>R</span>
-                    <span>Big Data</span>
-                    <span>Clustering</span>
-                    <span>SQL</span>
-                </div>
-                
-                <h3>
-                 <span class="lang-en">Learning Analytics Thesis</span>
-                 <span class="lang-fr" style="display:none">Mémoire Learning Analytics</span>
-               </h3>
-               <p class="justified-text">
-                 <span class="lang-en">Exploration of a large-scale dataset using Big Data techniques to understand student interaction dynamics within a digital learning environment.</span>
-                 <span class="lang-fr" style="display:none">Exploration d'un grand jeu de données via des techniques Big Data pour comprendre la dynamique des interactions étudiantes dans un environnement numérique.</span>
-               </p>
-             </div>
-             <a href="projects/projet1.html" class="btn-gradient grey">
-               <span class="lang-en">Read Case Study</span>
-               <span class="lang-fr" style="display:none">Lire l'Étude</span>
-             </a>
-          </div>
-        </article>
-
-<article class="project-card glass-panel hover-lift">
-          <div class="media-frame">
-            <img src="assets/images/panel/elipss.png" alt="ELIPSS Analysis" />
-          </div>
-          <div class="card-content">
-             <div>
-                <div class="tags">
-                    <span>R</span>
-                    <span>Économétrie de Panel</span>
-                </div>
-
-                <h3>
-                 <span class="lang-en">ELIPSS Longitudinal Analysis</span>
-                 <span class="lang-fr" style="display:none">Analyse Longitudinale ELIPSS</span>
-               </h3>
-               <p class="justified-text">
-                 <span class="lang-en">Statistical study on longitudinal data. Modeling social behaviors over time using advanced panel econometrics techniques.</span>
-                 <span class="lang-fr" style="display:none">Étude statistique sur données longitudinales. Modélisation des comportements sociaux dans le temps via des techniques d'économétrie de panel avancées.</span>
-               </p>
-             </div>
-             <a href="projects/elipss.html" class="btn-gradient grey">
-               <span class="lang-en">Read Case Study</span>
-               <span class="lang-fr" style="display:none">Lire l'Étude</span>
-             </a>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-<section id="associative" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Community Engagement</span>
-          <span class="lang-fr" style="display:none">Engagement Associatif</span>
-        </h2>
-      </div>
-
-      <div class="projects-wrapper compact">
-
-        <article class="project-card card-small glass-panel hover-lift">
-          <div class="media-frame small-frame">
-            <img src="assets/videos/be.png" alt="Bulles Étudiantes" />
-          </div>
-          <div class="card-content small-content">
-             <div>
-               <h3>Radio ICP</h3>
-               <p class="justified-text text-small">
-                 <span class="lang-en">IT Lead. Created the website, deployed it, and now handling regular maintenance and updates.</span>
-                 <span class="lang-fr" style="display:none">Informaticien de la radio. J'ai créé le site, l'ai mis en ligne et assure sa maintenance.</span>
-               </p>
-             </div>
-             <a href="https://www.bullesetudiantes.fr/" target="_blank" class="btn-gradient green btn-small">
-               <span class="lang-en">Visit Website</span>
-               <span class="lang-fr" style="display:none">Voir le site</span>
-             </a>
-          </div>
-        </article>
-
-        <article class="project-card card-small glass-panel hover-lift">
-          <div class="media-frame small-frame">
-            <img src="assets/logos/data_good.png" alt="Data For Good" />
-          </div>
-          <div class="card-content small-content">
-             <div>
-               <h3>Data For Good</h3>
-               <p class="justified-text text-small">
-                 <span class="lang-en">Providing support on key topics: climate, social justice, and democracy.</span>
-                 <span class="lang-fr" style="display:none">J'apporte une aide ponctuelle sur des thématiques clés : climat, justice sociale et démocratie.</span>
-               </p>
-             </div>
-             <a href="https://dataforgood.fr/" target="_blank" class="btn-gradient green btn-small">
-               <span class="lang-en">Learn More about Data for Good</span>
-               <span class="lang-fr" style="display:none">En savoir plus sur Data for Good</span>
-             </a>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-<section id="hobbies" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Hobbies</span>
-          <span class="lang-fr" style="display:none">Loisirs</span>
-        </h2>
-      </div>
-
-      <div class="projects-wrapper compact">
-        
-<article class="project-card glass-panel hover-lift">
-          <div class="media-frame">
-            <img src="assets/peint/peint_4.png" alt="Oil Painting" style="object-position: center;" />
-          </div>
-          <div class="card-content">
-             <div>
-               <h3>
-                 <span class="lang-en">Oil Painting</span>
-                 <span class="lang-fr" style="display:none">Peinture à l'huile</span>
-               </h3>
-               <p class="justified-text">
-                 <span class="lang-en">A personal collection of oil on canvas. Monochrome compositions exploring shadows, depth, and the nuances of grey and black.</span>
-                 <span class="lang-fr" style="display:none">Une collection personnelle d'huiles sur toile. Des compositions monochromes explorant les ombres, la profondeur et les nuances de gris et de noir.</span>
-               </p>
-             </div>
-             <a href="projects/peinture.html" class="btn-gradient grey">
-               <span class="lang-en">See Paintings</span>
-               <span class="lang-fr" style="display:none">Voir les peintures</span>
-             </a>
-          </div>
-        </article>
 
         <article class="project-card glass-panel hover-lift">
           <div class="media-frame">
-            <img src="assets/images/hyperbank.png" alt="Hyperank Game" />
+            <video autoplay loop muted playsinline poster="assets/videos/finteker.mp4">
+              <source src="assets/videos/finteker.mp4" type="video/mp4" />
+            </video>
           </div>
           <div class="card-content">
-             <div>
-               <h3>
-                 <span class="lang-en">Game Development</span>
-                 <span class="lang-fr" style="display:none">Création de Jeux Vidéo</span>
-               </h3>
-               <p class="justified-text">
-                 <span class="lang-en">Developing "Hyperank", a Cyberpunk shooter. Infiltrate a corrupt global bank that controls the world order.</span>
-                 <span class="lang-fr" style="display:none">Développement de "Hyperank", une immersion Cyberpunk. Le but : renverser une banque mondiale corrompue qui asservit le monde.</span>
-               </p>
-             </div>
-             <a href="hyperbank/index.html" target="_blank" class="btn-gradient grey">
-               <span class="lang-en">Play Demo (PC only)</span>
-               <span class="lang-fr" style="display:none">Jouer à la démo (PC uniquement)</span>
-             </a>
+            <div>
+              <div class="tags"><span>Python</span><span>Java</span><span>HTML/CSS</span><span>Chatbot</span><span>API</span></div>
+              <h3>Finteker Intelligence</h3>
+              <p class="justified-text">
+                <span class="lang-en">Finance education platform centralizing market news, learning resources, and interactive predictive analysis tools — built and deployed end-to-end.</span>
+                <span class="lang-fr" style="display:none">Plateforme d'éducation financière centralisant actualités boursières, ressources d'apprentissage et outils d'analyse prédictive — conçue et déployée de A à Z.</span>
+              </p>
+            </div>
+            <a href="https://finteker.fr" target="_blank" class="btn-gradient blue">
+              <span class="lang-en">Visit Platform</span>
+              <span class="lang-fr" style="display:none">Voir la Plateforme</span>
+            </a>
           </div>
         </article>
+
+      </div>
+    </section>
+
+
+    <section id="skills" class="fade-in">
+      <div class="section-header">
+        <h2>
+          <span class="lang-en">Skills</span>
+          <span class="lang-fr" style="display:none">Compétences</span>
+        </h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-group glass-panel">
+          <div class="skill-group-title"><span class="lang-en">Programming</span><span class="lang-fr" style="display:none">Programmation</span></div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">VBA</span><span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span><span class="skill-tag">Java</span><span class="skill-tag">Git</span>
+            <span class="skill-tag">HTML / CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-group glass-panel">
+          <div class="skill-group-title"><span class="lang-en">AI &amp; Data Science</span><span class="lang-fr" style="display:none">IA &amp; Data Science</span></div>
+          <div class="skill-tags">
+            <span class="skill-tag"><span class="lang-en">Machine Learning</span><span class="lang-fr" style="display:none">Machine Learning</span></span>
+            <span class="skill-tag">Deep Learning</span>
+            <span class="skill-tag">NLP</span>
+            <span class="skill-tag">Big Data</span>
+            <span class="skill-tag"><span class="lang-en">Time Series</span><span class="lang-fr" style="display:none">Séries Temporelles</span></span>
+            <span class="skill-tag">Data Mining</span>
+          </div>
+        </div>
+
+        <div class="skill-group glass-panel">
+          <div class="skill-group-title"><span class="lang-en">Quantitative Finance</span><span class="lang-fr" style="display:none">Finance Quantitative</span></div>
+          <div class="skill-tags">
+            <span class="skill-tag">VaR · Monte Carlo</span>
+            <span class="skill-tag">DCF</span>
+            <span class="skill-tag"><span class="lang-en">Portfolio Optimization (Markowitz)</span><span class="lang-fr" style="display:none">Optimisation de Portefeuille (Markowitz)</span></span>
+            <span class="skill-tag"><span class="lang-en">Financial Econometrics</span><span class="lang-fr" style="display:none">Économétrie Financière</span></span>
+            <span class="skill-tag"><span class="lang-en">Market Analysis</span><span class="lang-fr" style="display:none">Analyse de Marché</span></span>
+            <span class="skill-tag"><span class="lang-en">Budget Control &amp; Reporting</span><span class="lang-fr" style="display:none">Contrôle Budgétaire &amp; Reporting</span></span>
+          </div>
+        </div>
+
+        <div class="skill-group glass-panel">
+          <div class="skill-group-title">Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Power BI (DAX)</span>
+            <span class="skill-tag"><span class="lang-en">Excel (Advanced)</span><span class="lang-fr" style="display:none">Excel (Avancé)</span></span>
+            <span class="skill-tag">Streamlit</span><span class="skill-tag">Plotly</span>
+            <span class="skill-tag">SharePoint</span><span class="skill-tag">PowerPoint</span>
+          </div>
+        </div>
+
+        <div class="skill-group glass-panel skill-group-wide">
+          <div class="skill-group-title"><span class="lang-en">Languages &amp; Certifications</span><span class="lang-fr" style="display:none">Langues &amp; Certifications</span></div>
+          <div class="skill-tags">
+            <span class="skill-tag"><span class="lang-en">French — C2 (Bilingual)</span><span class="lang-fr" style="display:none">Français — C2 (Bilingue)</span></span>
+            <span class="skill-tag"><span class="lang-en">Georgian — Native</span><span class="lang-fr" style="display:none">Géorgien — Natif</span></span>
+            <span class="skill-tag"><span class="lang-en">English — C1 (Professional)</span><span class="lang-fr" style="display:none">Anglais — C1 (Professionnel)</span></span>
+            <span class="skill-tag"><span class="lang-en">Russian — B2 (Fluent)</span><span class="lang-fr" style="display:none">Russe — B2 (Courant)</span></span>
+            <span class="skill-tag amf-tag"><span class="lang-en">AMF Certification — In preparation</span><span class="lang-fr" style="display:none">Certification AMF — En préparation</span></span>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -403,7 +512,7 @@
   </footer>
 
 <div id="contactModal" class="modal-overlay" onclick="if(event.target === this) this.classList.remove('active')">
-    <div class="modal-content">
+    <div class="modal-content contact-modal">
       <h3>Contact</h3>
       <div class="contact-links">
         
@@ -433,7 +542,22 @@
     </div>
 </div>
 
-  <script src="js/script.js"></script>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div id="missionModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="modal-content mission-modal-content">
+      <h3 id="mModalTitle"></h3>
+      <ul class="modal-gains" id="mModalGains"></ul>
+      <button class="btn-close" onclick="document.getElementById('missionModal').classList.remove('active')">
+        <span class="lang-en">Close</span>
+        <span class="lang-fr" style="display:none">Fermer</span>
+      </button>
+    </div>
+  </div>
+
+  <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <script src="js/scripts.js"></script>
   <script src="js/trad.js"></script>
 </body>
 </html>
