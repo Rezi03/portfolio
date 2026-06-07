@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +21,7 @@
   <div class="background-blobs">
     <div class="blob blob-1 floating"></div>
     <div class="blob blob-2 floating-delayed"></div>
+    <div class="blob blob-3 floating-slow"></div>
   </div>
 
 <header class="glass-header fade-in">
@@ -32,6 +33,9 @@
         <a href="#finance"><span class="lang-en">Finance</span><span class="lang-fr" style="display:none">Finance</span></a>
         <a href="#education"><span class="lang-en">Education</span><span class="lang-fr" style="display:none">Formation</span></a>
         <a href="#skills"><span class="lang-en">Skills</span><span class="lang-fr" style="display:none">Compétences</span></a>
+<button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
         <button id="lang-toggle" class="lang-btn"><span class="lang-text">EN</span></button>
         <button class="btn-primary" onclick="document.getElementById('contactModal').classList.add('active')">Contact</button>
       </nav>
@@ -41,8 +45,26 @@
     </div>
   </header>
 
+  <!-- FINTEKER NAV PREVIEW -->
+  <div id="experience-preview" class="nav-preview">
+    <div class="nav-preview-inner">
+      <div class="nav-preview-title">Banque de France</div>
+      <div class="nav-preview-tags"><span>Python</span><span>Power BI</span><span>VBA</span><span>NLP</span></div>
+      <div class="nav-preview-desc"><span class="lang-en">Financial Developer &amp; Analyst Intern · Direction Financière · Paris HQ · Feb 2026 — Present</span><span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire · Direction Financière · Siège Social · Fév 2026 — En cours</span></div>
+    </div>
+  </div>
+
+  <div id="finteker-preview" class="nav-preview">
+    <div class="nav-preview-inner">
+      <div class="nav-preview-title">Finteker Intelligence</div>
+      <div class="nav-preview-tags"><span>DCF</span><span>Backtesting</span><span>IA</span></div>
+      <div class="nav-preview-desc"><span class="lang-en">Financial analysis platform — market data, predictive tools, learning resources.</span><span class="lang-fr" style="display:none">Plateforme d'analyse financière — données de marché, outils prédictifs, ressources pédagogiques.</span></div>
+      <a href="https://finteker.fr" target="_blank" class="nav-preview-link">finteker.fr →</a>
+    </div>
+  </div>
+
   <main class="container">
-    
+
     <section class="hero fade-in">
       <div class="hero-content">
         <div class="badge">
@@ -52,12 +74,14 @@
 
         <h1 class="gradient-text">
           <span class="lang-en">From raw data<br>to the C-suite.</span>
-          <span class="lang-fr" style="display:none">De la donnée brute<br>aux décisions de la direction.</span>
+          <span class="lang-fr" style="display:none">De la donnée brute<br>aux décisions de la direction.</span><span class="bbg-cursor">▌</span>
         </h1>
-        <p class="subtitle">
-          <span class="lang-en">MSc in Data Analytics with hands-on experience at the Banque de France. I build financial automation systems and data tools for high-stakes decisions.</span>
-          <span class="lang-fr" style="display:none">Master en Data Analytics avec une expérience à la Banque de France. Je conçois des systèmes d'automatisation financière et des outils de données pour des décisions à forts enjeux.</span>
-        </p>
+
+        <div class="bbg-terminal fade-in">
+          <div class="bbg-row"><span class="bbg-tkey lang-en">STATUS</span><span class="bbg-tkey lang-fr" style="display:none">STATUT</span><span class="bbg-dots"></span><span class="bbg-tval bbg-orange"><span class="bbg-live-dot"></span><span class="lang-en">ACTIVE — BdF · Direction Financière</span><span class="lang-fr" style="display:none">ACTIF — BdF · Direction Financière</span></span></div>
+          <div class="bbg-row"><span class="bbg-tkey">FINTEKER</span><span class="bbg-dots"></span><span class="bbg-tval"><span class="lang-en">Founder · DCF · Backtesting · AI</span><span class="lang-fr" style="display:none">Fondateur · DCF · Backtesting · IA</span></span></div>
+          <div class="bbg-row"><span class="bbg-tkey lang-en">LANGUAGES</span><span class="bbg-tkey lang-fr" style="display:none">LANGUES</span><span class="bbg-dots"></span><span class="bbg-tval">FR C2 &nbsp;·&nbsp; EN C1 &nbsp;·&nbsp; GEO Native &nbsp;·&nbsp; RU B2</span></div>
+        </div>
       </div>
       <div class="hero-image">
         <img src="assets/images/me.png" alt="Rezi Sabashvili" class="profile-img" />
@@ -108,6 +132,7 @@
 
         </a>
       </div>
+
     </section>
 
     <section id="experience" class="fade-in">
@@ -123,138 +148,71 @@
         <span class="lang-fr" style="display:none">Poste Actuel</span>
       </div>
 
-      <div class="exp-header glass-panel">
-        <div class="exp-title-block">
-          <div class="exp-role">
-            <span class="lang-en">Financial Developer &amp; Analyst Intern</span>
-            <span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire</span>
+      <!-- BdF ENTRY -->
+      <div class="etv-entry glass-panel">
+        <div class="etv-header">
+          <div class="etv-left">
+            <div class="etv-org">Banque de France · Direction Financière</div>
+            <div class="etv-role"><span class="lang-en">Financial Developer &amp; Analyst Intern</span><span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire</span></div>
+            <div class="etv-meta"><span class="lang-en">Paris (HQ) · SBCGP · Cross-functional division</span><span class="lang-fr" style="display:none">Paris (Siège) · SBCGP · Pôle transverse</span></div>
           </div>
-          <div class="exp-org">
-            <span class="lang-en">Banque de France (HQ, Paris) · Direction Financière</span>
-            <span class="lang-fr" style="display:none">Banque de France (Siège Social, Paris) · Direction Financière</span>
-          </div>
-          <div class="exp-team-desc">
-            <span class="lang-en">Cross-functional division overseeing the entire IT investment portfolio — budget consolidation, project governance, and financial oversight across all Banque de France directorates.</span>
-            <span class="lang-fr" style="display:none">Pôle transverse pilotant l'ensemble du portefeuille informatique — consolidation budgétaire, gouvernance des projets et supervision financière de toutes les directions de la Banque de France.</span>
+          <div class="etv-date">
+            <div class="status-dot blue"></div>
+            <span class="lang-en">Feb 2026 — Present</span>
+            <span class="lang-fr" style="display:none">Fév 2026 — En cours</span>
           </div>
         </div>
-        <div class="exp-path">
-          <span>Secrétariat Général</span>
-          <span class="path-arrow">›</span>
-          <span>
-            <span class="lang-en">Financial Directorate</span>
-            <span class="lang-fr" style="display:none">Direction Financière</span>
-          </span>
-          <span class="path-arrow">›</span>
-          <span>SBCGP</span>
-          <span class="path-arrow">›</span>
-          <span>
-            <span class="lang-en">Cross-functional Division</span>
-            <span class="lang-fr" style="display:none">Pôle Transverse</span>
-          </span>
+        <div class="etv-desc">
+          <span class="lang-en">Cross-functional division overseeing the entire IT investment portfolio of the Banque de France — budget consolidation, project governance, and financial oversight across all directorates.</span>
+          <span class="lang-fr" style="display:none">Pôle transverse pilotant l'ensemble du portefeuille informatique de la Banque de France — consolidation budgétaire, gouvernance des projets et supervision financière de toutes les directions.</span>
         </div>
-        <div class="exp-date">
-          <div class="status-dot blue"></div>
-          <span class="lang-en">Feb 2026 — Present</span>
-          <span class="lang-fr" style="display:none">Fév 2026 — En cours</span>
+        <div class="missions-grid">
+          <div class="mission-card glass-panel hover-lift" data-mission="hub">
+            <div class="mission-tags"><span>Excel</span><span>VBA</span><span>SQL</span></div>
+            <h4>Financial Data Hub</h4>
+            <p><span class="lang-en">Live SQL databases wired into a single Excel hub — one source of truth replacing scattered manual files across the team.</span><span class="lang-fr" style="display:none">Bases SQL connectées en temps réel dans un hub Excel centralisé — source unique remplaçant les fichiers dispersés.</span></p>
+            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
+          </div>
+          <div class="mission-card glass-panel hover-lift" data-mission="reporting">
+            <div class="mission-tags"><span>Python</span><span>Power BI</span><span>PowerPoint</span></div>
+            <h4><span class="lang-en">Reporting Automation</span><span class="lang-fr" style="display:none">Automatisation du Reporting</span></h4>
+            <p><span class="lang-en">Python pipeline from raw data to Power BI — CPPI reports delivered autonomously to the First Deputy Governor.</span><span class="lang-fr" style="display:none">Pipeline Python des données brutes au Power BI — rapports CPPI livrés automatiquement au Premier Sous-Gouverneur.</span></p>
+            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
+          </div>
+          <div class="mission-card glass-panel hover-lift" data-mission="cppi">
+            <div class="mission-tags"><span>Python</span><span>VBA</span><span>SharePoint</span><span>NLP</span></div>
+            <h4><span class="lang-en">Budget Collection System</span><span class="lang-fr" style="display:none">Système de Collecte Budgétaire</span></h4>
+            <p><span class="lang-en">9 directorates submit quarterly budgets via SharePoint templates — auto-consolidated into governance presentations and Power BI dashboards.</span><span class="lang-fr" style="display:none">9 directions saisissent leurs budgets trimestriels via SharePoint — consolidation automatique en présentations de gouvernance et tableaux Power BI.</span></p>
+            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
+          </div>
+          <div class="mission-card glass-panel hover-lift" data-mission="training">
+            <div class="mission-tags"><span>VBA</span><span>Python</span><span>Training</span></div>
+            <h4><span class="lang-en">Training Instructor</span><span class="lang-fr" style="display:none">Formateur</span></h4>
+            <p><span class="lang-en">Designed and led VBA &amp; Python courses for colleagues in the Financial Directorate, focused on financial automation.</span><span class="lang-fr" style="display:none">Conception et animation de cours VBA &amp; Python pour les collègues de la Direction Financière, axés sur l'automatisation financière.</span></p>
+            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
+          </div>
         </div>
       </div>
 
-      <div class="missions-grid">
-
-        <div class="mission-card glass-panel hover-lift" data-mission="hub">
-          <div class="mission-tags"><span>Excel</span><span>VBA</span><span>SQL</span></div>
-          <h4>Financial Data Hub</h4>
-          <p>
-            <span class="lang-en">Live SQL databases wired into a single Excel hub — one source of truth replacing scattered manual files across the team.</span>
-            <span class="lang-fr" style="display:none">Bases SQL connectées en temps réel dans un hub Excel centralisé — source unique remplaçant les fichiers dispersés.</span>
-          </p>
-          <div class="mission-expand">
-            <span class="lang-en">View details</span>
-            <span class="lang-fr" style="display:none">Voir les détails</span>
-            <span class="expand-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="mission-card glass-panel hover-lift" data-mission="reporting">
-          <div class="mission-tags"><span>Python</span><span>Power BI</span><span>PowerPoint</span></div>
-          <h4>
-            <span class="lang-en">Reporting Automation</span>
-            <span class="lang-fr" style="display:none">Automatisation du Reporting</span>
-          </h4>
-          <p>
-            <span class="lang-en">Python pipeline from raw data to Power BI — CPPI reports delivered autonomously to the First Deputy Governor.</span>
-            <span class="lang-fr" style="display:none">Pipeline Python des données brutes au Power BI — rapports CPPI livrés automatiquement au Premier Sous-Gouverneur.</span>
-          </p>
-          <div class="mission-expand">
-            <span class="lang-en">View details</span>
-            <span class="lang-fr" style="display:none">Voir les détails</span>
-            <span class="expand-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="mission-card glass-panel hover-lift" data-mission="cppi">
-          <div class="mission-tags"><span>Python</span><span>VBA</span><span>SharePoint</span><span>NLP</span></div>
-          <h4>
-            <span class="lang-en">Budget Collection System</span>
-            <span class="lang-fr" style="display:none">Système de Collecte Budgétaire</span>
-          </h4>
-          <p>
-            <span class="lang-en">9 directorates submit quarterly budgets via SharePoint templates — auto-consolidated into governance presentations and Power BI dashboards.</span>
-            <span class="lang-fr" style="display:none">9 directions saisissent leurs budgets trimestriels via SharePoint — consolidation automatique en présentations de gouvernance et tableaux Power BI.</span>
-          </p>
-          <div class="mission-expand">
-            <span class="lang-en">View details</span>
-            <span class="lang-fr" style="display:none">Voir les détails</span>
-            <span class="expand-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="mission-card glass-panel hover-lift" data-mission="training">
-          <div class="mission-tags"><span>VBA</span><span>Python</span><span>Training</span></div>
-          <h4>
-            <span class="lang-en">Training Instructor</span>
-            <span class="lang-fr" style="display:none">Formateur</span>
-          </h4>
-          <p>
-            <span class="lang-en">Designed and led VBA &amp; Python courses for colleagues in the Financial Directorate, focused on financial automation.</span>
-            <span class="lang-fr" style="display:none">Conception et animation de cours VBA &amp; Python pour les collègues de la Direction Financière, axés sur l'automatisation financière.</span>
-          </p>
-          <div class="mission-expand">
-            <span class="lang-en">View details</span>
-            <span class="lang-fr" style="display:none">Voir les détails</span>
-            <span class="expand-arrow">→</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="exp-subsection-label" style="margin-top: 2.5rem;">
+      <div class="exp-subsection-label" style="margin-top:2rem;">
         <span class="lang-en">Previous Roles</span>
         <span class="lang-fr" style="display:none">Expériences Précédentes</span>
       </div>
 
-      <div class="ca-card glass-panel fade-in">
-        <div class="ca-left">
-          <div class="ca-org">Crédit Agricole</div>
-          <div class="ca-date">Jan 2024 · Feb 2024</div>
-          <div class="ca-role">
-            <span class="lang-en">Sales &amp; Data Analyst Intern — Reims</span>
-            <span class="lang-fr" style="display:none">Analyste Commercial &amp; Data Stagiaire — Reims</span>
+      <!-- CA ENTRY -->
+      <div class="etv-entry glass-panel">
+        <div class="etv-header">
+          <div class="etv-left">
+            <div class="etv-org">Crédit Agricole</div>
+            <div class="etv-role"><span class="lang-en">Sales &amp; Data Analyst Intern</span><span class="lang-fr" style="display:none">Analyste Commercial &amp; Data Stagiaire</span></div>
+            <div class="etv-meta">Reims</div>
           </div>
+          <div class="etv-date">Jan – Feb 2024</div>
         </div>
-        <div class="ca-right">
-          <ul class="ca-bullets">
-            <li>
-              <span class="lang-en">Designed interactive Power BI dashboards to monitor commercial KPIs</span>
-              <span class="lang-fr" style="display:none">Conception de dashboards Power BI interactifs pour le suivi des KPIs commerciaux</span>
-            </li>
-            <li>
-              <span class="lang-en">Developed VBA scripts to automate weekly reporting, eliminating manual tracking</span>
-              <span class="lang-fr" style="display:none">Scripts VBA pour automatiser le reporting hebdomadaire et supprimer le suivi manuel</span>
-            </li>
-          </ul>
-        </div>
+        <ul class="ca-bullets">
+          <li><span class="lang-en">Designed interactive Power BI dashboards to monitor commercial KPIs</span><span class="lang-fr" style="display:none">Conception de dashboards Power BI interactifs pour le suivi des KPIs commerciaux</span></li>
+          <li><span class="lang-en">Developed VBA scripts to automate weekly reporting, eliminating manual tracking</span><span class="lang-fr" style="display:none">Scripts VBA pour automatiser le reporting hebdomadaire et supprimer le suivi manuel</span></li>
+        </ul>
       </div>
 
     </section>
