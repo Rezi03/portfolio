@@ -809,11 +809,8 @@ img, video { max-width: 100%; display: block; }
   .profile-img { width: 160px; margin: 0 auto; }
   .badge { font-size: 0.72rem; justify-content: center; }
 
-  /* Terminal Bloomberg */
-  .bbg-terminal { margin-top: 1.2rem; font-size: 0.7rem; }
-  .bbg-tkey { min-width: 80px; font-size: 0.62rem; }
-  .bbg-tval { font-size: 0.65rem; white-space: normal; }
-  .bbg-dots { max-width: 30px; }
+  /* Terminal Bloomberg — masqué sur mobile */
+  .bbg-terminal { display: none; }
 
   /* Layout */
   .container { padding: 0.9rem; }
