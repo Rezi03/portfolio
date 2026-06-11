@@ -795,46 +795,66 @@ img, video { max-width: 100%; display: block; }
 
 /* MOBILE RESPONSIVE — COMPREHENSIVE */
 @media (max-width: 768px) {
-  .glass-header { max-width: calc(100% - 2rem); width: auto; top: 10px; }
+  /* Header */
+  .glass-header { max-width: calc(100% - 1.5rem); width: auto; top: 10px; }
   .header-content { padding: 0.6rem 1rem; }
   .header-right { display: none; }
   .hamburger { display: flex; }
 
-  .hero { flex-direction: column; text-align: center; padding: 3rem 0 2rem; gap: 1.5rem; }
-  .hero-content h1 { font-size: 2.2rem; letter-spacing: -1px; }
+  /* Hero */
+  .hero { flex-direction: column; text-align: center; padding: 2.5rem 0 1.5rem; gap: 1.2rem; }
   .hero-content { order: 1; }
   .hero-image { order: 2; }
-  .profile-img { width: 180px; margin: 0 auto; }
-  .subtitle { font-size: 1rem; max-width: 100%; }
-  .badge { font-size: 0.75rem; }
+  .hero-content h1 { font-size: 2.1rem; letter-spacing: -1px; }
+  .profile-img { width: 160px; margin: 0 auto; }
+  .badge { font-size: 0.72rem; justify-content: center; }
 
-  .container { padding: 1rem; }
-  .section-header h2 { font-size: 1.6rem; }
+  /* Terminal Bloomberg */
+  .bbg-terminal { margin-top: 1.2rem; font-size: 0.7rem; }
+  .bbg-tkey { min-width: 80px; font-size: 0.62rem; }
+  .bbg-tval { font-size: 0.65rem; white-space: normal; }
+  .bbg-dots { max-width: 30px; }
 
+  /* Layout */
+  .container { padding: 0.9rem; }
+  .section-header h2 { font-size: 1.5rem; }
+  .section-header { margin-bottom: 1.2rem; }
+
+  /* Grids → 1 col */
   .bento-grid { grid-template-columns: 1fr; }
   .missions-grid { grid-template-columns: 1fr; }
   .edu-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
   .projects-wrapper { grid-template-columns: 1fr; }
+  .bento-card { min-height: unset; }
 
+  /* Experience */
+  .etv-entry { padding: 1.2rem 1.1rem; }
+  .etv-header { flex-direction: column; gap: 0.4rem; }
+  .etv-date { text-align: left; white-space: normal; }
   .ca-card { flex-direction: column; gap: 1rem; }
 
-  .modal-content { padding: 1.5rem; border-radius: 20px; }
+  /* Education */
+  .edu-grid { grid-template-columns: 1fr; }
+
+  /* Modals */
+  .modal-content { padding: 1.4rem; border-radius: 20px; }
   .mission-modal-content { max-width: 95%; width: 95%; }
   .contact-modal { width: auto; max-width: 95%; }
 
-  .exp-header { padding: 1rem; }
-  .exp-path { font-size: 0.7rem; }
-
-  .back-to-top { bottom: 20px; right: 20px; width: 38px; height: 38px; font-size: 1rem; }
-
-  .blob { opacity: 0.3; }
-  .bento-card { min-height: unset; }
+  /* Misc */
+  .back-to-top { bottom: 16px; right: 16px; width: 38px; height: 38px; font-size: 1rem; }
+  .blob { opacity: 0.25; }
+  .footer-container { flex-direction: column; gap: 1rem; text-align: center; }
+  .rune { display: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-content h1 { font-size: 1.8rem; }
-  .profile-img { width: 140px; }
+  .hero-content h1 { font-size: 1.75rem; }
+  .profile-img { width: 130px; }
+  .bbg-terminal { display: none; }
+  .etv-entry { padding: 1rem; }
+  .glass-panel { padding: 1.2rem; }
 }
 
 /* FOOTER */
