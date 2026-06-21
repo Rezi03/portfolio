@@ -409,25 +409,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 
-  // 2. 3D CARD TILT
-  if (!isTouch) {
-    document.querySelectorAll('.glass-panel').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(900px) rotateY(${x * 14}deg) rotateX(${-y * 10}deg) translateY(-6px)`;
-        card.style.transition = 'transform 0.08s ease';
-        card.style.zIndex = '2';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.transition = 'transform 0.7s cubic-bezier(0.2,0.8,0.2,1)';
-        card.style.zIndex = '';
-        setTimeout(() => card.style.transition = '', 700);
-      });
-    });
-  }
+  // 2. CARD HOVER — elevation/effects handled by CSS (.glass-panel:hover).
+  //    Mouse-follow 3D tilt removed per preference.
 
 
   // 4. ANIMATED GRADE COUNTERS
@@ -449,20 +432,22 @@ document.addEventListener("DOMContentLoaded", function() {
     obs.observe(el);
   });
 
-  // 5. MAGNETIC BUTTONS
+  // 5. MAGNETIC BUTTONS — very subtle pull, capped (kept gentle on purpose)
   if (!isTouch) {
+    const MAG = 0.10, CAP = 5; // factor + max px displacement
+    const clamp = v => Math.max(-CAP, Math.min(CAP, v));
     document.querySelectorAll('.btn-primary, .btn-gradient, .btn-outline').forEach(btn => {
       btn.addEventListener('mousemove', e => {
         const r = btn.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * 0.32;
-        const y = (e.clientY - r.top - r.height / 2) * 0.32;
+        const x = clamp((e.clientX - r.left - r.width / 2) * MAG);
+        const y = clamp((e.clientY - r.top - r.height / 2) * MAG);
         btn.style.transform = `translate(${x}px,${y}px)`;
-        btn.style.transition = 'transform 0.08s ease';
+        btn.style.transition = 'transform 0.12s ease';
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.transform = '';
-        btn.style.transition = 'transform 0.5s cubic-bezier(0.2,0.8,0.2,1)';
-        setTimeout(() => btn.style.transition = '', 500);
+        btn.style.transition = 'transform 0.4s cubic-bezier(0.2,0.8,0.2,1)';
+        setTimeout(() => btn.style.transition = '', 400);
       });
     });
   }
@@ -534,4 +519,160 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })();
 
+  // 11. SCROLL REVEAL (staggered) — Magic MCP "Scroll Animation" pattern
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const selector = '.bento-card, .mission-card, .project-card, .edu-card, .edu-card-small, .skill-group, .etv-entry';
+    const items = Array.prototype.slice.call(document.querySelectorAll(selector));
+    if (!items.length) return;
+    if (reduce) { items.forEach(el => el.classList.add('reveal-in')); return; }
+    items.forEach(el => el.classList.add('reveal-item'));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        // stagger by position among revealing siblings in the same container
+        const sibs = el.parentNode
+          ? Array.prototype.slice.call(el.parentNode.children).filter(c => c.classList.contains('reveal-item'))
+          : [el];
+        const idx = Math.max(0, sibs.indexOf(el));
+        el.style.transitionDelay = (idx * 90) + 'ms';
+        el.classList.add('reveal-in');
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    items.forEach(el => obs.observe(el));
+  })();
+
+  // 12. MAGIC TEXT — scroll-linked word reveal (Magic MCP "Magic Text")
+  (function () {
+    const blocks = Array.prototype.slice.call(document.querySelectorAll('.magic-text'));
+    if (!blocks.length) return;
+
+    function wrapWords(el) {
+      const text = el.textContent;
+      el.textContent = '';
+      text.split(/(\s+)/).forEach(tok => {
+        if (tok === '') return;
+        if (/^\s+$/.test(tok)) { el.appendChild(document.createTextNode(tok)); }
+        else { const s = document.createElement('span'); s.className = 'mw'; s.textContent = tok; el.appendChild(s); }
+      });
+    }
+    // wrap words inside each language span (so it works in EN and FR)
+    blocks.forEach(block => {
+      const langs = block.querySelectorAll('.lang-en, .lang-fr');
+      if (langs.length) langs.forEach(wrapWords);
+      else wrapWords(block);
+    });
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { document.querySelectorAll('.magic-text .mw').forEach(w => w.style.opacity = 1); return; }
+
+    let ticking = false;
+    function paint() {
+      ticking = false;
+      const vh = window.innerHeight;
+      const startY = vh * 0.85, endY = vh * 0.35; // reveal window
+      blocks.forEach(block => {
+        const words = Array.prototype.slice.call(block.querySelectorAll('.mw'))
+          .filter(w => w.offsetParent !== null); // only the visible language
+        if (!words.length) return;
+        const top = block.getBoundingClientRect().top;
+        let p = (startY - top) / (startY - endY);
+        p = Math.max(0, Math.min(1, p));
+        const reveal = p * words.length;
+        words.forEach((w, i) => {
+          const o = i < reveal - 1 ? 1 : (i < reveal ? 0.2 + 0.8 * (reveal - i) : 0.2);
+          w.style.opacity = o;
+        });
+      });
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    paint();
+  })();
+
 });
+
+/* =============================================
+   LIVE MARKET TICKER — Yahoo Finance
+   Real-time quotes for the .ticker-track strip.
+   Yahoo sends no CORS headers, so requests are routed through a CORS
+   proxy (allorigins, with corsproxy.io as fallback). Symbols are
+   fetched sequentially with small spacing to avoid proxy rate-limits.
+   If the network/proxy is unavailable, the static HTML stays in place.
+   ============================================= */
+(function () {
+  var track = document.querySelector('.ticker-track');
+  if (!track) return;
+
+  // symbol, display name, decimals
+  var SYMS = [
+    { s: '^FCHI',     n: 'CAC 40',        d: 2 },
+    { s: '^GSPC',     n: 'S&P 500',       d: 2 },
+    { s: '^STOXX50E', n: 'EURO STOXX 50', d: 2 },
+    { s: '^GDAXI',    n: 'DAX',           d: 2 },
+    { s: 'EURUSD=X',  n: 'EUR/USD',       d: 4 },
+    { s: 'GC=F',      n: 'GOLD',          d: 2 },
+    { s: 'BZ=F',      n: 'BRENT',         d: 2 },
+    { s: '^VIX',      n: 'VIX',           d: 2 },
+    { s: 'BTC-EUR',   n: 'BTC/EUR',       d: 0 }
+  ];
+
+  var PROXIES = [
+    function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
+    function (u) { return 'https://corsproxy.io/?url=' + encodeURIComponent(u); }
+  ];
+  function yurl(s) {
+    return 'https://query1.finance.yahoo.com/v8/finance/chart/' +
+           encodeURIComponent(s) + '?range=1d&interval=1d';
+  }
+  function fmt(v, d) { return v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  async function fetchOne(sym) {
+    var url = yurl(sym.s);
+    for (var i = 0; i < PROXIES.length; i++) {
+      try {
+        var r = await fetch(PROXIES[i](url), { cache: 'no-store' });
+        if (!r.ok) continue;
+        var j = await r.json();
+        var m = j && j.chart && j.chart.result && j.chart.result[0] && j.chart.result[0].meta;
+        if (!m || typeof m.regularMarketPrice !== 'number') continue;
+        var price = m.regularMarketPrice;
+        var prev = (typeof m.chartPreviousClose === 'number') ? m.chartPreviousClose : m.previousClose;
+        return { n: sym.n, price: price, d: sym.d, chg: prev ? ((price / prev - 1) * 100) : 0 };
+      } catch (e) { /* try next proxy */ }
+    }
+    return null;
+  }
+
+  function render(items) {
+    if (!items.length) return;
+    var html = items.map(function (it) {
+      var cls = it.chg > 0.001 ? 'up' : (it.chg < -0.001 ? 'down' : 'flat');
+      var arrow = cls === 'up' ? '▲' : (cls === 'down' ? '▼' : '—');
+      var sign = it.chg > 0 ? '+' : '';
+      return '<span class="tk">' +
+               '<span class="tk-sym">' + it.n + '</span>' +
+               '<span class="tk-val">' + fmt(it.price, it.d) + '</span>' +
+               '<span class="tk-chg ' + cls + '">' + arrow + ' ' + sign + it.chg.toFixed(2) + '%</span>' +
+             '</span>';
+    }).join('');
+    track.innerHTML = html + html; // duplicate for seamless loop
+  }
+
+  async function update() {
+    var out = [];
+    for (var i = 0; i < SYMS.length; i++) {
+      var q = await fetchOne(SYMS[i]);
+      if (q) out.push(q);
+      await sleep(450); // gentle pacing to avoid proxy rate-limiting
+    }
+    if (out.length >= 3) render(out);
+  }
+
+  update();
+  setInterval(update, 120000);
+})();

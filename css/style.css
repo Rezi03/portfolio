@@ -1212,10 +1212,18 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--t
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.75rem;
   border-left: 2px solid #b8862b;
-  padding-left: 14px;
+  border-radius: 4px 10px 10px 4px;
+  padding: 12px 16px 12px 14px;
+  background:
+    linear-gradient(180deg, rgba(10,15,31,0.035), rgba(10,15,31,0.015));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 8px rgba(10,15,31,0.05);
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+[data-theme="dark"] .bbg-terminal {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 2px 16px rgba(0,0,0,0.4);
 }
 .bbg-row {
   display: flex;
@@ -1299,8 +1307,8 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); color: var(--t
 
 
 .glass-panel:hover {
-    /* Soulèvement net et mesuré */
-    transform: translateY(-6px);
+    /* Soulèvement net et présent */
+    transform: translateY(-8px) scale(1.012);
 
     /* Ombre profonde + liseré or discret */
     box-shadow:
@@ -1995,6 +2003,257 @@ body, .glass-panel, .glass-header, section, .modal-content,
 @keyframes confettiFly {
   0% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
   100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0); opacity: 0; }
+}
+
+/* =============================================
+   IB POLISH — mono numerals, market ticker tape
+   (institutional fintech · ink/blue/gold · added 2026-06)
+   ============================================= */
+
+/* Mono numerals: terminal, grades, dates, KPIs read like a trading screen */
+:root { --mono: 'IBM Plex Mono', 'SF Mono', 'Courier New', monospace; }
+.bbg-terminal, .bbg-tkey, .bbg-tval,
+.course-grade, .etv-date, .tk {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.bbg-terminal { font-family: var(--mono); letter-spacing: -0.01em; }
+
+/* ---------- Market ticker tape ---------- */
+.ticker-tape {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0a0f1f 0%, #0c1224 100%);
+  border-top: 1px solid rgba(200,160,74,0.22);
+  border-bottom: 1px solid rgba(200,160,74,0.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 6px 24px rgba(10,15,31,0.12);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  padding: 9px 0;
+  will-change: transform;
+  animation: tickerScroll 60s linear infinite;
+}
+.ticker-tape:hover .ticker-track { animation-play-state: paused; }
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.tk {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0 22px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.tk-sym { color: var(--gold-soft); font-weight: 600; letter-spacing: 0.04em; }
+.tk-val { color: #e7e9f2; font-weight: 500; }
+.tk-chg { font-weight: 600; }
+.tk-chg.up   { color: #36d07a; }
+.tk-chg.down { color: #ff6b6b; }
+.tk-chg.flat { color: #8b90a3; }
+
+/* ---------- Dark mode overrides for new components ---------- */
+[data-theme="dark"] .ticker-tape {
+  background: linear-gradient(180deg, #0a0f1f 0%, #070a16 100%);
+  border-color: rgba(224,189,110,0.18);
+}
+[data-theme="dark"] .tk { border-right-color: rgba(255,255,255,0.07); }
+[data-theme="dark"] .tk-val { color: #e7e9f2; }
+
+/* ---------- Tabular figures for grades & dates ---------- */
+.course-grade, .etv-date { font-family: var(--mono); }
+
+/* ---------- Visible keyboard focus (a11y) ---------- */
+a:focus-visible,
+button:focus-visible,
+.btn-primary:focus-visible,
+.btn-gradient:focus-visible,
+.btn-outline:focus-visible,
+.lang-btn:focus-visible,
+.icon-btn:focus-visible,
+.mission-card:focus-visible,
+.skill-tag:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+[data-theme="dark"] a:focus-visible,
+[data-theme="dark"] button:focus-visible { outline-color: var(--blue-bright); }
+
+/* ---------- Reduced motion (was missing) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track { animation: none !important; transform: none !important; }
+  .gradient-text { animation: none !important; }
+  .blob, .floating, .floating-delayed, .floating-slow, .rune { animation: none !important; }
+  body.js-loaded .fade-in { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
+/* =============================================
+   INTRO SCREEN (preloader) — terminal boot ambiance
+   ============================================= */
+html.intro-lock, html.intro-lock body { overflow: hidden !important; height: 100%; }
+
+#intro.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 38%, rgba(31,95,208,0.20), transparent 70%),
+    linear-gradient(180deg, #0a0f1f 0%, #070a16 100%);
+  transition: opacity .8s ease, transform .85s cubic-bezier(.76,0,.24,1), visibility .85s;
+}
+/* faint terminal grid */
+#intro.intro-screen::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000, transparent 75%);
+  opacity: .6;
+}
+#intro.intro-done {
+  opacity: 0;
+  transform: translateY(-101%);
+  visibility: hidden;
+  pointer-events: none;
+}
+.intro-inner { position: relative; text-align: center; padding: 2rem; max-width: 90vw; }
+.intro-kicker {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .55em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin: 0 0 1.15rem;
+  padding-left: .55em;
+  opacity: 0;
+  animation: introFade .7s ease .15s forwards;
+}
+.intro-name { overflow: hidden; line-height: 1.02; padding: 0 .06em; }
+.intro-name span {
+  display: inline-block;
+  font-size: clamp(2.1rem, 7vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  background: linear-gradient(92deg, #ffffff 0%, #cfe0ff 55%, var(--gold-soft) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  transform: translateY(115%);
+  animation: introUp .95s cubic-bezier(.22,1,.36,1) .3s forwards;
+}
+.intro-tag {
+  margin-top: .85rem;
+  font-size: .92rem;
+  color: #aeb6cc;
+  letter-spacing: .02em;
+  opacity: 0;
+  animation: introFade .8s ease .6s forwards;
+}
+.intro-bar {
+  width: min(300px, 62vw);
+  height: 2px;
+  margin: 1.7rem auto .85rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.intro-bar > span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--blue-bright), var(--gold-soft));
+  box-shadow: 0 0 12px rgba(77,139,255,0.5);
+  animation: introBar 1.7s cubic-bezier(.4,0,.2,1) .45s forwards;
+}
+.intro-status {
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #717da0;
+  opacity: 0;
+  animation: introFade .8s ease .75s forwards;
+}
+.intro-status .dot { color: #36d07a; }
+@keyframes introUp   { to { transform: translateY(0); } }
+@keyframes introFade { to { opacity: 1; } }
+@keyframes introBar  { to { width: 100%; } }
+
+/* =============================================
+   BUTTON POLISH — arrow slide + refined states
+   ============================================= */
+.btn-arrow {
+  display: inline-block;
+  margin-left: .5em;
+  font-weight: 700;
+  transition: transform .25s cubic-bezier(.22,1,.36,1);
+}
+.btn-gradient:hover .btn-arrow,
+.btn-outline:hover .btn-arrow { transform: translateX(5px); }
+.btn-gradient, .btn-outline { transition: transform .2s ease, box-shadow .25s ease, filter .2s ease, color .3s, border-color .3s; }
+.btn-primary { transition: background .25s ease, transform .2s ease, box-shadow .25s ease; }
+.btn-primary:hover { box-shadow: 0 0 0 3px rgba(200,160,74,0.22), 0 8px 22px rgba(10,15,31,0.18); }
+.btn-gradient.blue:hover { box-shadow: 0 10px 26px rgba(20,64,154,0.36), 0 0 0 1px rgba(200,160,74,0.25) inset; }
+.btn-gradient.gold:hover { box-shadow: 0 10px 26px rgba(163,126,46,0.36); }
+[data-theme="dark"] .btn-primary:hover { box-shadow: 0 0 0 3px rgba(224,189,110,0.25), 0 0 30px rgba(59,142,255,0.45); }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-kicker, .intro-name span, .intro-tag, .intro-status { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .intro-bar > span { animation: none !important; width: 100% !important; }
+  .btn-arrow { transition: none !important; }
+}
+
+/* =============================================
+   SCROLL REVEAL — staggered (Magic MCP "Scroll Animation")
+   blur + slide-up reveal as cards enter the viewport
+   ============================================= */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(6px);
+  transition: opacity .75s cubic-bezier(.22,1,.36,1),
+              transform .75s cubic-bezier(.22,1,.36,1),
+              filter .75s ease;
+  will-change: opacity, transform, filter;
+}
+.reveal-item.reveal-in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+}
+
+/* =============================================
+   MAGIC TEXT — scroll-linked word reveal (Magic MCP)
+   words start dimmed and light up as you scroll through
+   ============================================= */
+.magic-text .mw {
+  opacity: 0.2;
+  transition: opacity .18s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .magic-text .mw { opacity: 1 !important; transition: none !important; }
 }
 
 

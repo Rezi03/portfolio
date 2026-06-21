@@ -14,9 +14,41 @@
     gtag('config', 'G-VLN2SS4TBC');
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="loading">
+
+  <!-- INTRO / PRELOADER -->
+  <noscript><style>#intro{display:none!important}</style></noscript>
+  <div id="intro" class="intro-screen" role="status" aria-label="Loading portfolio">
+    <div class="intro-inner">
+      <div class="intro-kicker">Portfolio</div>
+      <div class="intro-name"><span>Rezi Sabashvili</span></div>
+      <div class="intro-tag"><span class="lang-en">Quantitative Finance · Data Science · AI</span><span class="lang-fr" style="display:none">Finance Quantitative · Data Science · IA</span></div>
+      <div class="intro-bar"><span></span></div>
+      <div class="intro-status"><span class="dot">●</span> <span class="lang-en">Initializing terminal…</span><span class="lang-fr" style="display:none">Initialisation du terminal…</span></div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var html=document.documentElement;
+    html.classList.add('intro-lock');
+    function dismiss(){
+      var el=document.getElementById('intro');
+      if(!el||el.classList.contains('intro-done'))return;
+      el.classList.add('intro-done');
+      html.classList.remove('intro-lock');
+      setTimeout(function(){ if(el&&el.parentNode){ el.parentNode.removeChild(el); } }, 950);
+    }
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){ setTimeout(dismiss, 450); return; }
+    window.addEventListener('load', function(){ setTimeout(dismiss, 1900); });
+    setTimeout(dismiss, 3600); /* safety cap if load never fires */
+  })();
+  </script>
 
   <div class="background-blobs">
     <div class="blob blob-1 floating"></div>
@@ -44,6 +76,31 @@
       </button>
     </div>
   </header>
+
+  <!-- MARKET TICKER TAPE -->
+  <div class="ticker-tape" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="tk"><span class="tk-sym">CAC 40</span><span class="tk-val">8 142.30</span><span class="tk-chg up">▲ 0.62%</span></span>
+      <span class="tk"><span class="tk-sym">S&amp;P 500</span><span class="tk-val">5 487.03</span><span class="tk-chg up">▲ 0.31%</span></span>
+      <span class="tk"><span class="tk-sym">EURO STOXX 50</span><span class="tk-val">4 968.21</span><span class="tk-chg down">▼ 0.18%</span></span>
+      <span class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.0843</span><span class="tk-chg up">▲ 0.09%</span></span>
+      <span class="tk"><span class="tk-sym">OAT 10Y</span><span class="tk-val">3.124%</span><span class="tk-chg down">▼ 2.1bp</span></span>
+      <span class="tk"><span class="tk-sym">GOLD</span><span class="tk-val">2 341.80</span><span class="tk-chg up">▲ 0.44%</span></span>
+      <span class="tk"><span class="tk-sym">BRENT</span><span class="tk-val">84.17</span><span class="tk-chg down">▼ 0.73%</span></span>
+      <span class="tk"><span class="tk-sym">VIX</span><span class="tk-val">12.84</span><span class="tk-chg down">▼ 1.92%</span></span>
+      <span class="tk"><span class="tk-sym">€STR</span><span class="tk-val">3.658%</span><span class="tk-chg flat">— 0.0bp</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="tk"><span class="tk-sym">CAC 40</span><span class="tk-val">8 142.30</span><span class="tk-chg up">▲ 0.62%</span></span>
+      <span class="tk"><span class="tk-sym">S&amp;P 500</span><span class="tk-val">5 487.03</span><span class="tk-chg up">▲ 0.31%</span></span>
+      <span class="tk"><span class="tk-sym">EURO STOXX 50</span><span class="tk-val">4 968.21</span><span class="tk-chg down">▼ 0.18%</span></span>
+      <span class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.0843</span><span class="tk-chg up">▲ 0.09%</span></span>
+      <span class="tk"><span class="tk-sym">OAT 10Y</span><span class="tk-val">3.124%</span><span class="tk-chg down">▼ 2.1bp</span></span>
+      <span class="tk"><span class="tk-sym">GOLD</span><span class="tk-val">2 341.80</span><span class="tk-chg up">▲ 0.44%</span></span>
+      <span class="tk"><span class="tk-sym">BRENT</span><span class="tk-val">84.17</span><span class="tk-chg down">▼ 0.73%</span></span>
+      <span class="tk"><span class="tk-sym">VIX</span><span class="tk-val">12.84</span><span class="tk-chg down">▼ 1.92%</span></span>
+      <span class="tk"><span class="tk-sym">€STR</span><span class="tk-val">3.658%</span><span class="tk-chg flat">— 0.0bp</span></span>
+    </div>
+  </div>
 
   <!-- FINTEKER NAV PREVIEW -->
   <div id="experience-preview" class="nav-preview">
@@ -101,7 +158,7 @@
             <span class="lang-en">About Me</span>
             <span class="lang-fr" style="display:none">À propos</span>
           </h3>
-          <p class="justified-text">
+          <p class="justified-text magic-text">
             <span class="lang-en">MSc in Statistics for Evaluation and Forecasting (Highest Honors), University of Reims. Currently Financial Developer &amp; Analyst Intern at the Banque de France. Profile spanning data science, AI, quantitative finance, and financial risk.</span>
             <span class="lang-fr" style="display:none">Master en Statistique pour l’Évaluation et la Prévision (Mention Très Bien), Université de Reims. Développeur &amp; Analyste Financier en stage à la Banque de France. Profil couvrant la data science, l’IA, la finance quantitative et le risque financier.</span>
           </p>
@@ -162,7 +219,7 @@
             <span class="lang-fr" style="display:none">Fév 2026 — En cours</span>
           </div>
         </div>
-        <div class="etv-desc">
+        <div class="etv-desc magic-text">
           <span class="lang-en">Cross-functional division overseeing the entire IT investment portfolio of the Banque de France — budget consolidation, project governance, and financial oversight across all directorates.</span>
           <span class="lang-fr" style="display:none">Pôle transverse pilotant l'ensemble du portefeuille informatique de la Banque de France — consolidation budgétaire, gouvernance des projets et supervision financière de toutes les directions.</span>
         </div>
@@ -245,6 +302,7 @@
             <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-gradient blue">
               <span class="lang-en">View Dashboard</span>
               <span class="lang-fr" style="display:none">Voir le Dashboard</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
           </div>
         </article>
@@ -267,6 +325,7 @@
             <a href="https://finteker.fr" target="_blank" class="btn-gradient blue">
               <span class="lang-en">Visit Platform</span>
               <span class="lang-fr" style="display:none">Voir la Plateforme</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
           </div>
         </article>
@@ -444,6 +503,7 @@
           <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline" id="cv-link">
             <span class="lang-en">Download CV (EN)</span>
             <span class="lang-fr" style="display:none">Télécharger le CV (FR)</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
           </a>
         </div>
 
@@ -459,6 +519,7 @@
           <a href="projects/recommendations.html" class="btn-outline">
              <span class="lang-en">Read Letters</span>
              <span class="lang-fr" style="display:none">Lire les lettres</span>
+             <span class="btn-arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
