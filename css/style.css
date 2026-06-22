@@ -2407,9 +2407,36 @@ html.intro-lock, html.intro-lock body { overflow: hidden !important; height: 100
 /* =============================================
    PERFORMANCE — calmer constant repaints on weak machines
    ============================================= */
-/* Background blobs: keep as static ambient gradients (no infinite animation) */
-.blob, .floating, .floating-delayed, .floating-slow { animation: none !important; }
-.blob { filter: blur(80px); opacity: 0.34; }
+/* Background blobs replaced by the aurora background below */
+.background-blobs { display: none; }
+
+/* =============================================
+   AURORA BACKGROUND (aceternity), recolored blue/gold.
+   Transform-animated (composited) instead of background-position
+   to stay light on weak machines. Sits behind all content.
+   ============================================= */
+.aurora-bg {
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none; overflow: hidden;
+  opacity: 0.16;
+  -webkit-mask-image: radial-gradient(ellipse 85% 60% at 80% 0%, #000 8%, transparent 70%);
+          mask-image: radial-gradient(ellipse 85% 60% at 80% 0%, #000 8%, transparent 70%);
+}
+.aurora-bg::before {
+  content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background-image: repeating-linear-gradient(100deg,
+    #14409a 8%, #1f5fd0 14%, #4d8bff 20%, #c8a04a 26%, #14409a 32%);
+  background-size: 55% 100%;
+  filter: blur(55px);
+  will-change: transform;
+  animation: auroraShift 45s linear infinite alternate;
+}
+@keyframes auroraShift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(14%, 5%, 0); }
+}
+[data-theme="dark"] .aurora-bg { opacity: 0.28; }
+@media (prefers-reduced-motion: reduce) { .aurora-bg::before { animation: none; } }
 
 /* =============================================
    MOBILE — Bloomberg terminal must not overflow
