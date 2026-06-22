@@ -43,10 +43,14 @@
   <script>
   (function(){
     var html=document.documentElement;
-    html.classList.add('intro-lock');           // scroll stays locked until the user enters
+    // show the intro only once per session — don't replay it when returning from another page
+    var seen=false; try{ seen=sessionStorage.getItem('introSeen')==='1'; }catch(e){}
+    if(seen){ var el0=document.getElementById('intro'); if(el0&&el0.parentNode){ el0.parentNode.removeChild(el0); } return; }
+    html.classList.add('intro-lock');            // scroll stays locked until the user enters
     function dismiss(){
       var el=document.getElementById('intro');
       if(!el||el.classList.contains('intro-done'))return;
+      try{ sessionStorage.setItem('introSeen','1'); }catch(e){}
       el.classList.add('intro-done');            // smooth fade/dissolve (no slide)
       html.classList.remove('intro-lock');
       setTimeout(function(){ if(el&&el.parentNode){ el.parentNode.removeChild(el); } }, 1200);
@@ -168,7 +172,7 @@
               <img src="assets/images/me.png" alt="Rezi Sabashvili" />
             </div>
             <div class="synth-info">
-              <div class="synth-name">Rezi Sabashvili</div>
+              <div class="synth-name cascade-text">Rezi Sabashvili</div>
               <div class="synth-role">
                 <span class="lang-en">Financial Developer &amp; Analyst · Quant / Data / AI</span>
                 <span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier · Quant / Data / IA</span>

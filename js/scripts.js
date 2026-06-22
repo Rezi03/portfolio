@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const symbols = ['∑','∂','π','σ','∫','Δ','∇','μ','ρ','α','β','λ','φ','€','%','‰','∞','≈'];
     const container = document.querySelector('.background-blobs');
     if (!container) return;
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 8; i++) {
       const el = document.createElement('span');
       el.className = 'rune';
       el.textContent = symbols[i % symbols.length];
@@ -675,6 +675,26 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     paint();
+  })();
+
+  // 15. CASCADE TEXT (aayush-duhan/cascade-text) — hover letter reveal
+  (function () {
+    const els = Array.prototype.slice.call(document.querySelectorAll('.cascade-text'));
+    els.forEach(function (el) {
+      const text = el.textContent;
+      el.textContent = '';
+      const inner = document.createElement('span');
+      inner.className = 'cc-inner';
+      const chars = Array.from(text);
+      chars.forEach(function (ch, i) {
+        const s = document.createElement('span');
+        s.className = 'cc';
+        s.style.transitionDelay = (i * 25) + 'ms';
+        s.textContent = ch === ' ' ? ' ' : ch;
+        inner.appendChild(s);
+      });
+      el.appendChild(inner);
+    });
   })();
 
   // 14. ANIMATED TEXT CYCLE (thimows/animated-text-cycle)

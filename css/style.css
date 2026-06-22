@@ -59,7 +59,7 @@
   /* ===== Glass — net, premium ===== */
   --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(10, 15, 31, 0.07);
-  --glass-blur: blur(20px) saturate(1.4);
+  --glass-blur: blur(12px) saturate(1.3);
 
   /* ===== Shadows — layered, soft ===== */
   --shadow-sm: 0 1px 2px rgba(10,15,31,0.04), 0 3px 10px rgba(10,15,31,0.04);
@@ -2385,5 +2385,41 @@ html.intro-lock, html.intro-lock body { overflow: hidden !important; height: 100
 [data-theme="dark"] .theme-toggle { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
 [data-theme="dark"] .tt-thumb { transform: translateX(0); background: #1a2238; color: #cfe0ff; } /* dark → knob left */
 [data-theme="dark"] .tt-sun { display: none; } [data-theme="dark"] .tt-moon { display: inline-block; }
+
+/* =============================================
+   CASCADE TEXT (aayush-duhan/cascade-text) — hover letter reveal
+   ============================================= */
+.cascade-text { cursor: default; transition: color 0.35s ease; }
+.cascade-text .cc-inner { display: inline-flex; overflow: hidden; height: 1em; line-height: 1; vertical-align: bottom; }
+.cascade-text .cc {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform;
+  text-shadow: 0 1em currentColor;
+  transition: transform 0.25s ease-in-out;
+}
+.cascade-text:hover { color: var(--gold); }
+.cascade-text:hover .cc { transform: translateY(-1em); }
+@media (prefers-reduced-motion: reduce) {
+  .cascade-text .cc { transition: none !important; transform: none !important; }
+}
+
+/* =============================================
+   PERFORMANCE — calmer constant repaints on weak machines
+   ============================================= */
+/* Background blobs: keep as static ambient gradients (no infinite animation) */
+.blob, .floating, .floating-delayed, .floating-slow { animation: none !important; }
+.blob { filter: blur(80px); opacity: 0.34; }
+
+/* =============================================
+   MOBILE — Bloomberg terminal must not overflow
+   ============================================= */
+@media (max-width: 600px) {
+  .bbg-terminal { font-size: 0.66rem; padding: 10px 12px; }
+  .bbg-row { flex-wrap: wrap; gap: 1px 6px; }
+  .bbg-tkey { min-width: 0; font-size: 0.58rem; }
+  .bbg-dots { display: none; }
+  .bbg-tval { white-space: normal; font-size: 0.62rem; line-height: 1.45; }
+}
 
 
