@@ -1,3 +1,84 @@
+/* =============================================
+   INTRO SHADER — the exact 21st.dev "ShaderAnimation"
+   (designali-in/shader-animation) fragment shader, ported to raw
+   WebGL (no three.js dependency). Runs only while #intro is present;
+   falls back to the CSS gradient if WebGL/reduced-motion.
+   ============================================= */
+(function () {
+  var canvas = document.getElementById('introShader');
+  if (!canvas) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return; // CSS gradient remains as fallback
+
+  var vs = 'attribute vec4 p; void main(){ gl_Position = p; }';
+  // EXACT designali-in/shader-animation fragment shader (21st.dev), unmodified.
+  var fs = [
+    '#define TWO_PI 6.2831853072',
+    '#define PI 3.14159265359',
+    'precision highp float;',
+    'uniform vec2 resolution;',
+    'uniform float time;',
+    'void main(void) {',
+    '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
+    '  float t = time*0.05;',
+    '  float lineWidth = 0.002;',
+    '  vec3 color = vec3(0.0);',
+    '  for(int j = 0; j < 3; j++){',
+    '    for(int i=0; i < 5; i++){',
+    '      color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));',
+    '    }',
+    '  }',
+    '  gl_FragColor = vec4(color[0],color[1],color[2],1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { return null; }
+    return s;
+  }
+  var prog = gl.createProgram();
+  var v = compile(gl.VERTEX_SHADER, vs), f = compile(gl.FRAGMENT_SHADER, fs);
+  if (!v || !f) return;
+  gl.attachShader(prog, v); gl.attachShader(prog, f); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, 'p');
+  var uRes = gl.getUniformLocation(prog, 'resolution');
+  var uTime = gl.getUniformLocation(prog, 'time');
+
+  function resize() {
+    var w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    gl.viewport(0, 0, w, h);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var timeVal = 1.0;
+  function frame() {
+    if (!document.getElementById('introShader')) {       // intro removed → stop
+      window.removeEventListener('resize', resize);
+      return;
+    }
+    timeVal += 0.05;                                      // matches the original component
+    gl.useProgram(prog);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, timeVal);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(loc);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
 document.addEventListener("DOMContentLoaded", function() {
 
   document.body.classList.add('js-loaded');
@@ -74,14 +155,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   window.addEventListener('scroll', updateScroll, { passive: true });
   setTimeout(() => { if (progressBar) progressBar.classList.add('breathing'); }, 2000);
-
-  // PARALLAX HERO IMAGE
-  const heroImg = document.querySelector('.profile-img');
-  window.addEventListener('scroll', () => {
-    if (heroImg && window.scrollY < window.innerHeight) {
-      heroImg.style.transform = `translateY(${window.scrollY * 0.07}px)`;
-    }
-  }, { passive: true });
 
   // ACTIVE NAV LINK ON SCROLL
   const sections = document.querySelectorAll('section[id]');
@@ -432,35 +505,14 @@ document.addEventListener("DOMContentLoaded", function() {
     obs.observe(el);
   });
 
-  // 5. MAGNETIC BUTTONS — very subtle pull, capped (kept gentle on purpose)
-  if (!isTouch) {
-    const MAG = 0.10, CAP = 5; // factor + max px displacement
-    const clamp = v => Math.max(-CAP, Math.min(CAP, v));
-    document.querySelectorAll('.btn-primary, .btn-gradient, .btn-outline').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = clamp((e.clientX - r.left - r.width / 2) * MAG);
-        const y = clamp((e.clientY - r.top - r.height / 2) * MAG);
-        btn.style.transform = `translate(${x}px,${y}px)`;
-        btn.style.transition = 'transform 0.12s ease';
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-        btn.style.transition = 'transform 0.4s cubic-bezier(0.2,0.8,0.2,1)';
-        setTimeout(() => btn.style.transition = '', 400);
-      });
-    });
-  }
+  // 5. BUTTONS — magnetic mouse-follow removed (was too much).
+  //    Hover effects are CSS-only now (arrow slide + lift + shine).
 
 
-  // 7. DARK MODE TOGGLE
+  // 7. DARK MODE TOGGLE (pill switch — knob/icon driven by [data-theme] in CSS)
   (function() {
     const btn = document.getElementById('theme-toggle');
-    const icon = document.getElementById('theme-icon');
-    if (!btn || !icon) return;
-
-    const SUN_SVG = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
-    const MOON_SVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+    if (!btn) return;
 
     // Reset si l'utilisateur n'a jamais choisi explicitement (ancienne valeur système)
     if (localStorage.getItem('darkModeUserChosen') !== '1') {
@@ -470,7 +522,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let dark = localStorage.getItem('darkMode') === 'true';
     function applyTheme() {
       document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-      icon.innerHTML = dark ? SUN_SVG : MOON_SVG;
+      btn.setAttribute('aria-checked', dark ? 'true' : 'false');
     }
     applyTheme();
 
@@ -522,7 +574,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // 11. SCROLL REVEAL (staggered) — Magic MCP "Scroll Animation" pattern
   (function () {
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const selector = '.bento-card, .mission-card, .project-card, .edu-card, .edu-card-small, .skill-group, .etv-entry';
+    // every card/box on the page (.glass-panel + the solid highlight bento-card; .cs-card excluded — it has its own scroll animation)
+    const selector = '.glass-panel, .bento-card';
     const items = Array.prototype.slice.call(document.querySelectorAll(selector));
     if (!items.length) return;
     if (reduce) { items.forEach(el => el.classList.add('reveal-in')); return; }
@@ -591,6 +644,69 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     paint();
+  })();
+
+  // 13. CONTAINER SCROLL — Aceternity "Container Scroll Animation" (vanilla)
+  (function () {
+    const section = document.getElementById('synthesis');
+    const card = document.getElementById('csCard');
+    const title = document.getElementById('csTitle');
+    if (!section || !card) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      card.style.transform = 'none';
+      return;
+    }
+    let ticking = false;
+    function paint() {
+      ticking = false;
+      const vh = window.innerHeight;
+      const top = section.getBoundingClientRect().top;
+      let p = (vh - top) / (vh * 0.9); // 0 entering from bottom → 1 settled near top
+      p = Math.max(0, Math.min(1, p));
+      const rot = 20 * (1 - p);       // 20° → 0  (Aceternity exact)
+      const scale = 1.05 - 0.05 * p;  // 1.05 → 1 (Aceternity desktop)
+      card.style.transform = 'rotateX(' + rot + 'deg) scale(' + scale + ')';
+      if (title) {
+        title.style.transform = 'translateY(' + (-50 * p) + 'px)'; // header translates up (exact: 0→-100)
+        title.style.opacity = (0.5 + 0.5 * p).toFixed(3);
+      }
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    paint();
+  })();
+
+  // 14. ANIMATED TEXT CYCLE (thimows/animated-text-cycle)
+  (function () {
+    const els = Array.prototype.slice.call(document.querySelectorAll('.text-cycle'));
+    if (!els.length) return;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lang = localStorage.getItem('siteLanguage') || 'en';
+    els.forEach(function (el) {
+      let words;
+      try {
+        words = JSON.parse(el.getAttribute(lang === 'fr' ? 'data-words-fr' : 'data-words-en') || el.getAttribute('data-words-en'));
+      } catch (e) { words = null; }
+      if (!words || !words.length) return;
+      let span = el.querySelector('.tc-word');
+      if (!span) { span = document.createElement('span'); span.className = 'tc-word'; el.appendChild(span); }
+      span.textContent = words[0];
+      if (reduce || words.length < 2) return;
+      let i = 0;
+      setInterval(function () {
+        span.classList.add('tc-out');
+        setTimeout(function () {
+          i = (i + 1) % words.length;
+          span.textContent = words[i];
+          span.classList.remove('tc-out');
+          span.classList.add('tc-in');
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { span.classList.remove('tc-in'); });
+          });
+        }, 350);
+      }, 2600);
+    });
   })();
 
 });
