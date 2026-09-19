@@ -22,33 +22,32 @@
 <body>
 <nav class="topbar" aria-label="Navigation principale">
   <div class="wrap">
-    <a href="index.html" aria-current="page">Accueil</a>
-    <a href="experience.html">Expérience</a>
-    <a href="projets.html">Projets</a>
-    <a href="parcours.html">Parcours</a>
+    <a href="#experience">Expérience</a>
+    <a href="#formation">Formation</a>
+    <a href="#projets">Projets</a>
+    <a href="#documents">Documents</a>
     <a class="lang" href="en/index.html" hreflang="en" lang="en">EN</a>
   </div>
 </nav>
 
-
-<header class="masthead">
+<header class="card">
   <div class="wrap">
     <picture>
       <source srcset="assets/images/portrait.webp" type="image/webp">
-      <img class="portrait" src="assets/images/portrait.jpg" width="118" height="152" alt="Portrait de Rezo Sabashvili">
+      <img class="portrait" src="assets/images/portrait.jpg" width="104" height="134" alt="Portrait de Rezo Sabashvili">
     </picture>
-    <div>
-      <h1>Rezo Sabashvili</h1>
-      <p class="role">Analyste financier et développeur · Automatisation et modélisation en finance</p>
-      <p class="place">Paris · Disponible immédiatement</p>
-      <p class="contact-line">
-        <a href="mailto:rezi.sabashvili@outlook.com">rezi.sabashvili@outlook.com</a> ·
-        <a href="tel:+33618579173">+33 6 18 57 91 73</a> ·
-        <a href="https://www.linkedin.com/in/rezisabashvili">LinkedIn</a> ·
-        <a href="https://github.com/Rezi03">GitHub</a> ·
-        <a href="assets/cv/cv_fr.pdf">CV (PDF)</a>
-      </p>
-    </div>
+    <h1>Rezo Sabashvili</h1>
+    <p class="card-role">Analyste financier et développeur</p>
+    <hr class="card-rule">
+    <p class="card-sub">Automatisation et modélisation en finance</p>
+    <p class="card-place">Paris · Disponible immédiatement</p>
+    <p class="card-contact">
+      <a href="mailto:rezi.sabashvili@outlook.com">rezi.sabashvili@outlook.com</a> ·
+      <a href="tel:+33618579173">+33 6 18 57 91 73</a> ·
+      <a href="https://www.linkedin.com/in/rezisabashvili">LinkedIn</a> ·
+      <a href="https://github.com/Rezi03">GitHub</a> ·
+      <a href="assets/cv/cv_fr.pdf">CV</a>
+    </p>
   </div>
 </header>
 
@@ -63,92 +62,185 @@
         <div><span class="num">60+</span><span class="cap">agents utilisateurs du hub de données construit</span></div>
     </div>
 
-    <section>
+    <section id="experience">
       <h2>Expérience</h2>
       <ul class="rows">
         <li>
-          <a class="row-link" href="experience.html">
+          <button type="button" class="row-link" data-open="bdf">
             <span class="row-text">
               <span class="row-title">Banque de France — Siège</span>
-              <span class="row-meta"><br>Développeur et analyste financier, stage</span>
+              <span class="row-meta">Développeur et analyste financier, stage</span>
             </span>
             <span class="row-right">2026<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
+          </button>
         </li>
         <li>
-          <a class="row-link" href="experience.html">
+          <button type="button" class="row-link" data-open="ca">
             <span class="row-text">
               <span class="row-title">Crédit Agricole</span>
-              <span class="row-meta"><br>Analyste commercial et data, stage</span>
+              <span class="row-meta">Analyste commercial et data, stage</span>
             </span>
             <span class="row-right">2024<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
+          </button>
         </li>
       </ul>
-      <p class="more"><a href="experience.html">Le détail des missions →</a></p>
+      <p class="note">Emplois étudiants à temps partiel et saisonniers menés en parallèle d'études à temps plein (IKEA, Stokomani, McDonald's), 2021 — 2026.</p>
     </section>
 
-    <section>
-      <h2>Recherche et projets</h2>
+    <section id="formation">
+      <h2>Formation</h2>
+      <div class="edu">
+        <div class="entry-head">
+          <p class="degree">Université de Reims Champagne-Ardenne</p>
+          <span class="dates">2024 — 2026</span>
+        </div>
+        <p class="meta">Master Analyse et Politique Économique, parcours Statistique pour l'Évaluation et la Prévision</p>
+        <p class="meta">Diplômé en septembre 2026 · Mention Très Bien</p>
+        <ul class="grades">
+          <li>20/20 en Gestion des Risques Quantitatifs Financiers</li>
+          <li>16/20 en Séries Temporelles et Économétrie Financière</li>
+          <li>16/20 en Écosystèmes Big Data</li>
+          <li>Également Machine Learning, NLP, Deep Learning, Data Mining, apprentissage non supervisé</li>
+        </ul>
+      </div>
+      <div class="edu">
+        <div class="entry-head">
+          <p class="degree">Université de Reims Champagne-Ardenne</p>
+          <span class="dates">2021 — 2024</span>
+        </div>
+        <p class="meta">Licence Économie et Gestion, parcours Analyse Économique</p>
+        <p class="meta">Spécialisation Mathématiques Appliquées et Analyse Économique</p>
+      </div>
+    </section>
+
+    <section id="projets">
+      <h2>Recherche et projets indépendants</h2>
       <ul class="rows">
         <li>
-          <a class="row-link" href="projets.html">
+          <button type="button" class="row-link" data-open="axone">
             <span class="row-text">
               <span class="row-title">Axone</span>
-              <span class="row-meta"><br>Recherche actions indépendante, publiée chaque mois</span>
+              <span class="row-meta">Recherche actions indépendante, publiée chaque mois</span>
             </span>
             <span class="row-right">Fondateur<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
+          </button>
         </li>
         <li>
-          <a class="row-link" href="projets.html">
+          <button type="button" class="row-link" data-open="finteker">
             <span class="row-text">
               <span class="row-title">Finteker</span>
-              <span class="row-meta"><br>Plateforme d'intelligence financière full-stack</span>
+              <span class="row-meta">Plateforme d'intelligence financière full-stack</span>
             </span>
             <span class="row-right">Fondateur<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
-        </li>
-        <li>
-          <a class="row-link" href="projets.html">
-            <span class="row-text">
-              <span class="row-title">Banking Market Dashboard</span>
-              <span class="row-meta"><br>Suivi de marché et mesures de risque des grandes banques</span>
-            </span>
-            <span class="row-right">Python<span class="arrow" aria-hidden="true">→</span></span>
-          </a>
+          </button>
         </li>
       </ul>
-      <p class="more"><a href="projets.html">Le détail des projets →</a></p>
     </section>
 
-    <section>
-      <h2>Parcours</h2>
+    <section id="competences">
+      <h2>Compétences</h2>
+      <dl class="skills">
+        <dt>Programmation</dt>
+        <dd>Python | VBA | SQL et PostgreSQL | C++ | C# | R | Java | JavaScript | Git | HTML/CSS</dd>
+        <dt>Finance</dt>
+        <dd>Valorisation DCF | Comparables et transactions précédentes | VaR et Monte Carlo | Backtesting | Stress tests de taux | Optimisation de portefeuille | Économétrie financière</dd>
+        <dt>Data et IA</dt>
+        <dd>Machine Learning | Deep Learning | NLP | Séries temporelles | Big Data | Data Mining</dd>
+        <dt>Outils</dt>
+        <dd>Power BI (DAX) | Excel avancé | Tagetik | Streamlit | Plotly | SharePoint | Bloomberg | PowerPoint</dd>
+      </dl>
+    </section>
+
+    <section id="langues">
+      <h2>Langues</h2>
+      <p>Français C2 | Anglais C1 | Géorgien, langue maternelle | Russe B2</p>
+    </section>
+
+    <section id="documents">
+      <h2>Documents</h2>
       <ul class="rows">
         <li>
-          <a class="row-link" href="parcours.html">
+          <a class="row-link" href="assets/cv/cv_fr.pdf">
             <span class="row-text">
-              <span class="row-title">Master Statistique pour l'Évaluation et la Prévision</span>
-              <span class="row-meta"><br>Université de Reims Champagne-Ardenne · Mention Très Bien</span>
+              <span class="row-title">CV</span>
+              <span class="row-meta">Version française</span>
             </span>
-            <span class="row-right">2026<span class="arrow" aria-hidden="true">→</span></span>
+            <span class="row-right">PDF<span class="arrow" aria-hidden="true">→</span></span>
           </a>
         </li>
         <li>
-          <a class="row-link" href="parcours.html">
+          <a class="row-link" href="assets/cv/cv.pdf">
             <span class="row-text">
-              <span class="row-title">Licence Économie et Gestion</span>
-              <span class="row-meta"><br>Université de Reims Champagne-Ardenne</span>
+              <span class="row-title">CV</span>
+              <span class="row-meta">English version</span>
             </span>
-            <span class="row-right">2024<span class="arrow" aria-hidden="true">→</span></span>
+            <span class="row-right">PDF<span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="row-link" href="recommandations.html">
+            <span class="row-text">
+              <span class="row-title">Lettres de recommandation</span>
+              <span class="row-meta">Trois références académiques</span>
+            </span>
+            <span class="row-right"><span class="arrow" aria-hidden="true">→</span></span>
           </a>
         </li>
       </ul>
-      <p class="more"><a href="parcours.html">Compétences, langues et documents →</a></p>
     </section>
 
   </div>
 </main>
+
+<dialog id="bdf" class="sheet" aria-labelledby="bdf-t">
+  <div class="sheet-inner">
+    <button type="button" class="sheet-close" data-close aria-label="Fermer">Fermer ×</button>
+    <p class="sheet-dates">Février 2026 — Août 2026</p>
+    <h3 id="bdf-t">Banque de France — Siège</h3>
+    <p class="meta">Développeur et analyste financier, stage · Direction Financière · Paris</p>
+    <ul>
+      <li>Automatisation intégrale du reporting OPEX/CAPEX mensuel, diffusé aux 9 directions et à la Direction Financière</li>
+      <li>Hub de données consolidant 17 fichiers dispersés en 3 bases SQL, temps d'analyse ramené d'une heure à moins d'une minute, adopté par plus de 60 agents</li>
+      <li>Application web locale full-stack (Java, JavaScript, HTML/CSS) donnant le même accès aux données hors Excel</li>
+      <li>Pipeline de reporting trimestriel de gouvernance, de la collecte SharePoint aux synthèses directionnelles et aux supports remis à la direction générale</li>
+      <li>Fiabilisation de 1,4 million de lignes budgétaires sur 10 exercices, avec contrôles d'intégrité documentés, en vue d'un audit de la Cour des comptes</li>
+      <li>Conception et animation d'un cycle de formation hebdomadaire de quatre mois en VBA et Python, plus de 15 collègues formés</li>
+    </ul>
+  </div>
+</dialog>
+<dialog id="ca" class="sheet" aria-labelledby="ca-t">
+  <div class="sheet-inner">
+    <button type="button" class="sheet-close" data-close aria-label="Fermer">Fermer ×</button>
+    <p class="sheet-dates">Janvier 2024 — Février 2024</p>
+    <h3 id="ca-t">Crédit Agricole</h3>
+    <p class="meta">Analyste commercial et data, stage · Desk Change Corporate · Reims</p>
+    <ul>
+      <li>Tableau de bord Power BI de suivi des couvertures de change pour la clientèle entreprises, par devise et par volume notionnel</li>
+      <li>Suivi du PNB de marché et de l'échéancier des tombées de contrats</li>
+      <li>Automatisation en VBA du reporting hebdomadaire, en remplacement d'un suivi manuel</li>
+    </ul>
+  </div>
+</dialog>
+<dialog id="axone" class="sheet" aria-labelledby="axone-t">
+  <div class="sheet-inner">
+    <button type="button" class="sheet-close" data-close aria-label="Fermer">Fermer ×</button>
+    <p class="sheet-dates">Depuis 2026</p>
+    <h3 id="axone-t">Axone</h3>
+    <p class="meta">Recherche actions indépendante · Fondateur</p>
+    <p>Recherche actions publiée chaque mois, construite uniquement à partir de documents publics, avec toutes les hypothèses visibles et modifiables. Chaque valeur est triangulée en football field pondéré, DCF à 50 %, comparables boursiers à 35 %, transactions précédentes à 15 %, avec un WACC construit bottom-up et une valeur terminale cross-checkée. Chaque analyse est livrée avec son modèle Excel complet et son pitchbook. Première couverture, Pernod Ricard, objectif 108 euros, décote de 8,1x EV/EBITDA contre 12,4x pour la médiane sectorielle.</p>
+    <p class="link"><a href="https://rezi03.github.io/axone/">rezi03.github.io/axone →</a></p>
+  </div>
+</dialog>
+<dialog id="finteker" class="sheet" aria-labelledby="finteker-t">
+  <div class="sheet-inner">
+    <button type="button" class="sheet-close" data-close aria-label="Fermer">Fermer ×</button>
+    <p class="sheet-dates">Depuis 2024</p>
+    <h3 id="finteker-t">Finteker</h3>
+    <p class="meta">Plateforme d'intelligence financière · Fondateur et développeur</p>
+    <p>Plateforme full-stack bilingue, conçue et déployée de bout en bout en Python et Java. Elle réunit un M&amp;A Tracker alimenté en temps réel par les filings SEC EDGAR, un DCF Lab avec grilles de sensibilité et tornado charts, un screener obligataire par duration, spread et rating, et un backtester de portefeuilles avec stress tests de taux. Un tableau de bord multi-actifs complète l'ensemble, avec VaR 95 %, Sharpe, Sortino, beta et max drawdown.</p>
+    <p class="link"><a href="https://finteker.fr">finteker.fr →</a></p>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -158,6 +250,19 @@
     <a href="https://github.com/Rezi03">GitHub</a>
   </div>
 </footer>
+
+<script>
+  // Fenêtres de détail : <dialog> natif, ouverture, fermeture au clic hors cadre.
+  document.querySelectorAll('[data-open]').forEach(function (trigger) {
+    var dlg = document.getElementById(trigger.getAttribute('data-open'));
+    if (!dlg) return;
+    trigger.addEventListener('click', function () { dlg.showModal(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  });
+  document.querySelectorAll('[data-close]').forEach(function (btn) {
+    btn.addEventListener('click', function () { btn.closest('dialog').close(); });
+  });
+</script>
 
 </body>
 </html>

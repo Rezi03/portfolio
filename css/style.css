@@ -1,20 +1,20 @@
 /* Rezo Sabashvili — portfolio
    Blanc, encre #111111, un seul accent navy #003366, filets de 1 px.
-   Colonne unique de 760 px, intitulés de section en capitales espacées. */
+   En-tête composé comme une carte de visite, colonne unique de 720 px. */
 
 :root {
   --ink: #111111;
   --muted: #555555;
   --navy: #003366;
   --rule: #e5e5e5;
-  --page: 760px;
+  --page: 720px;
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4.5rem; }
 
 body {
   margin: 0;
@@ -34,23 +34,18 @@ a {
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(0, 51, 102, 0.35);
+  text-decoration-color: rgba(0, 51, 102, 0.3);
   transition: text-decoration-color 120ms linear;
 }
 
 a:hover { text-decoration-color: var(--navy); }
 
-a:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+a:focus-visible,
+button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
 
 /* ---------- Structure ---------- */
 
-.wrap {
-  max-width: var(--page);
-  margin: 0 auto;
-  padding: 0 28px;
-}
-
-main section { padding: 2.5rem 0 0; }
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 28px; }
 
 h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.25; }
 
@@ -58,29 +53,31 @@ h2 {
   font-family: var(--sans);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
-  padding-bottom: 0.7rem;
-  margin-bottom: 1.25rem;
+  color: var(--ink);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--ink);
 }
 
-h3 { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; }
+h3 { font-family: var(--serif); font-size: 1.375rem; font-weight: 600; }
 
 p { margin: 0 0 1rem; }
 
 ul { margin: 0.6rem 0 0; padding-left: 1.05rem; }
 
-li { margin-bottom: 0.4rem; }
+li { margin-bottom: 0.45rem; }
 
 li::marker { color: var(--muted); }
 
+main section { padding: 3rem 0 0; }
+
 .meta { color: var(--muted); font-size: 0.9375rem; margin: 0.15rem 0 0; }
 
-.note { color: var(--muted); font-size: 0.9375rem; font-style: italic; }
+.note { color: var(--muted); font-size: 0.9375rem; font-style: italic; margin: 1.5rem 0 0; }
 
-.more { margin: 1.25rem 0 0; font-size: 0.9375rem; }
+.link { margin: 1.25rem 0 0; font-size: 0.9375rem; }
 
 /* ---------- Barre de navigation ---------- */
 
@@ -96,7 +93,7 @@ li::marker { color: var(--muted); }
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.25rem 1.5rem;
+  gap: 0.25rem 1.75rem;
   padding-top: 0.85rem;
   padding-bottom: 0.85rem;
 }
@@ -106,71 +103,79 @@ li::marker { color: var(--muted); }
   text-decoration: none;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.topbar a:hover,
-.topbar a[aria-current="page"] { color: var(--navy); }
+.topbar a:hover { color: var(--navy); }
 
 .topbar .lang { margin-left: auto; color: var(--navy); }
 
-/* ---------- En-tête ---------- */
+/* ---------- Carte de visite ---------- */
 
-.masthead { padding: 3rem 0 0; }
-
-.masthead .wrap {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.75rem;
+.card {
+  text-align: center;
+  padding: 4.5rem 0 3.25rem;
+  border-bottom: 1px solid var(--rule);
 }
 
-.portrait {
-  width: 118px;
+.card .portrait {
+  width: 104px;
   height: auto;
   display: block;
-  flex: 0 0 118px;
+  margin: 0 auto 1.75rem;
   border: 1px solid var(--rule);
 }
 
-.masthead h1 {
+.card h1 {
   font-family: var(--serif);
-  font-size: 2.375rem;
+  font-size: 2.625rem;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.015em;
 }
 
-.masthead .role { font-family: var(--serif); font-size: 1.125rem; margin-bottom: 0.3rem; }
+.card-role {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
 
-.masthead .place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+.card-rule {
+  width: 56px;
+  margin: 1.5rem auto;
+  border: 0;
+  border-top: 1px solid var(--navy);
+}
 
-.masthead .contact-line { margin: 0.9rem 0 0; font-size: 0.9375rem; line-height: 1.9; }
+.card-sub { font-family: var(--serif); font-size: 1.125rem; margin: 0 0 0.35rem; }
 
-/* Pages secondaires : titre seul */
-.pagehead { padding: 3rem 0 0; }
+.card-place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
 
-.pagehead h1 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.35rem; }
+.card-contact { margin: 1.5rem 0 0; font-size: 0.875rem; line-height: 2; }
 
-.pagehead .place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+/* Page secondaire */
 
-/* ---------- Accueil ---------- */
+.pagehead { padding: 3.5rem 0 0; }
+
+.pagehead h1 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.4rem; }
+
+/* ---------- Accroche et chiffres ---------- */
 
 .intro {
   font-family: var(--serif);
   font-size: 1.1875rem;
-  line-height: 1.6;
-  margin: 2.5rem 0 0;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--ink);
+  line-height: 1.65;
+  margin: 3rem 0 0;
 }
 
 .figures {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2.25rem 0 0;
-  padding: 1.5rem 0;
+  gap: 1.75rem;
+  margin: 2.5rem 0 0;
+  padding: 1.75rem 0;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
@@ -185,13 +190,13 @@ li::marker { color: var(--muted); }
 
 .figures .cap {
   display: block;
-  margin-top: 0.4rem;
+  margin-top: 0.45rem;
   font-size: 0.8125rem;
   color: var(--muted);
   line-height: 1.45;
 }
 
-/* Lignes cliquables : expérience, projets, documents */
+/* ---------- Lignes ---------- */
 
 .rows { list-style: none; margin: 0; padding: 0; }
 
@@ -204,29 +209,87 @@ li::marker { color: var(--muted); }
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.15rem 1.25rem;
-  padding: 0.85rem 0;
-  text-decoration: none;
+  gap: 0.1rem 1.25rem;
+  width: 100%;
+  padding: 0.95rem 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .row-link:hover .row-title { text-decoration: underline; text-underline-offset: 3px; }
 
-.row-title { font-family: var(--serif); font-size: 1.0625rem; font-weight: 600; }
+.row-text { flex: 1 1 320px; }
 
-.row-meta { color: var(--muted); font-size: 0.9375rem; }
+.row-title { display: block; font-family: var(--serif); font-size: 1.1875rem; font-weight: 600; }
 
-.row-right { color: var(--muted); font-size: 0.875rem; white-space: nowrap; }
+.row-meta { display: block; color: var(--muted); font-size: 0.9375rem; }
 
-.row-link .arrow { color: var(--navy); margin-left: 0.5rem; }
+.row-right {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
-.row-text { flex: 1 1 340px; }
+.row-link .arrow { color: var(--navy); margin-left: 0.6rem; }
 
-/* ---------- Expérience ---------- */
+/* ---------- Fenêtres de détail ---------- */
 
-.entry { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+.sheet {
+  width: min(620px, calc(100% - 2.5rem));
+  max-height: 85vh;
+  padding: 0;
+  border: 1px solid var(--ink);
+  background: #ffffff;
+  color: var(--ink);
+}
 
-.entry:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+.sheet::backdrop { background: rgba(17, 17, 17, 0.45); }
+
+.sheet-inner { padding: 2.5rem; }
+
+.sheet-close {
+  float: right;
+  margin: -0.5rem -0.5rem 0 1rem;
+  padding: 0.25rem;
+  border: 0;
+  background: none;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.sheet-close:hover { color: var(--navy); }
+
+.sheet-dates {
+  margin: 0 0 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sheet h3 { margin-bottom: 0.35rem; }
+
+.sheet ul { margin-top: 1.25rem; }
+
+/* ---------- Formation ---------- */
+
+.edu { padding-bottom: 1.75rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--rule); }
+
+.edu:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
 .entry-head {
   display: flex;
@@ -236,31 +299,16 @@ li::marker { color: var(--muted); }
   gap: 0.15rem 1.5rem;
 }
 
-.org { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; }
+.edu .degree { font-family: var(--serif); font-size: 1.1875rem; font-weight: 600; margin: 0; }
 
-.dates { color: var(--muted); font-size: 0.875rem; letter-spacing: 0.04em; white-space: nowrap; }
+.dates {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
 
-/* ---------- Projets ---------- */
-
-.project { padding-bottom: 1.75rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--rule); }
-
-.project:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
-
-.project h3 { margin-bottom: 0.4rem; }
-
-.project p { margin-bottom: 0.5rem; }
-
-.project .link { margin-bottom: 0; font-size: 0.9375rem; }
-
-/* ---------- Formation ---------- */
-
-.edu { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
-
-.edu:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
-
-.edu .degree { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; margin: 0; }
-
-.grades { margin: 0.6rem 0 0; padding: 0; list-style: none; }
+.grades { margin: 0.7rem 0 0; padding: 0; list-style: none; }
 
 .grades li { color: var(--muted); font-size: 0.9375rem; margin-bottom: 0.2rem; }
 
@@ -271,15 +319,15 @@ li::marker { color: var(--muted); }
 .skills dt {
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
 }
 
 .skills dt:first-child { margin-top: 0; }
 
-.skills dd { margin: 0.25rem 0 0; }
+.skills dd { margin: 0.3rem 0 0; }
 
 /* ---------- Références ---------- */
 
@@ -287,18 +335,18 @@ li::marker { color: var(--muted); }
 
 .reference:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
-.reference .who { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; margin: 0 0 0.35rem; }
-
-.reference .link { margin: 0.75rem 0 0; font-size: 0.9375rem; }
+.reference .who { font-family: var(--serif); font-size: 1.1875rem; font-weight: 600; margin: 0 0 0.4rem; }
 
 /* ---------- Pied de page ---------- */
 
 footer {
-  margin-top: 3.5rem;
+  margin-top: 4rem;
   border-top: 1px solid var(--rule);
-  padding: 1.5rem 0 3rem;
-  font-size: 0.875rem;
+  padding: 1.75rem 0 3.5rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
   color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Responsive ---------- */
@@ -308,17 +356,21 @@ footer {
 
   .wrap { padding: 0 22px; }
 
-  .masthead .wrap { flex-direction: column; gap: 1.25rem; }
+  .card { padding: 3rem 0 2.5rem; }
 
-  .masthead h1 { font-size: 1.875rem; }
+  .card h1 { font-size: 2rem; }
 
-  .masthead .role { font-size: 1.0625rem; }
+  .card-role { letter-spacing: 0.16em; }
 
-  .intro { font-size: 1.0625rem; }
+  .intro { font-size: 1.0625rem; margin-top: 2.25rem; }
 
-  .figures { grid-template-columns: 1fr; gap: 1.1rem; }
+  .figures { grid-template-columns: 1fr; gap: 1.25rem; }
 
   .figures .num { font-size: 1.5rem; }
+
+  main section { padding-top: 2.5rem; }
+
+  .sheet-inner { padding: 1.75rem; }
 
   .topbar .wrap { gap: 0.4rem 1.1rem; }
 
