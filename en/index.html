@@ -34,15 +34,16 @@
 </nav>
 
 <header class="masthead">
-  <div class="wrap masthead-inner">
+  <div class="wrap">
     <picture>
       <source srcset="../assets/images/portrait.webp" type="image/webp">
-      <img class="portrait" src="../assets/images/portrait.jpg" width="160" height="160" alt="Portrait of Rezo Sabashvili">
+      <img class="portrait" src="../assets/images/portrait.jpg" width="150" height="194" alt="Portrait of Rezo Sabashvili">
     </picture>
-    <div>
+    <div class="masthead-text">
       <h1>Rezo Sabashvili</h1>
       <p class="role">Financial Analyst and Developer · Automation and Modelling in Finance</p>
       <p class="place">Paris · Available immediately</p>
+      <hr class="rule">
       <p class="contact-line">
         <a href="mailto:rezi.sabashvili@outlook.com">rezi.sabashvili@outlook.com</a> ·
         <a href="tel:+33618579173">+33 6 18 57 91 73</a> ·
@@ -58,120 +59,137 @@
 
   <section id="profile" class="wrap">
     <h2>Profile</h2>
-    <p>Financial analyst and developer, trained in statistics and modelling. I spent six months at the head office of the Banque de France, in the Finance Department, automating budget and governance reporting end to end. Alongside this, I publish independent equity research through Axone and build Finteker, a market analysis platform. I am looking for a role in banking, where automation and financial analysis meet. I speak four languages.</p>
+    <div class="section-body">
+      <p class="lead">Financial analyst and developer, trained in statistics and modelling. I spent six months at the head office of the Banque de France, in the Finance Department, automating budget and governance reporting end to end. Alongside this, I publish independent equity research through Axone and build Finteker, a market analysis platform. I am looking for a role in banking, where automation and financial analysis meet. I speak four languages.</p>
+    </div>
   </section>
 
   <section id="experience" class="wrap">
     <h2>Experience</h2>
+    <div class="section-body">
 
-    <article class="entry">
-      <div class="entry-head">
-        <h3><span class="org">Banque de France — Head Office</span></h3>
-        <span class="dates">February 2026 — August 2026</span>
-      </div>
-      <p class="meta">Financial Developer and Analyst, internship · Finance Department · Paris</p>
-      <ul>
-        <li>End-to-end automation of the monthly OPEX/CAPEX reporting, distributed to the 9 directorates and the Finance Department</li>
-        <li>Data hub consolidating 17 scattered files into 3 connected SQL databases, cutting a standard analysis from one hour to under a minute, adopted by over 60 users</li>
-        <li>Full-stack local web application (Java, JavaScript, HTML/CSS) giving the same access to the data outside Excel</li>
-        <li>Quarterly governance reporting pipeline, from SharePoint collection to directorate summaries and the materials delivered to senior management</li>
-        <li>Validation of 1.4 million budget lines across 10 financial years, with documented integrity controls, ahead of a French Court of Auditors audit</li>
-        <li>Designed and delivered a four-month weekly training programme in VBA and Python, upskilling over 15 colleagues</li>
-      </ul>
-    </article>
+      <article class="entry">
+        <div class="entry-head">
+          <h3 class="org">Banque de France — Head Office</h3>
+          <span class="dates">February 2026 — August 2026</span>
+        </div>
+        <p class="meta">Financial Developer and Analyst, internship · Finance Department · Paris</p>
+        <ul>
+          <li>End-to-end automation of the monthly OPEX/CAPEX reporting, distributed to the 9 directorates and the Finance Department</li>
+          <li>Data hub consolidating 17 scattered files into 3 connected SQL databases, cutting a standard analysis from one hour to under a minute, adopted by over 60 users</li>
+          <li>Full-stack local web application (Java, JavaScript, HTML/CSS) giving the same access to the data outside Excel</li>
+          <li>Quarterly governance reporting pipeline, from SharePoint collection to directorate summaries and the materials delivered to senior management</li>
+          <li>Validation of 1.4 million budget lines across 10 financial years, with documented integrity controls, ahead of a French Court of Auditors audit</li>
+          <li>Designed and delivered a four-month weekly training programme in VBA and Python, upskilling over 15 colleagues</li>
+        </ul>
+      </article>
 
-    <article class="entry">
-      <div class="entry-head">
-        <h3><span class="org">Crédit Agricole</span></h3>
-        <span class="dates">January 2024 — February 2024</span>
-      </div>
-      <p class="meta">Sales and Data Analyst, internship · Corporate FX Desk · Reims</p>
-      <ul>
-        <li>Power BI dashboard tracking FX hedges for corporate clients, by currency and notional volume</li>
-        <li>Monitoring of market revenue and of the contract maturity schedule</li>
-        <li>VBA automation of the weekly reporting, replacing a manual process</li>
-      </ul>
-    </article>
+      <article class="entry">
+        <div class="entry-head">
+          <h3 class="org">Crédit Agricole</h3>
+          <span class="dates">January 2024 — February 2024</span>
+        </div>
+        <p class="meta">Sales and Data Analyst, internship · Corporate FX Desk · Reims</p>
+        <ul>
+          <li>Power BI dashboard tracking FX hedges for corporate clients, by currency and notional volume</li>
+          <li>Monitoring of market revenue and of the contract maturity schedule</li>
+          <li>VBA automation of the weekly reporting, replacing a manual process</li>
+        </ul>
+      </article>
 
-    <p class="note">Part-time and seasonal student jobs held alongside full-time studies (IKEA, Stokomani, McDonald's), 2021 — 2026.</p>
+      <p class="note">Part-time and seasonal student jobs held alongside full-time studies (IKEA, Stokomani, McDonald's), 2021 — 2026.</p>
+    </div>
   </section>
 
   <section id="projects" class="wrap">
-    <h2>Independent Research and Projects</h2>
+    <h2>Research and projects</h2>
+    <div class="section-body">
 
-    <article class="project">
-      <h3>Axone — Independent Equity Research · Founder</h3>
-      <p>Equity research published monthly, built solely from public filings, with every assumption visible and editable. Each name is triangulated into a weighted football field, 50 % DCF, 35 % trading comparables, 15 % precedent transactions, with a bottom-up WACC and a cross-checked terminal value. Every note ships with its full Excel model and pitchbook. First coverage, Pernod Ricard, target price 108 euros, trading at 8.1x EV/EBITDA against a 12.4x sector median.</p>
-      <p><a href="https://rezi03.github.io/axone/">rezi03.github.io/axone</a></p>
-    </article>
+      <article class="project">
+        <h3>Axone — Independent Equity Research</h3>
+        <p class="meta">Founder</p>
+        <p>Equity research published monthly, built solely from public filings, with every assumption visible and editable. Each name is triangulated into a weighted football field, 50 % DCF, 35 % trading comparables, 15 % precedent transactions, with a bottom-up WACC and a cross-checked terminal value. Every note ships with its full Excel model and pitchbook. First coverage, Pernod Ricard, target price 108 euros, trading at 8.1x EV/EBITDA against a 12.4x sector median.</p>
+        <p class="link"><a href="https://rezi03.github.io/axone/">rezi03.github.io/axone</a></p>
+      </article>
 
-    <article class="project">
-      <h3>Finteker — Financial Intelligence Platform · Founder and lead developer</h3>
-      <p>Full-stack bilingual platform, designed and deployed end to end in Python and Java. It brings together a real-time M&amp;A tracker fed by SEC EDGAR filings, a DCF Lab with sensitivity grids and tornado charts, a bond screener by duration, spread and rating, and a portfolio backtester with rate stress tests. A multi-asset dashboard completes it, with 95 % VaR, Sharpe, Sortino, beta and max drawdown.</p>
-      <p><a href="https://finteker.fr">finteker.fr</a></p>
-    </article>
+      <article class="project">
+        <h3>Finteker — Financial Intelligence Platform</h3>
+        <p class="meta">Founder and lead developer</p>
+        <p>Full-stack bilingual platform, designed and deployed end to end in Python and Java. It brings together a real-time M&amp;A tracker fed by SEC EDGAR filings, a DCF Lab with sensitivity grids and tornado charts, a bond screener by duration, spread and rating, and a portfolio backtester with rate stress tests. A multi-asset dashboard completes it, with 95 % VaR, Sharpe, Sortino, beta and max drawdown.</p>
+        <p class="link"><a href="https://finteker.fr">finteker.fr</a></p>
+      </article>
 
-    <article class="project">
-      <h3>Banking Market Dashboard</h3>
-      <p>Interactive dashboard tracking the major banks from live market data. It brings together the standard technical indicators, RSI, Bollinger bands and MACD, and the risk measures, beta, Sharpe and VaR. PDF reports are generated automatically.</p>
-      <p><a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app">View the dashboard</a></p>
-    </article>
+      <article class="project">
+        <h3>Banking Market Dashboard</h3>
+        <p class="meta">Personal project</p>
+        <p>Interactive dashboard tracking the major banks from live market data. It brings together the standard technical indicators, RSI, Bollinger bands and MACD, and the risk measures, beta, Sharpe and VaR. PDF reports are generated automatically.</p>
+        <p class="link"><a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app">View the dashboard</a></p>
+      </article>
+    </div>
   </section>
 
   <section id="education" class="wrap">
     <h2>Education</h2>
+    <div class="section-body">
 
-    <div class="edu">
-      <div class="entry-head">
-        <p class="degree">University of Reims Champagne-Ardenne</p>
-        <span class="dates">2024 — 2026</span>
+      <div class="edu">
+        <div class="entry-head">
+          <p class="degree">University of Reims Champagne-Ardenne</p>
+          <span class="dates">2024 — 2026</span>
+        </div>
+        <p class="meta">MSc Statistics for Evaluation and Forecasting</p>
+        <p class="meta">Graduated September 2026 · Highest Honours</p>
+        <ul class="grades">
+          <li>20/20 in Quantitative Financial Risk Management</li>
+          <li>16/20 in Time Series and Financial Econometrics</li>
+          <li>16/20 in Big Data Ecosystems</li>
+          <li>Also Machine Learning, NLP, Deep Learning, Data Mining, unsupervised learning</li>
+        </ul>
       </div>
-      <p class="meta">MSc Statistics for Evaluation and Forecasting</p>
-      <p class="meta">Graduated September 2026 · Highest Honours</p>
-      <ul class="grades">
-        <li>20/20 in Quantitative Financial Risk Management</li>
-        <li>16/20 in Time Series and Financial Econometrics</li>
-        <li>16/20 in Big Data Ecosystems</li>
-        <li>Also Machine Learning, NLP, Deep Learning, Data Mining, unsupervised learning</li>
-      </ul>
-    </div>
 
-    <div class="edu">
-      <div class="entry-head">
-        <p class="degree">University of Reims Champagne-Ardenne</p>
-        <span class="dates">2021 — 2024</span>
+      <div class="edu">
+        <div class="entry-head">
+          <p class="degree">University of Reims Champagne-Ardenne</p>
+          <span class="dates">2021 — 2024</span>
+        </div>
+        <p class="meta">BSc Economics and Management, Economic Analysis track</p>
+        <p class="meta">Specialisation in Applied Mathematics and Economic Analysis</p>
       </div>
-      <p class="meta">BSc Economics and Management, Economic Analysis track</p>
-      <p class="meta">Specialisation in Applied Mathematics and Economic Analysis</p>
     </div>
   </section>
 
   <section id="skills" class="wrap">
     <h2>Skills</h2>
-    <dl class="skills">
-      <dt>Programming</dt>
-      <dd>Python | VBA | SQL and PostgreSQL | C++ | C# | R | Java | JavaScript | Git | HTML/CSS</dd>
-      <dt>Finance</dt>
-      <dd>DCF valuation | Comparables and precedent transactions | VaR and Monte Carlo | Backtesting | Rate stress testing | Portfolio optimisation | Financial econometrics</dd>
-      <dt>Data and AI</dt>
-      <dd>Machine Learning | Deep Learning | NLP | Time series | Big Data | Data Mining</dd>
-      <dt>Tools</dt>
-      <dd>Power BI (DAX) | Advanced Excel | Tagetik | Streamlit | Plotly | SharePoint | Bloomberg | PowerPoint</dd>
-    </dl>
+    <div class="section-body">
+      <dl class="skills">
+        <dt>Programming</dt>
+        <dd>Python | VBA | SQL and PostgreSQL | C++ | C# | R | Java | JavaScript | Git | HTML/CSS</dd>
+        <dt>Finance</dt>
+        <dd>DCF valuation | Comparables and precedent transactions | VaR and Monte Carlo | Backtesting | Rate stress testing | Portfolio optimisation | Financial econometrics</dd>
+        <dt>Data and AI</dt>
+        <dd>Machine Learning | Deep Learning | NLP | Time series | Big Data | Data Mining</dd>
+        <dt>Tools</dt>
+        <dd>Power BI (DAX) | Advanced Excel | Tagetik | Streamlit | Plotly | SharePoint | Bloomberg | PowerPoint</dd>
+      </dl>
+    </div>
   </section>
 
   <section id="languages" class="wrap">
     <h2>Languages</h2>
-    <p>French C2 | English C1 | Georgian, native | Russian B2</p>
+    <div class="section-body">
+      <p>French C2 | English C1 | Georgian, native | Russian B2</p>
+    </div>
   </section>
 
   <section id="documents" class="wrap">
     <h2>Documents</h2>
-    <ul class="docs">
-      <li><a href="../assets/cv/cv.pdf">CV (PDF, English)</a></li>
-      <li><a href="../assets/cv/cv_fr.pdf">CV (PDF, French)</a></li>
-      <li><a href="recommendations.html">Recommendation letters</a></li>
-    </ul>
+    <div class="section-body">
+      <ul class="docs">
+        <li><a href="../assets/cv/cv.pdf">CV (PDF, English)</a></li>
+        <li><a href="../assets/cv/cv_fr.pdf">CV (PDF, French)</a></li>
+        <li><a href="recommendations.html">Recommendation letters</a></li>
+      </ul>
+    </div>
   </section>
 
 </main>
