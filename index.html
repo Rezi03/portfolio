@@ -1,686 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rezi Sabashvili | Portfolio</title>
-  <link rel="icon" type="image/png" href="assets/logos/favicon.png" />
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLN2SS4TBC"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-VLN2SS4TBC');
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rezo Sabashvili — Analyste financier et développeur</title>
+<meta name="description" content="Analyste financier et développeur. Automatisation, modélisation et valorisation. Master de statistique, six mois au siège de la Banque de France.">
+<link rel="canonical" href="https://rezi03.github.io/portfolio/">
+<link rel="alternate" hreflang="fr" href="https://rezi03.github.io/portfolio/">
+<link rel="alternate" hreflang="en" href="https://rezi03.github.io/portfolio/en/">
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Rezo Sabashvili — Analyste financier et développeur">
+<meta property="og:description" content="Analyste financier et développeur. Automatisation, modélisation et valorisation. Master de statistique, six mois au siège de la Banque de France.">
+<meta property="og:url" content="https://rezi03.github.io/portfolio/">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="loading">
+<body>
 
-  <!-- INTRO / PRELOADER -->
-  <noscript><style>#intro{display:none!important}</style></noscript>
-  <div id="intro" class="intro-screen" role="status" aria-label="Loading portfolio">
-    <canvas id="introShader" class="intro-shader" aria-hidden="true"></canvas>
-    <div class="intro-inner">
-      <div class="intro-kicker">Portfolio</div>
-      <div class="intro-name"><span>Rezi Sabashvili</span></div>
-      <div class="intro-tag">
-        <span class="lang-en">Specialized in&nbsp;</span><span class="lang-fr" style="display:none">Spécialisé en&nbsp;</span><span
-          class="text-cycle"
-          data-words-en='["Quantitative Finance","Data Science","Artificial Intelligence","Financial Risk"]'
-          data-words-fr='["Finance Quantitative","Data Science","Intelligence Artificielle","Risque Financier"]'><span class="tc-word">Quantitative Finance</span></span>
-      </div>
-      <button id="introEnter" class="intro-cta" type="button">
-        <span class="lang-en">Learn more</span><span class="lang-fr" style="display:none">En savoir plus</span>
-        <span class="intro-cta-arrow" aria-hidden="true">↓</span>
-      </button>
+<nav class="topbar" aria-label="Navigation principale">
+  <div class="wrap">
+    <a href="#profil">Profil</a>
+    <a href="#experience">Expérience</a>
+    <a href="#projets">Projets</a>
+    <a href="#formation">Formation</a>
+    <a href="#competences">Compétences</a>
+    <a href="#documents">Documents</a>
+    <a class="lang" href="en/" hreflang="en" lang="en">EN</a>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <picture>
+      <source srcset="assets/images/portrait.webp" type="image/webp">
+      <img class="portrait" src="assets/images/portrait.jpg" width="160" height="160" alt="Portrait de Rezo Sabashvili">
+    </picture>
+    <div>
+      <h1>Rezo Sabashvili</h1>
+      <p class="role">Analyste financier et développeur · Automatisation et modélisation en finance</p>
+      <p class="place">Paris · Disponible immédiatement</p>
+      <p class="contact-line">
+        <a href="mailto:rezi.sabashvili@outlook.com">rezi.sabashvili@outlook.com</a> ·
+        <a href="tel:+33618579173">+33 6 18 57 91 73</a> ·
+        <a href="https://www.linkedin.com/in/rezisabashvili">LinkedIn</a> ·
+        <a href="https://github.com/Rezi03">GitHub</a> ·
+        <a href="assets/cv/cv_fr.pdf">CV (PDF)</a>
+      </p>
     </div>
   </div>
-  <script>
-  (function(){
-    var html=document.documentElement;
-    // show the intro only once per session — don't replay it when returning from another page
-    var seen=false; try{ seen=sessionStorage.getItem('introSeen')==='1'; }catch(e){}
-    if(seen){ var el0=document.getElementById('intro'); if(el0&&el0.parentNode){ el0.parentNode.removeChild(el0); } return; }
-    html.classList.add('intro-lock');            // scroll stays locked until the user enters
-    function dismiss(){
-      var el=document.getElementById('intro');
-      if(!el||el.classList.contains('intro-done'))return;
-      try{ sessionStorage.setItem('introSeen','1'); }catch(e){}
-      el.classList.add('intro-done');            // smooth fade/dissolve (no slide)
-      html.classList.remove('intro-lock');
-      setTimeout(function(){ if(el&&el.parentNode){ el.parentNode.removeChild(el); } }, 1200);
-    }
-    var btn=document.getElementById('introEnter');
-    if(btn) btn.addEventListener('click', dismiss);
-    document.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key==='Escape') dismiss(); });
-  })();
-  </script>
+</header>
 
-  <div class="background-blobs">
-    <div class="blob blob-1 floating"></div>
-    <div class="blob blob-2 floating-delayed"></div>
-    <div class="blob blob-3 floating-slow"></div>
-  </div>
+<main>
 
-  <!-- AURORA BACKGROUND (aceternity) -->
-  <div class="aurora-bg" aria-hidden="true"></div>
+  <section id="profil" class="wrap">
+    <h2>Profil</h2>
+    <p>Analyste financier et développeur, formé à la statistique et à la modélisation. J'ai passé six mois au siège de la Banque de France, à la Direction Financière, où j'ai automatisé de bout en bout le reporting budgétaire et le reporting de gouvernance. En parallèle, je publie avec Axone une recherche actions indépendante et je développe Finteker, une plateforme d'analyse de marché. Je cherche un poste en banque, sur les métiers où l'automatisation et l'analyse financière se rejoignent. Je parle quatre langues.</p>
+  </section>
 
-<header class="glass-header fade-in">
-    <div class="header-content">
-      <div class="header-left">Rezi Sabashvili</div>
-      <nav class="header-right" id="mainNav">
-        <a href="#about"><span class="lang-en">About</span><span class="lang-fr" style="display:none">À propos</span></a>
-        <a href="#experience"><span class="lang-en">Experience</span><span class="lang-fr" style="display:none">Expérience</span></a>
-        <a href="#finance"><span class="lang-en">Finance</span><span class="lang-fr" style="display:none">Finance</span></a>
-        <a href="#education"><span class="lang-en">Education</span><span class="lang-fr" style="display:none">Formation</span></a>
-        <a href="#skills"><span class="lang-en">Skills</span><span class="lang-fr" style="display:none">Compétences</span></a>
-<button id="theme-toggle" class="theme-toggle" role="switch" aria-label="Toggle dark mode">
-          <span class="tt-thumb">
-            <svg class="tt-i tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg class="tt-i tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </span>
-        </button>
-        <button id="lang-toggle" class="lang-btn"><span class="lang-text">EN</span></button>
-        <button class="btn-primary" onclick="document.getElementById('contactModal').classList.add('active')">Contact</button>
-      </nav>
-      <button class="hamburger" id="menuToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <section id="experience" class="wrap">
+    <h2>Expérience</h2>
 
-  <!-- MARKET TICKER TAPE -->
-  <div class="ticker-tape" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="tk"><span class="tk-sym">CAC 40</span><span class="tk-val">8 142.30</span><span class="tk-chg up">▲ 0.62%</span></span>
-      <span class="tk"><span class="tk-sym">S&amp;P 500</span><span class="tk-val">5 487.03</span><span class="tk-chg up">▲ 0.31%</span></span>
-      <span class="tk"><span class="tk-sym">EURO STOXX 50</span><span class="tk-val">4 968.21</span><span class="tk-chg down">▼ 0.18%</span></span>
-      <span class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.0843</span><span class="tk-chg up">▲ 0.09%</span></span>
-      <span class="tk"><span class="tk-sym">OAT 10Y</span><span class="tk-val">3.124%</span><span class="tk-chg down">▼ 2.1bp</span></span>
-      <span class="tk"><span class="tk-sym">GOLD</span><span class="tk-val">2 341.80</span><span class="tk-chg up">▲ 0.44%</span></span>
-      <span class="tk"><span class="tk-sym">BRENT</span><span class="tk-val">84.17</span><span class="tk-chg down">▼ 0.73%</span></span>
-      <span class="tk"><span class="tk-sym">VIX</span><span class="tk-val">12.84</span><span class="tk-chg down">▼ 1.92%</span></span>
-      <span class="tk"><span class="tk-sym">€STR</span><span class="tk-val">3.658%</span><span class="tk-chg flat">— 0.0bp</span></span>
-      <!-- duplicate for seamless loop -->
-      <span class="tk"><span class="tk-sym">CAC 40</span><span class="tk-val">8 142.30</span><span class="tk-chg up">▲ 0.62%</span></span>
-      <span class="tk"><span class="tk-sym">S&amp;P 500</span><span class="tk-val">5 487.03</span><span class="tk-chg up">▲ 0.31%</span></span>
-      <span class="tk"><span class="tk-sym">EURO STOXX 50</span><span class="tk-val">4 968.21</span><span class="tk-chg down">▼ 0.18%</span></span>
-      <span class="tk"><span class="tk-sym">EUR/USD</span><span class="tk-val">1.0843</span><span class="tk-chg up">▲ 0.09%</span></span>
-      <span class="tk"><span class="tk-sym">OAT 10Y</span><span class="tk-val">3.124%</span><span class="tk-chg down">▼ 2.1bp</span></span>
-      <span class="tk"><span class="tk-sym">GOLD</span><span class="tk-val">2 341.80</span><span class="tk-chg up">▲ 0.44%</span></span>
-      <span class="tk"><span class="tk-sym">BRENT</span><span class="tk-val">84.17</span><span class="tk-chg down">▼ 0.73%</span></span>
-      <span class="tk"><span class="tk-sym">VIX</span><span class="tk-val">12.84</span><span class="tk-chg down">▼ 1.92%</span></span>
-      <span class="tk"><span class="tk-sym">€STR</span><span class="tk-val">3.658%</span><span class="tk-chg flat">— 0.0bp</span></span>
-    </div>
-  </div>
-
-  <!-- FINTEKER NAV PREVIEW -->
-  <div id="experience-preview" class="nav-preview">
-    <div class="nav-preview-inner">
-      <div class="nav-preview-title">Banque de France</div>
-      <div class="nav-preview-tags"><span>Python</span><span>Power BI</span><span>VBA</span><span>NLP</span></div>
-      <div class="nav-preview-desc"><span class="lang-en">Financial Developer &amp; Analyst Intern · Direction Financière · Paris HQ · Feb 2026 — Present</span><span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire · Direction Financière · Siège Social · Fév 2026 — En cours</span></div>
-    </div>
-  </div>
-
-  <div id="finteker-preview" class="nav-preview">
-    <div class="nav-preview-inner">
-      <div class="nav-preview-title">Finteker Intelligence</div>
-      <div class="nav-preview-tags"><span>DCF</span><span>Backtesting</span><span>IA</span></div>
-      <div class="nav-preview-desc"><span class="lang-en">Financial analysis platform — market data, predictive tools, learning resources.</span><span class="lang-fr" style="display:none">Plateforme d'analyse financière — données de marché, outils prédictifs, ressources pédagogiques.</span></div>
-      <a href="https://finteker.fr" target="_blank" class="nav-preview-link">finteker.fr →</a>
-    </div>
-  </div>
-
-  <main class="container">
-
-    <section class="hero fade-in">
-      <div class="hero-content">
-        <div class="badge">
-          <span class="lang-en">Founder of <a href="https://finteker.fr" target="_blank" class="badge-link">Finteker</a> · Financial Analysis Platform (DCF, Backtesting, AI)</span>
-          <span class="lang-fr" style="display:none">Fondateur de <a href="https://finteker.fr" target="_blank" class="badge-link">Finteker</a> · Plateforme d'Analyse Financière (DCF, Backtesting, IA)</span>
-        </div>
-
-        <h1 class="gradient-text">
-          <span class="lang-en">From raw data<br>to the C-suite.</span>
-          <span class="lang-fr" style="display:none">De la donnée brute<br>aux décisions de la direction.</span><span class="bbg-cursor">▌</span>
-        </h1>
-
-        <div class="bbg-terminal fade-in">
-          <div class="bbg-row"><span class="bbg-tkey lang-en">STATUS</span><span class="bbg-tkey lang-fr" style="display:none">STATUT</span><span class="bbg-dots"></span><span class="bbg-tval bbg-orange"><span class="bbg-live-dot"></span><span class="lang-en">ACTIVE — BdF · Direction Financière</span><span class="lang-fr" style="display:none">ACTIF — BdF · Direction Financière</span></span></div>
-          <div class="bbg-row"><span class="bbg-tkey">FINTEKER</span><span class="bbg-dots"></span><span class="bbg-tval"><span class="lang-en">Founder · DCF · Backtesting · AI</span><span class="lang-fr" style="display:none">Fondateur · DCF · Backtesting · IA</span></span></div>
-          <div class="bbg-row"><span class="bbg-tkey lang-en">LANGUAGES</span><span class="bbg-tkey lang-fr" style="display:none">LANGUES</span><span class="bbg-dots"></span><span class="bbg-tval">FR C2 &nbsp;·&nbsp; EN C1 &nbsp;·&nbsp; GEO Native &nbsp;·&nbsp; RU B2</span></div>
-        </div>
+    <article class="entry">
+      <div class="entry-head">
+        <h3><span class="org">Banque de France — Siège</span></h3>
+        <span class="dates">Février 2026 — Août 2026</span>
       </div>
-    </section>
-
-    <!-- SYNTHESIS / OVERVIEW (Container Scroll) -->
-    <section id="synthesis" class="cs-section">
-      <div class="cs-title" id="csTitle">
-        <span class="cs-kicker"><span class="lang-en">Overview</span><span class="lang-fr" style="display:none">Aperçu</span></span>
-        <h2>
-          <span class="lang-en">The profile at a glance</span>
-          <span class="lang-fr" style="display:none">Le profil en un coup d'œil</span>
-        </h2>
-      </div>
-      <div class="cs-perspective">
-        <div class="cs-card" id="csCard">
-          <div class="synth-grid">
-            <div class="synth-photo">
-              <img src="assets/images/me.png" alt="Rezi Sabashvili" />
-            </div>
-            <div class="synth-info">
-              <div class="synth-name cascade-text">Rezi Sabashvili</div>
-              <div class="synth-role">
-                <span class="lang-en">Financial Developer &amp; Analyst · Quant / Data / AI</span>
-                <span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier · Quant / Data / IA</span>
-              </div>
-              <div class="synth-stats">
-                <div class="synth-stat"><span class="ss-val">MSc</span><span class="ss-lbl"><span class="lang-en">Highest Honors · Statistics</span><span class="lang-fr" style="display:none">Mention Très Bien · Statistique</span></span></div>
-                <div class="synth-stat"><span class="ss-val">Banque de France</span><span class="ss-lbl"><span class="lang-en">Direction Financière · Paris HQ</span><span class="lang-fr" style="display:none">Direction Financière · Siège</span></span></div>
-                <div class="synth-stat"><span class="ss-val">Finteker</span><span class="ss-lbl"><span class="lang-en">Founder · Analysis Platform</span><span class="lang-fr" style="display:none">Fondateur · Plateforme d'Analyse</span></span></div>
-                <div class="synth-stat"><span class="ss-val">4</span><span class="ss-lbl"><span class="lang-en">Languages · FR EN GEO RU</span><span class="lang-fr" style="display:none">Langues · FR EN GEO RU</span></span></div>
-              </div>
-              <div class="synth-tags">
-                <span>Python</span><span>VBA</span><span>SQL</span><span>Power BI</span><span>Machine Learning</span><span>DCF</span><span>VaR · Monte Carlo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Profile</span>
-          <span class="lang-fr" style="display:none">Profil</span>
-        </h2>
-      </div>
-      <div class="bento-grid">
-        <div class="bento-card large glass-panel hover-lift">
-          <h3>
-            <span class="lang-en">About Me</span>
-            <span class="lang-fr" style="display:none">À propos</span>
-          </h3>
-          <p class="justified-text magic-text">
-            <span class="lang-en">MSc in Statistics for Evaluation and Forecasting (Highest Honors), University of Reims. Currently Financial Developer &amp; Analyst Intern at the Banque de France. Profile spanning data science, AI, quantitative finance, and financial risk.</span>
-            <span class="lang-fr" style="display:none">Master en Statistique pour l’Évaluation et la Prévision (Mention Très Bien), Université de Reims. Développeur &amp; Analyste Financier en stage à la Banque de France. Profil couvrant la data science, l’IA, la finance quantitative et le risque financier.</span>
-          </p>
-        </div>
-
-<a href="http://www.linkedin.com/in/rezisabashvili" target="_blank" class="bento-card small highlight hover-lift bdf-final-card">
-          
-          <div class="bdf-text-top">
-              <h3>
-                <span class="lang-en">Financial Developer & Analyst</span>
-                <span class="lang-fr" style="display:none">Développeur & Analyste Financier</span>
-              </h3>
-              <p>
-                <span class="lang-en">Banque de France · Direction Financière</span>
-                <span class="lang-fr" style="display:none">Banque de France · Direction Financière</span>
-              </p>
-          </div>
-
-          <div class="bdf-logo-center">
-              <img src="assets/logos/bdf.png" alt="BdF" class="bdf-logo-img">
-          </div>
-
-          <div class="bdf-status-bottom">
-             <div class="status-dot blue"></div>
-             <span class="lang-en">Internship (In Progress)</span>
-             <span class="lang-fr" style="display:none">Stage (En cours)</span>
-          </div>
-
-        </a>
-      </div>
-
-    </section>
-
-    <section id="experience" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Experience</span>
-          <span class="lang-fr" style="display:none">Expériences</span>
-        </h2>
-      </div>
-
-      <div class="exp-subsection-label">
-        <span class="lang-en">Current Role</span>
-        <span class="lang-fr" style="display:none">Poste Actuel</span>
-      </div>
-
-      <!-- BdF ENTRY -->
-      <div class="etv-entry glass-panel">
-        <div class="etv-header">
-          <div class="etv-left">
-            <div class="etv-org">Banque de France · Direction Financière</div>
-            <div class="etv-role"><span class="lang-en">Financial Developer &amp; Analyst Intern</span><span class="lang-fr" style="display:none">Développeur &amp; Analyste Financier Stagiaire</span></div>
-            <div class="etv-meta"><span class="lang-en">Paris (HQ) · SBCGP · Cross-functional division</span><span class="lang-fr" style="display:none">Paris (Siège) · SBCGP · Pôle transverse</span></div>
-          </div>
-          <div class="etv-date">
-            <div class="status-dot blue"></div>
-            <span class="lang-en">Feb 2026 — Present</span>
-            <span class="lang-fr" style="display:none">Fév 2026 — En cours</span>
-          </div>
-        </div>
-        <div class="etv-desc magic-text">
-          <span class="lang-en">Cross-functional division overseeing the entire IT investment portfolio of the Banque de France — budget consolidation, project governance, and financial oversight across all directorates.</span>
-          <span class="lang-fr" style="display:none">Pôle transverse pilotant l'ensemble du portefeuille informatique de la Banque de France — consolidation budgétaire, gouvernance des projets et supervision financière de toutes les directions.</span>
-        </div>
-        <div class="missions-grid">
-          <div class="mission-card glass-panel hover-lift" data-mission="hub">
-            <div class="mission-tags"><span>Excel</span><span>VBA</span><span>SQL</span></div>
-            <h4>Financial Data Hub</h4>
-            <p><span class="lang-en">Live SQL databases wired into a single Excel hub — one source of truth replacing scattered manual files across the team.</span><span class="lang-fr" style="display:none">Bases SQL connectées en temps réel dans un hub Excel centralisé — source unique remplaçant les fichiers dispersés.</span></p>
-            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
-          </div>
-          <div class="mission-card glass-panel hover-lift" data-mission="reporting">
-            <div class="mission-tags"><span>Python</span><span>Power BI</span><span>PowerPoint</span></div>
-            <h4><span class="lang-en">Reporting Automation</span><span class="lang-fr" style="display:none">Automatisation du Reporting</span></h4>
-            <p><span class="lang-en">Python pipeline from raw data to Power BI — CPPI reports delivered autonomously to the First Deputy Governor.</span><span class="lang-fr" style="display:none">Pipeline Python des données brutes au Power BI — rapports CPPI livrés automatiquement au Premier Sous-Gouverneur.</span></p>
-            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
-          </div>
-          <div class="mission-card glass-panel hover-lift" data-mission="cppi">
-            <div class="mission-tags"><span>Python</span><span>VBA</span><span>SharePoint</span><span>NLP</span></div>
-            <h4><span class="lang-en">Budget Collection System</span><span class="lang-fr" style="display:none">Système de Collecte Budgétaire</span></h4>
-            <p><span class="lang-en">9 directorates submit quarterly budgets via SharePoint templates — auto-consolidated into governance presentations and Power BI dashboards.</span><span class="lang-fr" style="display:none">9 directions saisissent leurs budgets trimestriels via SharePoint — consolidation automatique en présentations de gouvernance et tableaux Power BI.</span></p>
-            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
-          </div>
-          <div class="mission-card glass-panel hover-lift" data-mission="training">
-            <div class="mission-tags"><span>VBA</span><span>Python</span><span>Training</span></div>
-            <h4><span class="lang-en">Training Instructor</span><span class="lang-fr" style="display:none">Formateur</span></h4>
-            <p><span class="lang-en">Designed and led VBA &amp; Python courses for colleagues in the Financial Directorate, focused on financial automation.</span><span class="lang-fr" style="display:none">Conception et animation de cours VBA &amp; Python pour les collègues de la Direction Financière, axés sur l'automatisation financière.</span></p>
-            <div class="mission-expand"><span class="lang-en">View details</span><span class="lang-fr" style="display:none">Voir les détails</span><span class="expand-arrow">→</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-subsection-label" style="margin-top:2rem;">
-        <span class="lang-en">Previous Roles</span>
-        <span class="lang-fr" style="display:none">Expériences Précédentes</span>
-      </div>
-
-      <!-- CA ENTRY -->
-      <div class="etv-entry glass-panel">
-        <div class="etv-header">
-          <div class="etv-left">
-            <div class="etv-org">Crédit Agricole</div>
-            <div class="etv-role"><span class="lang-en">Sales &amp; Data Analyst Intern</span><span class="lang-fr" style="display:none">Analyste Commercial &amp; Data Stagiaire</span></div>
-            <div class="etv-meta">Reims</div>
-          </div>
-          <div class="etv-date">Jan – Feb 2024</div>
-        </div>
-        <ul class="ca-bullets">
-          <li><span class="lang-en">Designed interactive Power BI dashboards to monitor commercial KPIs</span><span class="lang-fr" style="display:none">Conception de dashboards Power BI interactifs pour le suivi des KPIs commerciaux</span></li>
-          <li><span class="lang-en">Developed VBA scripts to automate weekly reporting, eliminating manual tracking</span><span class="lang-fr" style="display:none">Scripts VBA pour automatiser le reporting hebdomadaire et supprimer le suivi manuel</span></li>
-        </ul>
-      </div>
-
-    </section>
-
-<section id="finance" class="fade-in">
-  <div class="section-header">
-    <h2>
-      <span class="lang-en">Finance Projects</span>
-      <span class="lang-fr" style="display:none">Projets Finance</span>
-    </h2>
-  </div>
-  <div class="projects-wrapper">
-
-    <!-- ===== Carte vedette pleine largeur ===== -->
-    <article class="project-card project-card--featured glass-panel hover-lift">
-      <div class="media-frame">
-        <img src="assets/screen/axone.png" alt="Axone Equity Research preview" loading="lazy" />
-      </div>
-      <div class="card-content">
-        <div>
-          <div class="tags"><span>Excel/VBA</span><span>Python</span><span>DCF</span><span>Comps</span><span>PowerPoint</span><span>Equity Research</span></div>
-          <h3>Axone — Independent Equity Research</h3>
-          <p class="justified-text">
-            <span class="lang-en">Independent, equity research published monthly. Each name is valued the sell-side way — DCF, trading comps and precedent transactions triangulated into a single target — and ships with its full Excel model and pitchbook. First deep-dive: Pernod Ricard SA (RI FP).</span>
-            <span class="lang-fr" style="display:none">Recherche actions indépendante, publiée chaque mois. Chaque valeur est analysée comme côté sell-side — DCF, comparables boursiers et transactions précédentes triangulés en un objectif unique — livrée avec son modèle Excel complet et son pitchbook. Première analyse : Pernod Ricard SA (RI FP).</span>
-          </p>
-        </div>
-        <a href="https://rezi03.github.io/axone/" target="_blank" class="btn-gradient blue">
-          <span class="lang-en">Visit Axone</span>
-          <span class="lang-fr" style="display:none">Voir Axone</span>
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+      <p class="meta">Développeur et analyste financier, stage · Direction Financière · Paris</p>
+      <ul>
+        <li>Automatisation intégrale du reporting OPEX/CAPEX mensuel, diffusé aux 9 directions et à la Direction Financière</li>
+        <li>Hub de données consolidant 17 fichiers dispersés en 3 bases SQL, temps d'analyse ramené d'une heure à moins d'une minute, adopté par plus de 60 agents</li>
+        <li>Application web locale full-stack (Java, JavaScript, HTML/CSS) donnant le même accès aux données hors Excel</li>
+        <li>Pipeline de reporting trimestriel de gouvernance, de la collecte SharePoint aux synthèses directionnelles et aux supports remis à la direction générale</li>
+        <li>Fiabilisation de 1,4 million de lignes budgétaires sur 10 exercices, avec contrôles d'intégrité documentés, en vue d'un audit de la Cour des comptes</li>
+        <li>Conception et animation d'un cycle de formation hebdomadaire de quatre mois en VBA et Python, plus de 15 collègues formés</li>
+      </ul>
     </article>
 
-    <!-- ===== Banking Market Dashboard ===== -->
-    <article class="project-card glass-panel hover-lift">
-      <div class="media-frame">
-        <img src="assets/screen/stre.png" alt="Banking Market Dashboard preview" loading="lazy" />
+    <article class="entry">
+      <div class="entry-head">
+        <h3><span class="org">Crédit Agricole</span></h3>
+        <span class="dates">Janvier 2024 — Février 2024</span>
       </div>
-      <div class="card-content">
-        <div>
-          <div class="tags"><span>Python</span><span>Streamlit</span><span>Yahoo Finance API</span></div>
-          <h3>Banking Market Dashboard</h3>
-          <p class="justified-text">
-            <span class="lang-en">Interactive dashboard tracking major banks — live price data, technical indicators (RSI, Bollinger, MACD), risk metrics (Beta, Sharpe, VaR), and automated PDF reports.</span>
-            <span class="lang-fr" style="display:none">Dashboard interactif sur les grandes banques — données en temps réel, indicateurs techniques (RSI, Bollinger, MACD), métriques de risque (Bêta, Sharpe, VaR) et rapports PDF automatisés.</span>
-          </p>
-        </div>
-        <a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app" target="_blank" class="btn-gradient blue">
-          <span class="lang-en">View Dashboard</span>
-          <span class="lang-fr" style="display:none">Voir le Dashboard</span>
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+      <p class="meta">Analyste commercial et data, stage · Desk Change Corporate · Reims</p>
+      <ul>
+        <li>Tableau de bord Power BI de suivi des couvertures de change pour la clientèle entreprises, par devise et par volume notionnel</li>
+        <li>Suivi du PNB de marché et de l'échéancier des tombées de contrats</li>
+        <li>Automatisation en VBA du reporting hebdomadaire, en remplacement d'un suivi manuel</li>
+      </ul>
     </article>
 
-    <!-- ===== Finteker Intelligence ===== -->
-    <article class="project-card glass-panel hover-lift">
-      <div class="media-frame">
-        <img src="assets/screen/finteker.png" alt="Finteker Intelligence preview" loading="lazy" />
-      </div>
-      <div class="card-content">
-        <div>
-          <div class="tags"><span>Python</span><span>Java</span><span>HTML/CSS</span><span>Chatbot</span><span>API</span></div>
-          <h3>Finteker Intelligence</h3>
-          <p class="justified-text">
-            <span class="lang-en">Finance education platform centralizing market news, learning resources, and interactive predictive analysis tools — built and deployed end-to-end.</span>
-            <span class="lang-fr" style="display:none">Plateforme d'éducation financière centralisant actualités boursières, ressources d'apprentissage et outils d'analyse prédictive — conçue et déployée de A à Z.</span>
-          </p>
-        </div>
-        <a href="https://finteker.fr" target="_blank" class="btn-gradient blue">
-          <span class="lang-en">Visit Platform</span>
-          <span class="lang-fr" style="display:none">Voir la Plateforme</span>
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+    <p class="note">Emplois étudiants à temps partiel et saisonniers menés en parallèle d'études à temps plein (IKEA, Stokomani, McDonald's), 2021 — 2026.</p>
+  </section>
+
+  <section id="projets" class="wrap">
+    <h2>Recherche et projets indépendants</h2>
+
+    <article class="project">
+      <h3>Axone — Recherche actions indépendante · Fondateur</h3>
+      <p>Recherche actions publiée chaque mois, construite uniquement à partir de documents publics, avec toutes les hypothèses visibles et modifiables. Chaque valeur est triangulée en football field pondéré, DCF à 50 %, comparables boursiers à 35 %, transactions précédentes à 15 %, avec un WACC construit bottom-up et une valeur terminale cross-checkée. Chaque analyse est livrée avec son modèle Excel complet et son pitchbook. Première couverture, Pernod Ricard, objectif 108 euros, décote de 8,1x EV/EBITDA contre 12,4x pour la médiane sectorielle.</p>
+      <p><a href="https://rezi03.github.io/axone/">rezi03.github.io/axone</a></p>
     </article>
 
+    <article class="project">
+      <h3>Finteker — Plateforme d'intelligence financière · Fondateur et développeur</h3>
+      <p>Plateforme full-stack bilingue, conçue et déployée de bout en bout en Python et Java. Elle réunit un M&amp;A Tracker alimenté en temps réel par les filings SEC EDGAR, un DCF Lab avec grilles de sensibilité et tornado charts, un screener obligataire par duration, spread et rating, et un backtester de portefeuilles avec stress tests de taux. Un tableau de bord multi-actifs complète l'ensemble, avec VaR 95 %, Sharpe, Sortino, beta et max drawdown.</p>
+      <p><a href="https://finteker.fr">finteker.fr</a></p>
+    </article>
+
+    <article class="project">
+      <h3>Banking Market Dashboard</h3>
+      <p>Tableau de bord interactif de suivi des grandes banques, à partir des données de marché en temps réel. Il réunit les indicateurs techniques usuels, RSI, bandes de Bollinger et MACD, et les mesures de risque, bêta, Sharpe et VaR. Les rapports PDF sont générés automatiquement.</p>
+      <p><a href="https://project-portfolio-uif5tvjqcbi55pbxlstumv.streamlit.app">Voir le tableau de bord</a></p>
+    </article>
+  </section>
+
+  <section id="formation" class="wrap">
+    <h2>Formation</h2>
+
+    <div class="edu">
+      <div class="entry-head">
+        <p class="degree">Université de Reims Champagne-Ardenne</p>
+        <span class="dates">2024 — 2026</span>
+      </div>
+      <p class="meta">Master Analyse et Politique Économique, parcours Statistique pour l'Évaluation et la Prévision</p>
+      <p class="meta">Diplômé en septembre 2026 · Mention Très Bien</p>
+      <ul class="grades">
+        <li>20/20 en Gestion des Risques Quantitatifs Financiers</li>
+        <li>16/20 en Séries Temporelles et Économétrie Financière</li>
+        <li>16/20 en Écosystèmes Big Data</li>
+        <li>Également Machine Learning, NLP, Deep Learning, Data Mining, apprentissage non supervisé</li>
+      </ul>
+    </div>
+
+    <div class="edu">
+      <div class="entry-head">
+        <p class="degree">Université de Reims Champagne-Ardenne</p>
+        <span class="dates">2021 — 2024</span>
+      </div>
+      <p class="meta">Licence Économie et Gestion, parcours Analyse Économique</p>
+      <p class="meta">Spécialisation Mathématiques Appliquées et Analyse Économique</p>
+    </div>
+  </section>
+
+  <section id="competences" class="wrap">
+    <h2>Compétences</h2>
+    <dl class="skills">
+      <dt>Programmation</dt>
+      <dd>Python | VBA | SQL et PostgreSQL | C++ | C# | R | Java | JavaScript | Git | HTML/CSS</dd>
+      <dt>Finance</dt>
+      <dd>Valorisation DCF | Comparables et transactions précédentes | VaR et Monte Carlo | Backtesting | Stress tests de taux | Optimisation de portefeuille | Économétrie financière</dd>
+      <dt>Data et IA</dt>
+      <dd>Machine Learning | Deep Learning | NLP | Séries temporelles | Big Data | Data Mining</dd>
+      <dt>Outils</dt>
+      <dd>Power BI (DAX) | Excel avancé | Tagetik | Streamlit | Plotly | SharePoint | Bloomberg | PowerPoint</dd>
+    </dl>
+  </section>
+
+  <section id="langues" class="wrap">
+    <h2>Langues</h2>
+    <p>Français C2 | Anglais C1 | Géorgien, langue maternelle | Russe B2</p>
+  </section>
+
+  <section id="documents" class="wrap">
+    <h2>Documents</h2>
+    <ul class="docs">
+      <li><a href="assets/cv/cv_fr.pdf">CV (PDF, français)</a></li>
+      <li><a href="assets/cv/cv.pdf">CV (PDF, anglais)</a></li>
+      <li><a href="recommandations.html">Lettres de recommandation</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © 2026 Rezo Sabashvili ·
+    <a href="mailto:rezi.sabashvili@outlook.com">rezi.sabashvili@outlook.com</a> ·
+    <a href="https://www.linkedin.com/in/rezisabashvili">LinkedIn</a> ·
+    <a href="https://github.com/Rezi03">GitHub</a>
   </div>
-</section>
+</footer>
 
-    <section id="education" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Education</span>
-          <span class="lang-fr" style="display:none">Formation</span>
-        </h2>
-      </div>
-
-      <div class="edu-grid">
-
-        <div class="edu-card glass-panel hover-lift">
-          <div class="edu-header">
-            <div class="edu-degree">
-              <span class="lang-en">MSc Statistics for Evaluation &amp; Forecasting</span>
-              <span class="lang-fr" style="display:none">Master Statistique pour l'Évaluation et la Prévision</span>
-            </div>
-            <div class="edu-school">
-              <span class="lang-en">University of Reims · 2024–2026</span>
-              <span class="lang-fr" style="display:none">Université de Reims · 2024–2026</span>
-            </div>
-            <div class="edu-honor">
-              <span class="lang-en">Highest Honors</span>
-              <span class="lang-fr" style="display:none">Mention Très Bien</span>
-            </div>
-          </div>
-          <div class="edu-courses">
-            <div class="edu-course-highlight">
-              <span class="course-grade perfect">20/20</span>
-              <span class="lang-en">Quantitative Financial Risk Management</span>
-              <span class="lang-fr" style="display:none">Gestion des Risques Quantitatifs Financiers</span>
-            </div>
-            <div class="edu-course-highlight">
-              <span class="course-grade">16/20</span>
-              <span class="lang-en">Time Series &amp; Financial Econometrics</span>
-              <span class="lang-fr" style="display:none">Séries Temporelles &amp; Économétrie Financière</span>
-            </div>
-            <div class="edu-course-highlight">
-              <span class="course-grade">16/20</span>
-              <span class="lang-en">Big Data Ecosystems</span>
-              <span class="lang-fr" style="display:none">Écosystèmes Big Data</span>
-            </div>
-            <div class="edu-tags">
-              <span>NLP</span><span>Deep Learning</span><span>Data Mining</span><span class="lang-en">Unsupervised Learning</span><span class="lang-fr" style="display:none">Apprentissage Non-Supervisé</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="edu-side">
-          <div class="edu-card-small glass-panel hover-lift">
-            <div class="edu-degree">
-              <span class="lang-en">BSc Economics &amp; Management</span>
-              <span class="lang-fr" style="display:none">Licence Économie &amp; Gestion</span>
-            </div>
-            <div class="edu-school">
-              <span class="lang-en">University of Reims · 2021–2024</span>
-              <span class="lang-fr" style="display:none">Université de Reims · 2021–2024</span>
-            </div>
-            <div class="edu-honor">
-              <span class="lang-en">With Honors · Applied Mathematics &amp; Economic Analysis</span>
-              <span class="lang-fr" style="display:none">Mention Bien · Mathématiques Appliquées &amp; Analyse Économique</span>
-            </div>
-          </div>
-
-          <div class="edu-card-small glass-panel hover-lift amf-card">
-            <div class="edu-degree">
-              <span class="lang-en">AMF Certification</span>
-              <span class="lang-fr" style="display:none">Certification AMF</span>
-            </div>
-            <div class="edu-school">
-              <span class="lang-en">Autorité des Marchés Financiers</span>
-              <span class="lang-fr" style="display:none">Autorité des Marchés Financiers</span>
-            </div>
-            <div class="edu-honor amf-status">
-              <span class="status-dot blue"></span>
-              <span class="lang-en">In preparation</span>
-              <span class="lang-fr" style="display:none">En préparation</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <section id="skills" class="fade-in">
-      <div class="section-header">
-        <h2>
-          <span class="lang-en">Skills</span>
-          <span class="lang-fr" style="display:none">Compétences</span>
-        </h2>
-      </div>
-      <div class="skills-grid">
-
-        <div class="skill-group glass-panel">
-          <div class="skill-group-title"><span class="lang-en">Programming</span><span class="lang-fr" style="display:none">Programmation</span></div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span><span class="skill-tag">VBA</span><span class="skill-tag">SQL</span>
-            <span class="skill-tag">R</span><span class="skill-tag">Java</span><span class="skill-tag">Git</span>
-            <span class="skill-tag">HTML / CSS</span>
-          </div>
-        </div>
-
-        <div class="skill-group glass-panel">
-          <div class="skill-group-title"><span class="lang-en">AI &amp; Data Science</span><span class="lang-fr" style="display:none">IA &amp; Data Science</span></div>
-          <div class="skill-tags">
-            <span class="skill-tag"><span class="lang-en">Machine Learning</span><span class="lang-fr" style="display:none">Machine Learning</span></span>
-            <span class="skill-tag">Deep Learning</span>
-            <span class="skill-tag">NLP</span>
-            <span class="skill-tag">Big Data</span>
-            <span class="skill-tag"><span class="lang-en">Time Series</span><span class="lang-fr" style="display:none">Séries Temporelles</span></span>
-            <span class="skill-tag">Data Mining</span>
-          </div>
-        </div>
-
-        <div class="skill-group glass-panel">
-          <div class="skill-group-title"><span class="lang-en">Quantitative Finance</span><span class="lang-fr" style="display:none">Finance Quantitative</span></div>
-          <div class="skill-tags">
-            <span class="skill-tag">VaR · Monte Carlo</span>
-            <span class="skill-tag">DCF</span>
-            <span class="skill-tag"><span class="lang-en">Portfolio Optimization (Markowitz)</span><span class="lang-fr" style="display:none">Optimisation de Portefeuille (Markowitz)</span></span>
-            <span class="skill-tag"><span class="lang-en">Financial Econometrics</span><span class="lang-fr" style="display:none">Économétrie Financière</span></span>
-            <span class="skill-tag"><span class="lang-en">Market Analysis</span><span class="lang-fr" style="display:none">Analyse de Marché</span></span>
-            <span class="skill-tag"><span class="lang-en">Budget Control &amp; Reporting</span><span class="lang-fr" style="display:none">Contrôle Budgétaire &amp; Reporting</span></span>
-          </div>
-        </div>
-
-        <div class="skill-group glass-panel">
-          <div class="skill-group-title">Tools</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Power BI (DAX)</span>
-            <span class="skill-tag"><span class="lang-en">Excel (Advanced)</span><span class="lang-fr" style="display:none">Excel (Avancé)</span></span>
-            <span class="skill-tag">Streamlit</span><span class="skill-tag">Plotly</span>
-            <span class="skill-tag">SharePoint</span><span class="skill-tag">PowerPoint</span>
-          </div>
-        </div>
-
-        <div class="skill-group glass-panel skill-group-wide">
-          <div class="skill-group-title"><span class="lang-en">Languages &amp; Certifications</span><span class="lang-fr" style="display:none">Langues &amp; Certifications</span></div>
-          <div class="skill-tags">
-            <span class="skill-tag"><span class="lang-en">French — C2 (Bilingual)</span><span class="lang-fr" style="display:none">Français — C2 (Bilingue)</span></span>
-            <span class="skill-tag"><span class="lang-en">Georgian — Native</span><span class="lang-fr" style="display:none">Géorgien — Natif</span></span>
-            <span class="skill-tag"><span class="lang-en">English — C1 (Professional)</span><span class="lang-fr" style="display:none">Anglais — C1 (Professionnel)</span></span>
-            <span class="skill-tag"><span class="lang-en">Russian — B2 (Fluent)</span><span class="lang-fr" style="display:none">Russe — B2 (Courant)</span></span>
-            <span class="skill-tag amf-tag"><span class="lang-en">AMF Certification — In preparation</span><span class="lang-fr" style="display:none">Certification AMF — En préparation</span></span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="documents" class="fade-in">
-       <div class="section-header">
-        <h2>
-          <span class="lang-en">Downloads & References</span>
-          <span class="lang-fr" style="display:none">Téléchargements & Références</span>
-        </h2>
-      </div>
-      <div class="bento-grid">
-        <div class="bento-card file-card glass-panel hover-lift">
-          <h3>
-             <span class="lang-en">Resume / CV</span>
-             <span class="lang-fr" style="display:none">Mon CV</span>
-          </h3>
-          <p>
-            <span class="lang-en">Available in English.</span>
-            <span class="lang-fr" style="display:none">Disponible en français.</span>
-          </p>
-          <a href="assets/cv/cv.pdf" target="_blank" class="btn-outline" id="cv-link">
-            <span class="lang-en">Download CV (EN)</span>
-            <span class="lang-fr" style="display:none">Télécharger le CV (FR)</span>
-            <span class="btn-arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-
-        <div class="bento-card file-card glass-panel hover-lift">
-          <h3>
-            <span class="lang-en">Recommendations</span>
-            <span class="lang-fr" style="display:none">Recommandations</span>
-          </h3>
-          <p>
-            <span class="lang-en">Letters from professors and researchers.</span>
-            <span class="lang-fr" style="display:none">Lettres de professeurs et chercheurs.</span>
-          </p>
-          <a href="projects/recommendations.html" class="btn-outline">
-             <span class="lang-en">Read Letters</span>
-             <span class="lang-fr" style="display:none">Lire les lettres</span>
-             <span class="btn-arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="fade-in">
-    <div class="footer-container">
-      <div class="footer-left">
-        <p>&copy; Rezi Sabashvili.</p>
-      </div>
-      <div class="footer-right">
-        <a href="#" onclick="event.preventDefault();document.getElementById('emailChoiceModal').classList.add('active')"><img src="assets/logos/mail.png" alt="Email" class="footer-icon"></a>
-        <a href="https://github.com/Rezi03" target="_blank"><img src="assets/logos/github.png" alt="GitHub" class="footer-icon"></a>
-        <a href="http://www.linkedin.com/in/rezisabashvili" target="_blank"><img src="assets/logos/linkedin.png" alt="LinkedIn" class="footer-icon"></a>
-      </div>
-    </div>
-  </footer>
-
-<div id="contactModal" class="modal-overlay" onclick="if(event.target === this) this.classList.remove('active')">
-    <div class="modal-content contact-modal">
-      <h3>Contact</h3>
-      <div class="contact-links">
-        
-        <a href="#" onclick="event.preventDefault();document.getElementById('emailChoiceModal').classList.add('active')" class="contact-item">
-          <img src="assets/logos/mail.png" alt="Mail" class="icon-svg"/>
-          <span>rezisabashvili1@gmail.com</span>
-        </a>
-
-        <a href="tel:+33618579173" class="contact-item">
-          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <span>+33 6 18 57 91 73</span>
-        </a>
-
-        <a href="https://www.linkedin.com/in/rezisabashvili" target="_blank" class="contact-item">
-          <img src="assets/logos/linkedin.png" alt="LinkedIn" class="icon-svg"/>
-          <span>LinkedIn</span>
-        </a>
-
-      </div>
-      
-      <button class="btn-close" onclick="document.getElementById('contactModal').classList.remove('active')">
-        <span class="lang-en">Close</span>
-        <span class="lang-fr" style="display:none">Fermer</span>
-      </button>
-    </div>
-</div>
-
-  <div id="emailChoiceModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('active')">
-    <div class="modal-content contact-modal">
-      <h3>
-        <span class="lang-en">Open email in…</span>
-        <span class="lang-fr" style="display:none">Ouvrir dans…</span>
-      </h3>
-      <div class="email-choices">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rezisabashvili1@gmail.com" target="_blank" class="email-choice-btn" onclick="document.getElementById('emailChoiceModal').classList.remove('active')">Gmail</a>
-        <a href="https://outlook.live.com/owa/?path=/mail/action/compose&to=rezisabashvili1@gmail.com" target="_blank" class="email-choice-btn" onclick="document.getElementById('emailChoiceModal').classList.remove('active')">Outlook</a>
-        <a href="mailto:rezisabashvili1@gmail.com" class="email-choice-btn" onclick="document.getElementById('emailChoiceModal').classList.remove('active')">
-          <span class="lang-en">Default app</span>
-          <span class="lang-fr" style="display:none">App par défaut</span>
-        </a>
-        <button class="email-choice-btn copy-email-btn" id="copyEmailBtn">
-          <span class="lang-en">Copy address</span>
-          <span class="lang-fr" style="display:none">Copier l'adresse</span>
-        </button>
-      </div>
-      <button class="btn-close" onclick="document.getElementById('emailChoiceModal').classList.remove('active')">
-        <span class="lang-en">Close</span>
-        <span class="lang-fr" style="display:none">Fermer</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="scroll-progress" id="scrollProgress"></div>
-
-  <div id="missionModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('active')">
-    <div class="modal-content mission-modal-content">
-      <h3 id="mModalTitle"></h3>
-      <ul class="modal-gains" id="mModalGains"></ul>
-      <button class="btn-close" onclick="document.getElementById('missionModal').classList.remove('active')">
-        <span class="lang-en">Close</span>
-        <span class="lang-fr" style="display:none">Fermer</span>
-      </button>
-    </div>
-  </div>
-
-  <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
-
-  <script src="js/scripts.js"></script>
-  <script src="js/trad.js"></script>
 </body>
 </html>
