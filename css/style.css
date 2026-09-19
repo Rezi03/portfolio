@@ -50,6 +50,9 @@ button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
 h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.25; }
 
 h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
   font-family: var(--sans);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -74,6 +77,25 @@ li::marker { color: var(--muted); }
 main section { padding: 3rem 0 0; }
 
 .meta { color: var(--muted); font-size: 0.9375rem; margin: 0.15rem 0 0; }
+
+/* Second niveau : serif italique, pour distinguer la précision du diplôme */
+.meta.em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+/* Numéro de section, à la manière d'un rapport */
+.sec-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--navy);
+}
 
 .note { color: var(--muted); font-size: 0.9375rem; font-style: italic; margin: 1.5rem 0 0; }
 
@@ -172,8 +194,8 @@ main section { padding: 3rem 0 0; }
 
 .figures {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
   margin: 2.5rem 0 0;
   padding: 1.75rem 0;
   border-top: 1px solid var(--rule);
@@ -283,6 +305,8 @@ main section { padding: 3rem 0 0; }
 
 .sheet h3 { margin-bottom: 0.35rem; }
 
+.sheet .meta { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink); }
+
 .sheet ul { margin-top: 1.25rem; }
 
 /* ---------- Formation ---------- */
@@ -342,11 +366,20 @@ main section { padding: 3rem 0 0; }
 footer {
   margin-top: 4rem;
   border-top: 1px solid var(--rule);
+  position: relative;
   padding: 1.75rem 0 3.5rem;
   font-size: 0.8125rem;
   letter-spacing: 0.02em;
   color: var(--muted);
   text-align: center;
+}
+
+footer .wrap::before {
+  content: "";
+  display: block;
+  width: 56px;
+  margin: 0 auto 1.5rem;
+  border-top: 1px solid var(--navy);
 }
 
 /* ---------- Responsive ---------- */
