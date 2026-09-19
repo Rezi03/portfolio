@@ -7,7 +7,7 @@
   --muted: #555555;
   --navy: #003366;
   --rule: #e5e5e5;
-  --page: 720px;
+  --page: 760px;
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
@@ -133,49 +133,60 @@ main section { padding: 3rem 0 0; }
 
 .topbar .lang { margin-left: auto; color: var(--navy); }
 
-/* ---------- Carte de visite ---------- */
+/* ---------- Carte de visite : photo et nom à gauche, le reste à droite ---------- */
 
 .card {
-  text-align: center;
-  padding: 4.5rem 0 3.25rem;
-  border-bottom: 1px solid var(--rule);
+  padding: 4rem 0 2.75rem;
+  border-bottom: 1px solid var(--navy);
 }
+
+.card .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem 2.5rem;
+}
+
+.card-left { flex: 0 0 auto; }
 
 .card .portrait {
   width: 104px;
   height: auto;
   display: block;
-  margin: 0 auto 1.75rem;
+  margin: 0 0 1.5rem;
   border: 1px solid var(--rule);
 }
 
 .card h1 {
   font-family: var(--serif);
-  font-size: 2.625rem;
+  font-size: 2.25rem;
   font-weight: 600;
   letter-spacing: 0.015em;
 }
 
+.card-right { flex: 1 1 280px; text-align: right; }
+
 .card-role {
-  margin: 0.75rem 0 0;
-  font-size: 0.75rem;
+  margin: 0 0 0.6rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
+.card-sub { font-family: var(--serif); font-size: 1.0625rem; margin: 0 0 0.3rem; }
+
+.card-place { color: var(--muted); font-size: 0.875rem; margin: 0; }
+
 .card-rule {
   width: 56px;
-  margin: 1.5rem auto;
+  margin: 1.25rem 0 1.25rem auto;
   border: 0;
   border-top: 1px solid var(--navy);
 }
 
-.card-sub { font-family: var(--serif); font-size: 1.125rem; margin: 0 0 0.35rem; }
-
-.card-place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
-
-.card-contact { margin: 1.5rem 0 0; font-size: 0.875rem; line-height: 2; }
+.card-contact { margin: 0; font-size: 0.8125rem; line-height: 1.9; }
 
 /* Page secondaire */
 
@@ -389,11 +400,21 @@ footer .wrap::before {
 
   .wrap { padding: 0 22px; }
 
-  .card { padding: 3rem 0 2.5rem; }
+  .card { padding: 2.75rem 0 2.25rem; }
+
+  .card .wrap { display: block; }
 
   .card h1 { font-size: 2rem; }
 
+  .card .portrait { margin-bottom: 1.25rem; }
+
+  .card-left { margin-bottom: 1.5rem; }
+
+  .card-right { flex: 1 1 auto; text-align: left; }
+
   .card-role { letter-spacing: 0.16em; }
+
+  .card-rule { margin-left: 0; }
 
   .intro { font-size: 1.0625rem; margin-top: 2.25rem; }
 
