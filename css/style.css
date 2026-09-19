@@ -1,23 +1,20 @@
 /* Rezo Sabashvili — portfolio
    Blanc, encre #111111, un seul accent navy #003366, filets de 1 px.
-   Grille éditoriale : intitulé de section à gauche, contenu à droite. */
+   Colonne unique de 760 px, intitulés de section en capitales espacées. */
 
 :root {
   --ink: #111111;
   --muted: #555555;
   --navy: #003366;
   --rule: #e5e5e5;
-  --measure: 700px;
-  --page: 1060px;
-  --label: 190px;
-  --gutter: 56px;
+  --page: 760px;
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5.5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
 
 body {
   margin: 0;
@@ -43,52 +40,33 @@ a {
 
 a:hover { text-decoration-color: var(--navy); }
 
-a:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 2px;
-}
+a:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-/* ---------- Grille ---------- */
+/* ---------- Structure ---------- */
 
 .wrap {
   max-width: var(--page);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 28px;
 }
 
-main section {
-  display: grid;
-  grid-template-columns: var(--label) minmax(0, 1fr);
-  column-gap: var(--gutter);
-  padding: 3.25rem 0;
-  border-top: 1px solid var(--rule);
-}
+main section { padding: 2.5rem 0 0; }
 
-.section-body { max-width: var(--measure); }
-
-/* ---------- Titres ---------- */
-
-h1, h2, h3 {
-  margin: 0;
-  color: var(--ink);
-  line-height: 1.25;
-}
+h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.25; }
 
 h2 {
   font-family: var(--sans);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-top: 0.35rem;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--ink);
 }
 
-h3 {
-  font-family: var(--serif);
-  font-size: 1.125rem;
-  font-weight: 600;
-}
+h3 { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; }
 
 p { margin: 0 0 1rem; }
 
@@ -97,6 +75,12 @@ ul { margin: 0.6rem 0 0; padding-left: 1.05rem; }
 li { margin-bottom: 0.4rem; }
 
 li::marker { color: var(--muted); }
+
+.meta { color: var(--muted); font-size: 0.9375rem; margin: 0.15rem 0 0; }
+
+.note { color: var(--muted); font-size: 0.9375rem; font-style: italic; }
+
+.more { margin: 1.25rem 0 0; font-size: 0.9375rem; }
 
 /* ---------- Barre de navigation ---------- */
 
@@ -113,96 +97,134 @@ li::marker { color: var(--muted); }
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.25rem 1.5rem;
-  padding-top: 0.9rem;
-  padding-bottom: 0.9rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
 }
 
 .topbar a {
   color: var(--ink);
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.topbar a:hover { color: var(--navy); }
+.topbar a:hover,
+.topbar a[aria-current="page"] { color: var(--navy); }
 
 .topbar .lang { margin-left: auto; color: var(--navy); }
 
 /* ---------- En-tête ---------- */
 
-.masthead { padding: 4rem 0 3rem; }
+.masthead { padding: 3rem 0 0; }
 
 .masthead .wrap {
-  display: grid;
-  grid-template-columns: var(--label) minmax(0, 1fr);
-  column-gap: var(--gutter);
-  align-items: start;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
 }
 
 .portrait {
-  width: 150px;
+  width: 118px;
   height: auto;
   display: block;
+  flex: 0 0 118px;
   border: 1px solid var(--rule);
 }
 
-.masthead-text { max-width: var(--measure); }
-
 .masthead h1 {
   font-family: var(--serif);
-  font-size: 2.75rem;
+  font-size: 2.375rem;
   font-weight: 600;
   letter-spacing: -0.015em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
-.masthead .role {
+.masthead .role { font-family: var(--serif); font-size: 1.125rem; margin-bottom: 0.3rem; }
+
+.masthead .place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+
+.masthead .contact-line { margin: 0.9rem 0 0; font-size: 0.9375rem; line-height: 1.9; }
+
+/* Pages secondaires : titre seul */
+.pagehead { padding: 3rem 0 0; }
+
+.pagehead h1 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.35rem; }
+
+.pagehead .place { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+
+/* ---------- Accueil ---------- */
+
+.intro {
   font-family: var(--serif);
   font-size: 1.1875rem;
-  margin-bottom: 0.35rem;
+  line-height: 1.6;
+  margin: 2.5rem 0 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--ink);
 }
 
-.masthead .place {
+.figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.25rem 0 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.figures .num {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.figures .cap {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
   color: var(--muted);
-  font-size: 0.9375rem;
-  margin-bottom: 1.5rem;
+  line-height: 1.45;
 }
 
-.masthead .rule {
-  border: 0;
-  border-top: 1px solid var(--navy);
-  margin: 0 0 1.25rem;
+/* Lignes cliquables : expérience, projets, documents */
+
+.rows { list-style: none; margin: 0; padding: 0; }
+
+.rows li { border-bottom: 1px solid var(--rule); }
+
+.rows li:last-child { border-bottom: 0; }
+
+.row-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 1.25rem;
+  padding: 0.85rem 0;
+  text-decoration: none;
+  color: var(--ink);
 }
 
-.contact-line {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.9;
-}
+.row-link:hover .row-title { text-decoration: underline; text-underline-offset: 3px; }
 
-/* Page secondaire : titre seul, sans colonne de gauche */
-.masthead.simple .wrap { grid-template-columns: minmax(0, 1fr); }
+.row-title { font-family: var(--serif); font-size: 1.0625rem; font-weight: 600; }
 
-.masthead.simple h1 { font-size: 2.25rem; }
+.row-meta { color: var(--muted); font-size: 0.9375rem; }
 
-/* ---------- Profil ---------- */
+.row-right { color: var(--muted); font-size: 0.875rem; white-space: nowrap; }
 
-.lead {
-  font-family: var(--serif);
-  font-size: 1.1875rem;
-  line-height: 1.65;
-  margin: 0;
-}
+.row-link .arrow { color: var(--navy); margin-left: 0.5rem; }
+
+.row-text { flex: 1 1 340px; }
 
 /* ---------- Expérience ---------- */
 
-.entry {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--rule);
-}
+.entry { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--rule); }
 
 .entry:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
@@ -214,39 +236,17 @@ li::marker { color: var(--muted); }
   gap: 0.15rem 1.5rem;
 }
 
-.entry .org { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; }
+.org { font-family: var(--serif); font-size: 1.125rem; font-weight: 600; }
 
-.dates {
-  color: var(--muted);
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.meta {
-  color: var(--muted);
-  font-size: 0.9375rem;
-  margin: 0.15rem 0 0;
-}
-
-.note {
-  color: var(--muted);
-  font-size: 0.9375rem;
-  font-style: italic;
-  margin: 2rem 0 0;
-}
+.dates { color: var(--muted); font-size: 0.875rem; letter-spacing: 0.04em; white-space: nowrap; }
 
 /* ---------- Projets ---------- */
 
-.project {
-  padding-bottom: 1.75rem;
-  margin-bottom: 1.75rem;
-  border-bottom: 1px solid var(--rule);
-}
+.project { padding-bottom: 1.75rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--rule); }
 
 .project:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
-.project h3 { margin-bottom: 0.5rem; }
+.project h3 { margin-bottom: 0.4rem; }
 
 .project p { margin-bottom: 0.5rem; }
 
@@ -254,11 +254,7 @@ li::marker { color: var(--muted); }
 
 /* ---------- Formation ---------- */
 
-.edu {
-  padding-bottom: 1.75rem;
-  margin-bottom: 1.75rem;
-  border-bottom: 1px solid var(--rule);
-}
+.edu { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
 
 .edu:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
@@ -273,9 +269,9 @@ li::marker { color: var(--muted); }
 .skills { margin: 0; }
 
 .skills dt {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 1.25rem;
@@ -285,24 +281,9 @@ li::marker { color: var(--muted); }
 
 .skills dd { margin: 0.25rem 0 0; }
 
-/* ---------- Documents ---------- */
+/* ---------- Références ---------- */
 
-.docs { list-style: none; margin: 0; padding: 0; }
-
-.docs li {
-  padding: 0.7rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.docs li:last-child { border-bottom: 0; }
-
-/* ---------- Lettres de recommandation ---------- */
-
-.reference {
-  padding-bottom: 1.75rem;
-  margin-bottom: 1.75rem;
-  border-bottom: 1px solid var(--rule);
-}
+.reference { padding-bottom: 1.75rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--rule); }
 
 .reference:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
 
@@ -313,8 +294,9 @@ li::marker { color: var(--muted); }
 /* ---------- Pied de page ---------- */
 
 footer {
+  margin-top: 3.5rem;
   border-top: 1px solid var(--rule);
-  padding: 1.75rem 0 3.5rem;
+  padding: 1.5rem 0 3rem;
   font-size: 0.875rem;
   color: var(--muted);
 }
@@ -324,29 +306,23 @@ footer {
 @media (max-width: 768px) {
   body { font-size: 16px; }
 
-  .wrap { padding: 0 24px; }
+  .wrap { padding: 0 22px; }
 
-  main section,
-  .masthead .wrap {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 1.25rem;
-  }
+  .masthead .wrap { flex-direction: column; gap: 1.25rem; }
 
-  main section { padding: 2.5rem 0; }
-
-  .masthead { padding: 2.5rem 0 2rem; }
-
-  .masthead h1 { font-size: 2rem; }
+  .masthead h1 { font-size: 1.875rem; }
 
   .masthead .role { font-size: 1.0625rem; }
 
-  .portrait { width: 132px; }
+  .intro { font-size: 1.0625rem; }
 
-  .lead { font-size: 1.0625rem; }
+  .figures { grid-template-columns: 1fr; gap: 1.1rem; }
+
+  .figures .num { font-size: 1.5rem; }
 
   .topbar .wrap { gap: 0.4rem 1.1rem; }
 
   .topbar .lang { margin-left: 0; }
 
-  .dates { white-space: normal; }
+  .dates, .row-right { white-space: normal; }
 }
