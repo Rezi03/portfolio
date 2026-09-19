@@ -250,7 +250,7 @@ main section { padding: 3rem 0 0; }
 
 .row-link:hover .row-title { text-decoration: underline; text-underline-offset: 3px; }
 
-.row-text { flex: 1 1 320px; }
+.row-text { flex: 1 1 200px; min-width: 0; }
 
 .row-title { display: block; font-family: var(--serif); font-size: 1.1875rem; font-weight: 600; }
 
@@ -271,6 +271,8 @@ main section { padding: 3rem 0 0; }
 .sheet {
   width: min(620px, calc(100% - 2.5rem));
   max-height: 85vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 0;
   border: 1px solid var(--ink);
   background: #ffffff;
@@ -415,9 +417,17 @@ footer .wrap::before {
 
   .sheet-inner { padding: 1.75rem; }
 
-  .topbar .wrap { gap: 0.4rem 1.1rem; }
+  .topbar .wrap { gap: 0.35rem 1rem; }
 
-  .topbar .lang { margin-left: 0; }
+  .topbar a { font-size: 0.625rem; letter-spacing: 0.08em; }
+
+  .sheet { width: calc(100% - 1.5rem); max-height: 88vh; }
+
+  .row-link { padding: 0.85rem 0; }
+
+  .row-title { font-size: 1.0625rem; }
+
+  .row-right { font-size: 0.6875rem; }
 
   .dates, .row-right { white-space: normal; }
 }
