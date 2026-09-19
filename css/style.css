@@ -136,57 +136,50 @@ main section { padding: 3rem 0 0; }
 /* ---------- Carte de visite : photo et nom à gauche, le reste à droite ---------- */
 
 .card {
-  padding: 4rem 0 2.75rem;
+  padding: 3.5rem 0 2.75rem;
   border-bottom: 1px solid var(--navy);
 }
 
 .card .wrap {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 2rem 2.5rem;
+  gap: 1.75rem 2.5rem;
 }
 
-.card-left { flex: 0 0 auto; }
+.card-left { display: flex; align-items: center; gap: 1.5rem; }
 
 .card .portrait {
-  width: 104px;
+  width: 92px;
   height: auto;
   display: block;
-  margin: 0 0 1.5rem;
   border: 1px solid var(--rule);
 }
 
 .card h1 {
   font-family: var(--serif);
-  font-size: 2.25rem;
+  font-size: 2.125rem;
   font-weight: 600;
-  letter-spacing: 0.015em;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
-.card-right { flex: 1 1 280px; text-align: right; }
+.card-right { text-align: right; }
 
 .card-role {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.5rem;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.card-sub { font-family: var(--serif); font-size: 1.0625rem; margin: 0 0 0.3rem; }
+.card-sub { font-family: var(--serif); font-size: 1.0625rem; margin: 0 0 0.15rem; }
 
-.card-place { color: var(--muted); font-size: 0.875rem; margin: 0; }
+.card-place { color: var(--muted); font-size: 0.8125rem; margin: 0 0 0.8rem; }
 
-.card-rule {
-  width: 56px;
-  margin: 1.25rem 0 1.25rem auto;
-  border: 0;
-  border-top: 1px solid var(--navy);
-}
-
-.card-contact { margin: 0; font-size: 0.8125rem; line-height: 1.9; }
+.card-contact { margin: 0; font-size: 0.8125rem; line-height: 1.8; }
 
 /* Page secondaire */
 
@@ -400,21 +393,17 @@ footer .wrap::before {
 
   .wrap { padding: 0 22px; }
 
-  .card { padding: 2.75rem 0 2.25rem; }
+  .card { padding: 2.5rem 0 2rem; }
 
   .card .wrap { display: block; }
 
-  .card h1 { font-size: 2rem; }
+  .card-left { gap: 1.25rem; margin-bottom: 1.5rem; }
 
-  .card .portrait { margin-bottom: 1.25rem; }
+  .card h1 { font-size: 1.75rem; }
 
-  .card-left { margin-bottom: 1.5rem; }
-
-  .card-right { flex: 1 1 auto; text-align: left; }
+  .card-right { text-align: left; }
 
   .card-role { letter-spacing: 0.16em; }
-
-  .card-rule { margin-left: 0; }
 
   .intro { font-size: 1.0625rem; margin-top: 2.25rem; }
 
