@@ -151,10 +151,19 @@ main section { padding: 3rem 0 0; }
 .card-left { display: flex; align-items: center; gap: 1.5rem; }
 
 .card .portrait {
-  width: 92px;
-  height: auto;
+  width: 104px;
+  height: 104px;
+  flex: none;
   display: block;
-  border: 1px solid var(--rule);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--rule);
+  /* Double filet : anneau blanc puis hairline navy, dans l'esprit des filets de 1 px */
+  box-shadow:
+    0 0 0 1px var(--rule),
+    0 0 0 5px #ffffff,
+    0 0 0 6px rgba(0, 51, 102, 0.22),
+    0 12px 24px -14px rgba(17, 17, 17, 0.45);
 }
 
 .card h1 {
@@ -400,6 +409,8 @@ footer .wrap::before {
   .card .wrap { display: block; }
 
   .card-left { gap: 1.25rem; margin-bottom: 1.5rem; }
+
+  .card .portrait { width: 88px; height: 88px; }
 
   .card h1 { font-size: 1.75rem; }
 
